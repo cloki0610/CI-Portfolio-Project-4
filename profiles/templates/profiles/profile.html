@@ -2,17 +2,79 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-<h1>User Profile</h1>
-<!--Card component to display user's personal information-->
-<div class="container-fluid text-center">
-    <div class="row" id="user_icon"></div>
-    <div class="row" id="user_name"></div>
-    <div class="row" id="membership"></div>
-    <div class="row" id="registered_date"></div>
-    <div class="row" id="location"></div>
-    <div class="row" id="bio"></div>
-    <button id="edit_profile">EDIT YOUR PROFILE</button>
-    <button id="change_password">CHANGE PASSOWRD</button>
-    <button id="become_creator">BECOME OUR CREATOR</button>
+<h1 class="text-center">{{ user.userprofile.name }}'s Profile</h1>
+<!--Component to display user's personal information-->
+<div class="container-fluid">
+    <div class="row" id="user_icon">
+        <div class="col text-center">
+            <img src="{{ user.userprofile.user_icon.url }}" alt="{{ user.userprofile.name }}">
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Your Username
+        </div>
+    </div>
+    <div class="row" id="user_name">
+        <div class="col text-center">
+            {{ user.username }}
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Your Membership
+        </div>
+    </div>
+    <div class="row" id="membership">
+        <div class="col text-center">
+            {{ user.userprofile.get_membership_display }}
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Registered Date
+        </div>
+    </div>
+    <div class="row" id="registered_date">
+        <div class="col text-center">
+            {{ user.userprofile.registered_date }}
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Location
+        </div>
+    </div>
+    <div class="row" id="location">
+        <div class="col text-center">
+            {{ user.userprofile.location }}
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Bio
+        </div>
+    </div>
+    <div class="row" id="bio">
+        <div class="col text-center">
+            {{ user.userprofile.bio | safe }}
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-6 col-md-3">
+            <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">EDIT PROFILE</a>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSOWRD</a>
+        </div>
+        {% ifequal user.userprofile.get_membership_display "member" %}
+        <div class="col-sm-6 col-md-3">
+            <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
+        </div>
+        {% endifequal %}
+        <div class="col-sm-6 col-md-3">
+            <a href="#" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+        </div>
+    </div>
 </div>
 {% endblock %}

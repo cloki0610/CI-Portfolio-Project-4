@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!--Head-->
     <title>TALES - Value every experience</title>
 </head>
@@ -48,7 +50,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link">PROFILE</a>
+                        <a href="{% url 'profile' %}" class="nav-link">PROFILE</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">BECOME A CREATOR</a>
