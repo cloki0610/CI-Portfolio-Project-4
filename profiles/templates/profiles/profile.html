@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+<h1>User Profile</h1>
+<!--Card component to display user's personal information-->
+<div class="container-fluid text-center">
+    <div class="row" id="user_icon"></div>
+    <div class="row" id="user_name"></div>
+    <div class="row" id="membership"></div>
+    <div class="row" id="registered_date"></div>
+    <div class="row" id="location"></div>
+    <div class="row" id="bio"></div>
+    <button id="edit_profile">EDIT YOUR PROFILE</button>
+    <button id="change_password">CHANGE PASSOWRD</button>
+    <button id="become_creator">BECOME OUR CREATOR</button>
+</div>
+{% endblock %}

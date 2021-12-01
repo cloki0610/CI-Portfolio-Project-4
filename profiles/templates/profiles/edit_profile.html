@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Profile Update</h1>
+<!--A form to allowed user to edit their profile-->
+<form action="">
+    {% csrf_token %}
+    {{ profile_form }}
+    <input type="submit" value="SUBMIT">
+</form>
+{% endblock %}
