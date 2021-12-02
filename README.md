@@ -1,9 +1,9 @@
 # TALES - A content share community
 # Portfolio Project 4
-Tales is a Reddit-like news website focus on content creation and experience sharing.\
+Tales is a news website focus on content creation and experience sharing.\
 Creators can publish their story, creation and experience to the platform and begin a conversation about their contents.\
-The live website can be found here.\
-You can also click [here]() to the living website.
+And the other member can leave their comment to react to the creators.\
+You can click [here]() to the living website.\
 Active website: 
 ![screen-capture]()
 
@@ -44,6 +44,9 @@ Django allauth was used to set up user registration and built in decorators allo
 ## **Feature**
 ### **Existing Features**
 ### **Features Left to Implement**
+## **Testing**
+### Issue found and solved
+## **Deployment**
 ## **Technologies**
  - HTML
  - CSS
@@ -55,8 +58,6 @@ Django allauth was used to set up user registration and built in decorators allo
  - GitHub
  - Git
  - Heroku
-## **Testing**
-## **Deployment**
 ## **Credits**
 ### **Code**
  - https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html

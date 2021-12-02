@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     membership = models.IntegerField(choices=ROLES, default=0)
     registered_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50, null=True, blank=True)
-    bio = models.TextField()
+    bio = models.TextField(null=True, blank=True)
     user_icon = CloudinaryField('image', default='v1638377416/placeholder.jpg')
 
     class Meta:

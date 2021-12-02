@@ -2,7 +2,11 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
+{% ifequal user.userprofile.name None %}
+<h1 class="text-center">Your Profile</h1>
+{% else %}
 <h1 class="text-center">{{ user.userprofile.name }}'s Profile</h1>
+{% endifequal %}
 <!--Component to display user's personal information-->
 <div class="container-fluid">
     <div class="row" id="user_icon">
@@ -12,7 +16,7 @@
     </div>
     <div class="row profile-tables">
         <div class="col text-center">
-            Your Username
+            Username
         </div>
     </div>
     <div class="row" id="user_name">
@@ -22,7 +26,7 @@
     </div>
     <div class="row profile-tables">
         <div class="col text-center">
-            Your Membership
+            Membership
         </div>
     </div>
     <div class="row" id="membership">
@@ -37,7 +41,7 @@
     </div>
     <div class="row" id="registered_date">
         <div class="col text-center">
-            {{ user.userprofile.registered_date }}
+            {{ user.userprofile.registered_on }}
         </div>
     </div>
     <div class="row profile-tables">
@@ -56,9 +60,15 @@
         </div>
     </div>
     <div class="row" id="bio">
+        {% ifequal user.usereprofile.bio "" %}
+        <div class="col text-center">
+            <p>Keep secret for now :)</p>
+        </div>
+            {% else %}
         <div class="col text-center">
             {{ user.userprofile.bio | safe }}
         </div>
+            {% endifequal%}
     </div>
     <div class="row gap-1 justify-content-center align-items-center">
         <div class="col-sm-5 col-md-5 p-1">
@@ -73,7 +83,7 @@
         </div>
         {% endifequal %}
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="#" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+            <a href="{% url 'delete_account' request.user %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
         </div>
     </div>
 </div>
