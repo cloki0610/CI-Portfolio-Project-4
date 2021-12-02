@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
 {% block content %}
+{% load crispy_forms_tags %}
 <h1>Profile Update</h1>
 <!--A form to allowed user to edit their profile-->
-<form action="">
+<form action="{% url 'editprofile' request.user %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ profile_form }}
+    {{ profile_form | crispy }}
     <input type="submit" value="SUBMIT">
 </form>
+<a href="{% url 'profile' request.user %}">Return to Profile</a>
 {% endblock %}
