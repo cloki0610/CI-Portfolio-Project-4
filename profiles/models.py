@@ -1,4 +1,4 @@
-""" Manage the UserProfile and PromoteRequest model """
+""" UserProfile Data model """
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_delete
@@ -9,7 +9,7 @@ import cloudinary
 
 class UserProfile(models.Model):
     """
-    A extend model to store the user information
+    A extend model for store user information
     """
     ROLES = ((0, "member"), (1, "creator"), (2, "admin"))
 
@@ -18,11 +18,11 @@ class UserProfile(models.Model):
     membership = models.IntegerField(choices=ROLES, default=0)
     registered_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50, null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
+    bio = models.TextField(blank=True)
     user_icon = CloudinaryField('image', default='v1638377416/placeholder.jpg')
 
     class Meta:
-        """ This model should order by register date """
+        """ Data should order by register date """
         ordering = ['registered_on']
 
     def __str__(self):
