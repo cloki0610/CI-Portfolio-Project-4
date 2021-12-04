@@ -7,5 +7,8 @@ class Category(models.Model):
     name = models.CharField(max_length=80)
     introduction = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = "Categorie"
+
     def __str__(self):
         return str(self.name)

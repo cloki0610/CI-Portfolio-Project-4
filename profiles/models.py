@@ -24,6 +24,7 @@ class UserProfile(models.Model):
     class Meta:
         """ Data should order by register date """
         ordering = ['registered_on']
+        verbose_name = "Profile"
 
     def __str__(self):
         return self.name or self.user.username
