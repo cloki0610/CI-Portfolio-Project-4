@@ -79,7 +79,7 @@
         </div>
         {% ifequal user.userprofile.get_membership_display "member" %}
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
+            <a href="{% url 'promote_request' request.user %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
         </div>
         {% endifequal %}
         <div class="col-sm-5 col-md-5 p-1">

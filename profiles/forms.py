@@ -5,10 +5,10 @@ from .models import UserProfile
 
 
 class UserProfilesForm(forms.ModelForm):
-    """ A form to let user modify his own profile """
+    """ Form model to let user modify his own profile """
     bio = forms.CharField(widget=SummernoteWidget())
 
     class Meta:
-        """ to control the values in form"""
+        """ Handle the column in form"""
         model = UserProfile
         fields = ('user_icon', 'name', 'location', 'bio')

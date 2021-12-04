@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+{% load crispy_forms_tags %}
+<h1>Join us as creator</h1>
+<!--Request form-->
+<form action="{% url 'promote_request' request.user %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Your username: {{ user.username }}</p>
+    {{ request_form | crispy }}
+    <input type="submit" value="SUBMIT">
+</form>
+<a href="{% url 'profile' request.user %}">Return to Profile</a>
+{% endblock %}
