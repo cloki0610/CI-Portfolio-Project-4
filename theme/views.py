@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.utils.text import slugify
 from .models import Theme
 from .forms import CommentForm, ThemeForm
 
@@ -97,17 +98,27 @@ class EditThemeView(LoginRequiredMixin, View):
 
     def post(self, request, slug, *args, **kwargs):
         """ POST method """
-        theme_form = ThemeForm(request.POST, request.FILES, instance=post)
+        edit_theme = get_object_or_404(Theme, slug=slug)
+        theme_form = ThemeForm(request.POST, request.FILES, instance=edit_theme)
         if theme_form.is_valid():
             edited_theme = theme_form.save(commit=False)
             edited_theme.author = request.user
+            edited_theme.slug = slugify(edited_theme.title)
+            comments = edited_theme.theme_comments.order_by('created_on')
             edited_theme.save()
             messages.success(request,
                              'Your theme has been updated.')
         else:
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
-        return redirect('theme_overview', slug=slug)
+        return render(
+            request,
+            "theme/theme_overview.html",
+            {
+                "theme": edited_theme,
+                "comments": comments,
+                "comment_form": CommentForm(),
+            })
 
 
 class DeleteTheme(LoginRequiredMixin, View):

@@ -3,26 +3,63 @@
 {% load cloudinary %}
 {% block content %}
 <!--Header-->
-<h1>{{ theme.title }}</h1>
-<h2>{{ theme.author.userprofile.name }}</h2>
+<h1 class="text-center">{{ theme.title }}</h1>
+<h2 class="text-center">{{ theme.author.userprofile.name }}</h2>
 <!--theme details-->
-<img src="{{ theme.feature_image }}" alt="{{ theme.title }}" class="img-thumbnail">
-<p>{{ theme.excerpt }}</p>
-<p>{{ theme.category.name }}</p>
-<p>{{ theme.created_on }}</p>
-<p>{{ theme.updated_on }}</p>
-<p>upvote  {{ theme.upvote.count_upvote }}</p>
-<p>downvote {{ theme.downvote.count_downvote}}</p>
-<p>comments {{ comments.count }}</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <img src="{{ theme.feature_image }}" alt="{{ theme.title }}" class="img-thumbnail">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>{{ theme.excerpt }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>{{ theme.category.name }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>{{ theme.created_on }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>{{ theme.updated_on }}</p>
+        </div>
+    </div>
+    <div class="row gap-1 justify-content-center align-items-center">
+        <div class="col-md-2">
+            <p>upvote  {{ theme.upvote.count_upvote }}</p>
+        </div>
+        <div class="col-md-2">
+            <p>downvote {{ theme.downvote.count_downvote}}</p>
+        </div>
+        <div class="col=md-2">
+            <p>comments {{ comments.count }}</p>
+        </div>
+    </div>
 <!--button to post list-->
 <!--if user is author also display edit theme and delete theme-->
-<a href="#">Enter to contents</a>
-{% if user.is_authenticated %}
-{% if request.user == theme.author %}
-<a href="{% url 'edit_theme' theme.slug %}">Edit Theme info</a>
-<a href="{% url 'delete_theme' theme.slug %}">Delete {{ theme.title }}</a>
-{% endif %}
-{% endif %}
+<div class="row gap-1 justify-content-center align-items-center">
+    <div class="col-sm-5 col-md-5 p-1">
+        <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">Enter to contents</a>
+    </div>
+    {% if user.is_authenticated %}
+    {% if request.user == theme.author %}
+    <div class="col-sm-5 col-md-5 p-1">
+        <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Theme info</a>
+    </div>
+    <div class="col-sm-5 col-md-5 p-1">
+        <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete {{ theme.title }}</a>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
 <!--comment form-->
 {% if user.is_authenticated %}
 {% endif %}
