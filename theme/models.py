@@ -19,7 +19,7 @@ class Theme(models.Model):
                                  related_name="category_theme")
     excerpt = models.TextField(blank=True, default='')
     feature_image = CloudinaryField('image',
-                                    default='v1638492563/feature_img.jpg')
+                                    default='featureimg')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     upvote = models.ManyToManyField(User, related_name='theme_upvote',
@@ -32,7 +32,7 @@ class Theme(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"{self.title} by {self.author}"
+        return f"{self.title} by {self.author.userprofile.name}"
 
     def count_upvote(self):
         """ return the number of upvote """
@@ -75,7 +75,7 @@ class Comment(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"Comment on {self.theme} by {self.user.name}"
+        return f"Comment on {self.theme} by {self.user.userprofile.name}"
 
     def count_upvote(self):
         """ return the number of upvote """

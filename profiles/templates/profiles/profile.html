@@ -13,7 +13,11 @@
 <div class="container-fluid">
     <div class="row" id="user_icon">
         <div class="col text-center">
+            {% if "placeholder" in user.userprofile.user_icon.url %}
+            <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638377322/lx9f54ugcciywep0ifke.jpg" alt="{{ user.userprofile.name }}" class="img-thumbnail">
+            {% else %}
             <img src="{{ user.userprofile.user_icon.url }}" alt="{{ user.userprofile.name }}" class="img-thumbnail">
+            {% endif %}
         </div>
     </div>
     <div class="row profile-tables">

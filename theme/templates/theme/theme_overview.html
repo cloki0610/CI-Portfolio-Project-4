@@ -2,6 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
+{% load crispy_forms_tags %}
 <!--Header-->
 <h1 class="text-center">{{ theme.title }}</h1>
 <h2 class="text-center">{{ theme.author.userprofile.name }}</h2>
@@ -9,7 +10,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col text-center">
-            <img src="{{ theme.feature_image }}" alt="{{ theme.title }}" class="img-thumbnail">
+            {% if "featureimg" in theme.feature_image.url %}
+            <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" alt="{{ theme.title }}" class="img-thumbnail">
+            {% else %}
+            <img src="{{ theme.feature_image.url }}" alt="{{ theme.title }}" class="img-thumbnail">
+            {% endif %}
         </div>
     </div>
     <div class="row">
@@ -33,40 +38,47 @@
         </div>
     </div>
     <div class="row gap-1 justify-content-center align-items-center">
-        <div class="col-md-2">
+        <div class="col col-md-2 text-center">
             <p>upvote  {{ theme.upvote.count_upvote }}</p>
         </div>
-        <div class="col-md-2">
+        <div class="col col-md-2 text-center">
             <p>downvote {{ theme.downvote.count_downvote}}</p>
         </div>
-        <div class="col=md-2">
+        <div class="col col-md-2 text-center">
             <p>comments {{ comments.count }}</p>
         </div>
     </div>
 <!--button to post list-->
 <!--if user is author also display edit theme and delete theme-->
 <div class="row gap-1 justify-content-center align-items-center">
-    <div class="col-sm-5 col-md-5 p-1">
+    <div class="col-sm-3 col-md-3 p-1">
         <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">Enter to contents</a>
     </div>
     {% if user.is_authenticated %}
     {% if request.user == theme.author %}
-    <div class="col-sm-5 col-md-5 p-1">
+    <div class="col-sm-3 col-md-3 p-1">
         <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Theme info</a>
     </div>
-    <div class="col-sm-5 col-md-5 p-1">
-        <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete {{ theme.title }}</a>
+    <div class="col-sm-3 col-md-3 p-1">
+        <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete Theme</a>
     </div>
     {% endif %}
     {% endif %}
 </div>
 <!--comment form-->
 {% if user.is_authenticated %}
+<h3>Leave a comment:</h3>
+<p>Posting as: {{ user.username }}</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ comment_form | crispy }}
+    <button type="submit" class="btn btn-outline-dark btn-block btn-lg">Submit</button>
+</form>
 {% endif %}
 <!--display all comment-->
 {% for comment in comments %}
 <p>{{ comment.user.userprofile.name }}</p>
-<p>{{ comment.comment_body }}</p>
+<p>{{ comment.comment_body | safe }}</p>
 <p>Comment on {{ comment.created_on }}</p>
 <p>Last updated {{ comment.updated_on }}</p>
 <p>upvote  {{ comment.upvote.count_upvote }}</p>

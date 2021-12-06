@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     registered_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50, blank=True, default='')
     bio = models.TextField(blank=True, default='')
-    user_icon = CloudinaryField('image', default='v1638377416/placeholder.jpg')
+    user_icon = CloudinaryField('image', default='placeholder')
 
     class Meta:
         """ Data should order by register date """

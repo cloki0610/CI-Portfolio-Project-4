@@ -6,6 +6,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.text import slugify
+from django.http import HttpResponseRedirect
 from .models import Theme
 from .forms import CommentForm, ThemeForm
 
@@ -71,6 +72,7 @@ class NewThemeView(LoginRequiredMixin, View):
         if theme_form.is_valid():
             new_theme = theme_form.save(commit=False)
             new_theme.author = request.user
+            comments = new_theme.theme_comments.order_by('created_on')
             new_theme.save()
             messages.success(request,
                              'New theme has been created. '
@@ -78,7 +80,16 @@ class NewThemeView(LoginRequiredMixin, View):
         else:
             messages.warning(request,
                              'Submit failed, Please check and Try Again!')
-        return redirect(reverse('home'))
+            return redirect(reverse('home'))
+        return render(
+            request,
+            "theme/theme_overview.html",
+            {
+                "theme": new_theme,
+                "comments": comments,
+                "comment_form": CommentForm()
+            },
+        )
 
 
 class EditThemeView(LoginRequiredMixin, View):
@@ -111,14 +122,7 @@ class EditThemeView(LoginRequiredMixin, View):
         else:
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
-        return render(
-            request,
-            "theme/theme_overview.html",
-            {
-                "theme": edited_theme,
-                "comments": comments,
-                "comment_form": CommentForm(),
-            })
+        return HttpResponseRedirect(reverse('theme_overview', args=[edited_theme.slug]))
 
 
 class DeleteTheme(LoginRequiredMixin, View):
