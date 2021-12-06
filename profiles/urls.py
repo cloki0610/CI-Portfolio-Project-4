@@ -18,11 +18,11 @@ from . import views
 
 
 urlpatterns = [
-    path('<str:user>/', views.UserProfileView.as_view(), name='profile'),
-    path('edit/<str:user>', views.EditUserProfileView.as_view(),
+    path('', views.UserProfileView.as_view(), name='profile'),
+    path('edit/', views.EditUserProfileView.as_view(),
          name='editprofile'),
-    path('delete_account/<str:user>', views.DeleteAccount.as_view(),
+    path('delete_account/', views.DeleteAccount.as_view(),
          name='delete_account'),
-    path('delete_action/<str:user>', views.DeleteAction.as_view(),
+    path('delete_action/', views.DeleteAction.as_view(),
          name='delete_action'),
 ]

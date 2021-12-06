@@ -4,12 +4,12 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!--Header-->
-<h1>Profile Update</h1>
-<!--A form to allowed user to edit their profile-->
-<form action="{% url 'editprofile' %}" method="POST" enctype="multipart/form-data">
+<h1></h1>
+<!--A form to allowed user to edit their post-->
+<form action="{% url '' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ profile_form | crispy }}
     <input type="submit" value="SUBMIT">
 </form>
-<a href="{% url 'profile' %}">Return to Profile</a>
+<a href="#">Back to Menu</a>
 {% endblock %}

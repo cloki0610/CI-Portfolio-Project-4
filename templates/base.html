@@ -50,7 +50,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{% url 'profile' request.user %}" class="nav-link">PROFILE</a>
+                        <a href="{% url 'profile' %}" class="nav-link">PROFILE</a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="nav-link">LOGOUT</a>

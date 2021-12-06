@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<!--Block content-->
 {% ifequal user.username "admin" %}
+<!--if user is admin display the waring message and return link-->
 <div class="container-fluid position-absolute top-50 start-50 translate-middle">
     <div class="row">
         <div class="col-md-8 offset-md-2 text-center">
@@ -10,11 +12,12 @@
     </div>
     <div class="row  justify-content-center align-items-center">
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'profile' request.user %}" class="btn btn-outline-dark btn-block btn-lg w-100">Return</a>
+            <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">Return</a>
         </div>
     </div>
 </div>
 {% else %}
+<!--Else show the confirm components-->
 <div class="container-fluid  position-absolute top-50 start-50 translate-middle">
     <div class="row">
         <div class="col-md-8 offset-md-2 text-center">
@@ -32,8 +35,9 @@
         </div>
     </div>
     <div class="row gap-1 justify-content-center align-items-center">
+        <!--Return button-->
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'profile' request.user %}" class="btn btn-outline-dark btn-block btn-lg w-100">Back to Profile</a>
+            <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">Back to Profile</a>
         </div>
         <div class="col-sm-5 col-md-5 p-1">
             <!-- Button trigger modal -->
@@ -56,7 +60,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-danger" href="{% url 'delete_action' request.user %}">Delete Account</a>
+            <a class="btn btn-danger" href="{% url 'delete_action' %}">Delete Account</a>
         </div>
       </div>
     </div>

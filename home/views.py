@@ -1,5 +1,5 @@
 """
-HOME PAGE APP VIEWS
+HOME APPLICATION VIEWS
 """
 from django.shortcuts import render
 

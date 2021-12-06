@@ -12,6 +12,7 @@ class PromoteRequest(models.Model):
                                  related_name="category_request")
     reason = models.TextField(blank=True)
     submit_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
 
     class Meta:
         """ Data should order by submit date """

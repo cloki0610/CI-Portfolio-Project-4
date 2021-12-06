@@ -3,11 +3,13 @@
 {% load cloudinary %}
 {% block content %}
 {% ifequal user.userprofile.name None %}
+<!--if name in user profile is none display default header-->
 <h1 class="text-center">Your Profile</h1>
 {% else %}
+<!--else display header with user's name-->
 <h1 class="text-center">{{ user.userprofile.name }}'s Profile</h1>
 {% endifequal %}
-<!--Component to display user's personal information-->
+<!--Display user's personal information-->
 <div class="container-fluid">
     <div class="row" id="user_icon">
         <div class="col text-center">
@@ -22,6 +24,16 @@
     <div class="row" id="user_name">
         <div class="col text-center">
             {{ user.username }}
+        </div>
+    </div>
+    <div class="row profile-tables">
+        <div class="col text-center">
+            Display Name
+        </div>
+    </div>
+    <div class="row" id="user_name">
+        <div class="col text-center">
+            {{ user.userprofile.name }}
         </div>
     </div>
     <div class="row profile-tables">
@@ -70,20 +82,25 @@
         </div>
             {% endifequal%}
     </div>
+    <!--Buttons-->
     <div class="row gap-1 justify-content-center align-items-center">
+        <!--Edit probile-->
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'editprofile' request.user %}" class="btn btn-outline-dark btn-block btn-lg w-100">EDIT PROFILE</a>
+            <a href="{% url 'editprofile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">EDIT PROFILE</a>
         </div>
+        <!--Change password-->
         <div class="col-sm-5 col-md-5 p-1">
             <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSOWRD</a>
         </div>
+        <!--if user membership is member display a button to request form-->
         {% ifequal user.userprofile.get_membership_display "member" %}
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'promote_request' request.user %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
+            <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
         </div>
         {% endifequal %}
+        <!--Delete account-->
         <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'delete_account' request.user %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+            <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
         </div>
     </div>
 </div>

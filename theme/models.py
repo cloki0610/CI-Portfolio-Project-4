@@ -67,7 +67,7 @@ class Comment(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"Comment on {self.theme} by {self.name}"
+        return f"Comment on {self.theme} by {self.user.name}"
 
     def count_upvote(self):
         """ return the number of upvote """

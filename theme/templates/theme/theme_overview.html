@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+<!--Header-->
+<h1>{{ theme.title }}</h1>
+<h2>{{ theme.author.userprofile.name }}</h2>
+<!--theme details-->
+<img src="{{ theme.feature_image }}" alt="{{ theme.title }}" class="img-thumbnail">
+<p>{{ theme.excerpt }}</p>
+<p>{{ theme.category.name }}</p>
+<p>{{ theme.created_on }}</p>
+<p>{{ theme.updated_on }}</p>
+<p>upvote  {{ theme.upvote.count_upvote }}</p>
+<p>downvote {{ theme.downvote.count_downvote}}</p>
+<p>comments {{ comments.count }}</p>
+<!--button to post list, edit theme and delete theme-->
+<a href="#">Enter to contents</a>
+<a href="#">Edit Theme infromation</a>
+<a href="#">Delete {{ theme.title }}</a>
+<!--comment form-->
+{% if user.is_authenticated %}
+{% endif %}
+<!--display all comment-->
+{% for comment in comments %}
+<p>{{ comment.user.userprofile.name }}</p>
+<p>{{ comment.comment_body }}</p>
+<p>Comment on {{ comment.created_on }}</p>
+<p>Last updated {{ comment.updated_on }}</p>
+<p>upvote  {{ comment.upvote.count_upvote }}</p>
+<p>downvote {{ comment.downvote.count_downvote}}</p>
+{% endfor %}
+{% endblock %}

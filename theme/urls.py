@@ -1,4 +1,4 @@
-"""home URL Configuration
+""" Theme URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -18,5 +18,5 @@ from . import views
 
 
 urlpatterns = [
-    
+    path('<slug:slug>/', views.ThemeOverView.as_view(), name='theme_overview'),
 ]

@@ -18,6 +18,6 @@ from . import views
 
 
 urlpatterns = [
-    path('<str:user>/', views.PromoteRequestView.as_view(),
+    path('', views.PromoteRequestView.as_view(),
          name='promote_request'),
 ]
