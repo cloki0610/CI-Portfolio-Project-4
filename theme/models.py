@@ -46,7 +46,8 @@ class Theme(models.Model):
 @receiver(pre_delete, sender=Theme)
 def feature_image_delete(sender, instance, **kwargs):
     """ try to remove the image in cloudinary when record deleted """
-    cloudinary.uploader.destroy(instance.feature_image.public_id)
+    if instance.feature_image.url != "featureimg":
+        cloudinary.uploader.destroy(instance.feature_image.public_id)
 
 
 @receiver(pre_save, sender=Theme)

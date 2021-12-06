@@ -110,19 +110,20 @@ class EditThemeView(LoginRequiredMixin, View):
     def post(self, request, slug, *args, **kwargs):
         """ POST method """
         edit_theme = get_object_or_404(Theme, slug=slug)
-        theme_form = ThemeForm(request.POST, request.FILES, instance=edit_theme)
+        theme_form = ThemeForm(request.POST, request.FILES,
+                               instance=edit_theme)
         if theme_form.is_valid():
             edited_theme = theme_form.save(commit=False)
             edited_theme.author = request.user
             edited_theme.slug = slugify(edited_theme.title)
-            comments = edited_theme.theme_comments.order_by('created_on')
             edited_theme.save()
             messages.success(request,
                              'Your theme has been updated.')
         else:
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
-        return HttpResponseRedirect(reverse('theme_overview', args=[edited_theme.slug]))
+        return HttpResponseRedirect(reverse('theme_overview',
+                                    args=[edited_theme.slug]))
 
 
 class DeleteTheme(LoginRequiredMixin, View):
