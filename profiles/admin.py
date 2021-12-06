@@ -1,10 +1,9 @@
-""" User Profile Model display in admin site """
+""" Manage User Profile Model display in admin site """
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import UserProfile
 
 
-# Register your models here.
 @admin.register(UserProfile)
 class UserProfileAdmin(SummernoteModelAdmin):
     """ Show model in admin table with follow rules"""

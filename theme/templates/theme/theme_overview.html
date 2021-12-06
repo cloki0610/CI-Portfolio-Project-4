@@ -14,10 +14,15 @@
 <p>upvote  {{ theme.upvote.count_upvote }}</p>
 <p>downvote {{ theme.downvote.count_downvote}}</p>
 <p>comments {{ comments.count }}</p>
-<!--button to post list, edit theme and delete theme-->
+<!--button to post list-->
+<!--if user is author also display edit theme and delete theme-->
 <a href="#">Enter to contents</a>
-<a href="#">Edit Theme infromation</a>
-<a href="#">Delete {{ theme.title }}</a>
+{% if user.is_authenticated %}
+{% if request.user == theme.author %}
+<a href="{% url 'edit_theme' theme.slug %}">Edit Theme info</a>
+<a href="{% url 'delete_theme' theme.slug %}">Delete {{ theme.title }}</a>
+{% endif %}
+{% endif %}
 <!--comment form-->
 {% if user.is_authenticated %}
 {% endif %}
@@ -29,5 +34,7 @@
 <p>Last updated {{ comment.updated_on }}</p>
 <p>upvote  {{ comment.upvote.count_upvote }}</p>
 <p>downvote {{ comment.downvote.count_downvote}}</p>
+{% empty %}
+<p>Here is no comment yet.</p>
 {% endfor %}
 {% endblock %}

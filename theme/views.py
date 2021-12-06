@@ -14,7 +14,7 @@ class ThemeOverView(LoginRequiredMixin, View):
     def get(self, request, slug, *args, **kwargs):
         """ GET method """
         theme = get_object_or_404(Theme, slug=slug)
-        comments = theme.theme_comments.order.order_by('created_on')
+        comments = theme.theme_comments.order_by('created_on')
         return render(
             request,
             "theme/theme_overview.html",
@@ -27,7 +27,7 @@ class ThemeOverView(LoginRequiredMixin, View):
     def post(self, request, slug, *args, **kwargs):
         """ POST method """
         theme = get_object_or_404(Theme, slug=slug)
-        comments = theme.theme_comments.order.order_by('created_on')
+        comments = theme.theme_comments.order_by('created_on')
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -82,7 +82,7 @@ class NewThemeView(LoginRequiredMixin, View):
 
 class EditThemeView(LoginRequiredMixin, View):
     """ return a form model to edit a exist theme record """
-    def get(self, request, slug):
+    def get(self, request, slug, *args, **kwargs):
         """ GET method"""
         edit_theme = get_object_or_404(Theme, slug=slug)
         theme_form = ThemeForm(instance=edit_theme)
@@ -90,13 +90,14 @@ class EditThemeView(LoginRequiredMixin, View):
             request,
             "theme/edit_theme.html",
             {
-                "theme_form": theme_form
+                "theme_form": theme_form,
+                "theme": edit_theme
             },
         )
 
-    def post(self, request, slug):
+    def post(self, request, slug, *args, **kwargs):
         """ POST method """
-        theme_form = ThemeForm(request.POST)
+        theme_form = ThemeForm(request.POST, request.FILES, instance=post)
         if theme_form.is_valid():
             edited_theme = theme_form.save(commit=False)
             edited_theme.author = request.user
@@ -107,3 +108,15 @@ class EditThemeView(LoginRequiredMixin, View):
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
         return redirect('theme_overview', slug=slug)
+
+
+class DeleteTheme(LoginRequiredMixin, View):
+    """ View to delete theme after confirmation """
+
+    def get(self, request, slug):
+        """ get method """
+        delete_theme = get_object_or_404(Theme, slug=slug)
+        delete_theme.delete()
+        messages.success(request,
+                         'Your theme is successfully deleted.')
+        return redirect(reverse('home'))

@@ -49,6 +49,11 @@
                         </ul>
                     </li>
                     {% if user.is_authenticated %}
+                    {% if user.userprofile.membership == 1 or user.userprofile.membership == 2%}
+                    <li class="nav-item">
+                        <a href="{% url 'new_theme' %}" class="nav-link">NEW THEME</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a href="{% url 'profile' %}" class="nav-link">PROFILE</a>
                     </li>

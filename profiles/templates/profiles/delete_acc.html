@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <!--Block content-->
-{% ifequal user.username "admin" %}
+{% if user.username is "admin" %}
 <!--if user is admin display the waring message and return link-->
 <div class="container-fluid position-absolute top-50 start-50 translate-middle">
     <div class="row">
@@ -65,5 +65,5 @@
       </div>
     </div>
   </div>
-{% endifequal %}
+{% endif %}
 {% endblock %}

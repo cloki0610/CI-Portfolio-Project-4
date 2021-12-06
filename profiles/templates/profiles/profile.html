@@ -2,13 +2,13 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-{% ifequal user.userprofile.name None %}
+{% if user.userprofile.name is None %}
 <!--if name in user profile is none display default header-->
 <h1 class="text-center">Your Profile</h1>
 {% else %}
 <!--else display header with user's name-->
 <h1 class="text-center">{{ user.userprofile.name }}'s Profile</h1>
-{% endifequal %}
+{% endif %}
 <!--Display user's personal information-->
 <div class="container-fluid">
     <div class="row" id="user_icon">
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="row" id="bio">
-        {% ifequal user.usereprofile.bio "" %}
+        {% if user.usereprofile.bio is "" %}
         <div class="col text-center">
             <p>Keep secret for now :)</p>
         </div>
@@ -80,7 +80,7 @@
         <div class="col text-center">
             {{ user.userprofile.bio | safe }}
         </div>
-            {% endifequal%}
+            {% endif %}
     </div>
     <!--Buttons-->
     <div class="row gap-1 justify-content-center align-items-center">
@@ -93,11 +93,11 @@
             <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSOWRD</a>
         </div>
         <!--if user membership is member display a button to request form-->
-        {% ifequal user.userprofile.get_membership_display "member" %}
+        {% if user.userprofile.get_membership_display is "member" %}
         <div class="col-sm-5 col-md-5 p-1">
             <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
         </div>
-        {% endifequal %}
+        {% endif %}
         <!--Delete account-->
         <div class="col-sm-5 col-md-5 p-1">
             <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>

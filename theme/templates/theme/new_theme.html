@@ -3,7 +3,7 @@
 {% load cloudinary %}
 {% block content %}
 {% load crispy_forms_tags %}
-<h1>Edit Your Theme</h1>
+<h1>Add new Theme</h1>
 <!--Request form-->
 <form action="{% url 'new_theme' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

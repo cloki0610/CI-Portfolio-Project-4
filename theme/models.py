@@ -2,7 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, pre_save
+from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 import cloudinary
 from home.models import Category
@@ -18,7 +19,7 @@ class Theme(models.Model):
                                  related_name="category_theme")
     excerpt = models.TextField(blank=True, default='')
     feature_image = CloudinaryField('image',
-                                    default='v1638492563/tisbV2F_jsz5r2.jpg')
+                                    default='v1638492563/feature_img.jpg')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     upvote = models.ManyToManyField(User, related_name='theme_upvote',
@@ -46,6 +47,13 @@ class Theme(models.Model):
 def feature_image_delete(sender, instance, **kwargs):
     """ try to remove the image in cloudinary when record deleted """
     cloudinary.uploader.destroy(instance.feature_image.public_id)
+
+
+@receiver(pre_save, sender=Theme)
+def theme_pre_save(sender, instance, *args, **kwargs):
+    """ auto add slug to the slug column """
+    if not instance.slug:
+        instance.slug = slugify(instance.title)
 
 
 class Comment(models.Model):
