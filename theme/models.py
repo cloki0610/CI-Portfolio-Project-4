@@ -16,7 +16,7 @@ class Theme(models.Model):
                                related_name="author_theme")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name="category_theme")
-    excerpt = models.TextField(blank=True)
+    excerpt = models.TextField(blank=True, default='')
     feature_image = CloudinaryField('image',
                                     default='v1638492563/tisbV2F_jsz5r2.jpg')
     created_on = models.DateTimeField(auto_now_add=True)
@@ -54,7 +54,7 @@ class Comment(models.Model):
                               related_name="theme_comments")
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name="user_comments")
-    comment_body = models.TextField(blank=True)
+    comment_body = models.TextField(blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     upvote = models.ManyToManyField(User, related_name='comment_upvote',

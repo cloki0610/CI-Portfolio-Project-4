@@ -19,4 +19,7 @@ from . import views
 
 urlpatterns = [
     path('<slug:slug>/', views.ThemeOverView.as_view(), name='theme_overview'),
+    path('new_theme/', views.NewThemeView.as_view(), name='new_theme'),
+    path('edit_theme/<slug:slug>',
+         views.EditThemeView.as_view(), name='edit_theme')
 ]

@@ -5,11 +5,11 @@
 {% load crispy_forms_tags %}
 <h1>Edit Your Theme</h1>
 <!--Request form-->
-<form action="{% url 'new_theme' request.user %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'new_theme' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <p>Your username: {{ user.username }}</p>
     {{ theme_form | crispy }}
     <input type="submit" value="SUBMIT">
 </form>
-<a href="{% url 'theme' %}">Return to Profile</a>
+<a href="{% url 'home' %}">Return to Homepage</a>
 {% endblock %}

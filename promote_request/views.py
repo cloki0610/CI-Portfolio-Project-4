@@ -18,7 +18,8 @@ class PromoteRequestView(LoginRequiredMixin, View):
             request,
             "promote_request/request.html", {
                 "request_form": request_form
-            })
+            }
+        )
 
     def post(self, request):
         """ post method """
@@ -31,7 +32,7 @@ class PromoteRequestView(LoginRequiredMixin, View):
                              'Form submited, please wait for approved')
         else:
             messages.warning(request,
-                             'Invalid input, Please check and Try Again!')
+                             'Submit failed, Please check and Try Again!')
         return render(
             request,
             "profiles/profile.html",

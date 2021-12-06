@@ -14,11 +14,11 @@ class UserProfile(models.Model):
     ROLES = ((0, "member"), (1, "creator"), (2, "admin"))
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=80, null=True, blank=True)
+    name = models.CharField(max_length=80, blank=True, default='')
     membership = models.IntegerField(choices=ROLES, default=0)
     registered_on = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=50, null=True, blank=True)
-    bio = models.TextField(blank=True)
+    location = models.CharField(max_length=50, blank=True, default='')
+    bio = models.TextField(blank=True, default='')
     user_icon = CloudinaryField('image', default='v1638377416/placeholder.jpg')
 
     class Meta:
