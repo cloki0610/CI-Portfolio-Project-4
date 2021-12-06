@@ -33,8 +33,7 @@ class UserProfile(models.Model):
 @receiver(pre_delete, sender=UserProfile)
 def icon_delete(sender, instance, **kwargs):
     """ try to remove the image in cloudinary when user record deleted """
-    if instance.user_icon.url != "placeholder":
-        cloudinary.uploader.destroy(instance.user_icon.public_id)
+    cloudinary.uploader.destroy(instance.user_icon.public_id)
 
 
 @receiver(post_save, sender=User)
