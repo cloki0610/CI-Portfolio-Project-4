@@ -34,14 +34,6 @@ class Theme(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author.userprofile.name}"
 
-    def count_upvote(self):
-        """ return the number of upvote """
-        return self.upvote.count()
-
-    def count_downvote(self):
-        """ return the number of downvote """
-        return self.downvote.count()
-
 
 @receiver(pre_delete, sender=Theme)
 def feature_image_delete(sender, instance, **kwargs):
@@ -76,11 +68,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment on {self.theme} by {self.user.userprofile.name}"
-
-    def count_upvote(self):
-        """ return the number of upvote """
-        return self.upvote.count()
-
-    def count_downvote(self):
-        """ return the number of downvote """
-        return self.downvote.count()

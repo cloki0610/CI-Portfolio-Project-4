@@ -9,7 +9,7 @@
 <!--theme details-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col text-center">
+        <div class="col-md-4 offset-4 align-self-center">
             {% if "featureimg" in theme.feature_image.url %}
             <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" alt="{{ theme.title }}" class="img-thumbnail">
             {% else %}
@@ -19,71 +19,97 @@
     </div>
     <div class="row">
         <div class="col text-center">
+            Excerpt
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
             <p>{{ theme.excerpt }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col text-center">
-            <p>{{ theme.category.name }}</p>
+            <p>Category: {{ theme.category.name }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col text-center">
-            <p>{{ theme.created_on }}</p>
+            <p>Created on: {{ theme.created_on }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col text-center">
-            <p>{{ theme.updated_on }}</p>
+            <p>Last updated: {{ theme.updated_on }}</p>
         </div>
     </div>
     <div class="row gap-1 justify-content-center align-items-center">
         <div class="col col-md-2 text-center">
-            <p>upvote  {{ theme.upvote.count_upvote }}</p>
+            <p>upvote  {{ theme.upvote.count }}</p>
         </div>
         <div class="col col-md-2 text-center">
-            <p>downvote {{ theme.downvote.count_downvote}}</p>
+            <p>downvote {{ theme.downvote.count }}</p>
         </div>
         <div class="col col-md-2 text-center">
             <p>comments {{ comments.count }}</p>
         </div>
     </div>
-<!--button to post list-->
-<!--if user is author also display edit theme and delete theme-->
-<div class="row gap-1 justify-content-center align-items-center">
-    <div class="col-sm-3 col-md-3 p-1">
-        <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">Enter to contents</a>
+    <!--button to post list-->
+    <!--if user is author also display edit theme and delete theme-->
+    <div class="row gap-1 justify-content-center align-items-center">
+        <div class="col-sm-3 col-md-3 p-1">
+            <a href="#" class="btn btn-outline-dark btn-block btn-lg w-100">Enter to contents</a>
+        </div>
+        {% if user.is_authenticated %}
+        {% if request.user == theme.author %}
+        <div class="col-sm-3 col-md-3 p-1">
+            <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Theme info</a>
+        </div>
+        <div class="col-sm-3 col-md-3 p-1">
+            <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete Theme</a>
+        </div>
+        {% endif %}
+        {% endif %}
     </div>
-    {% if user.is_authenticated %}
-    {% if request.user == theme.author %}
-    <div class="col-sm-3 col-md-3 p-1">
-        <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Theme info</a>
-    </div>
-    <div class="col-sm-3 col-md-3 p-1">
-        <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete Theme</a>
-    </div>
-    {% endif %}
-    {% endif %}
 </div>
 <!--comment form-->
 {% if user.is_authenticated %}
-<h3>Leave a comment:</h3>
-<p>Posting as: {{ user.username }}</p>
-<form method="POST">
-    {% csrf_token %}
-    {{ comment_form | crispy }}
-    <button type="submit" class="btn btn-outline-dark btn-block btn-lg">Submit</button>
-</form>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <h3 class="text-center">Leave a comment:</h3>
+        <p class="text-center">Posting as: {{ user.username }}</p>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form | crispy }}
+            <button type="submit" class="btn btn-outline-dark btn-block btn-lg">Submit</button>
+        </form>
+    </div>
+</div>
 {% endif %}
 <!--display all comment-->
+<div class="container-fluid">
 {% for comment in comments %}
-<p>{{ comment.user.userprofile.name }}</p>
-<p>{{ comment.comment_body | safe }}</p>
-<p>Comment on {{ comment.created_on }}</p>
-<p>Last updated {{ comment.updated_on }}</p>
-<p>upvote  {{ comment.upvote.count_upvote }}</p>
-<p>downvote {{ comment.downvote.count_downvote}}</p>
+<div class="card">
+    <div class="card-header">
+        <h4>{{ comment.user.userprofile.name }}</h4>
+    </div>
+    <div class="card-body">
+        <p>{{ comment.comment_body | safe }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <p>
+            upvote  {{ comment.upvote.count }}
+            downvote {{ comment.downvote.count }}
+        </p>
+        <p>
+            Comment on {{ comment.created_on }}
+            Last updated {{ comment.updated_on }}
+        </p>
+    </div>
+</div>
 {% empty %}
-<p>Here is no comment yet.</p>
+<p class="text-center">Here is no comment yet.</p>
 {% endfor %}
+</div>
 {% endblock %}
