@@ -6,7 +6,14 @@ from .models import UserProfile
 
 class UserProfilesForm(forms.ModelForm):
     """ Form model to let user modify his own profile """
-    bio = forms.CharField(widget=SummernoteWidget())
+    bio = forms.CharField(widget=SummernoteWidget(attrs={
+                                        'summernote': {
+                                            'width': '100%',
+                                            'height': '400px',
+                                            'align-item': 'center'
+                                        }
+                                    }
+                                    ))
 
     class Meta:
         """ Handle the column in form"""

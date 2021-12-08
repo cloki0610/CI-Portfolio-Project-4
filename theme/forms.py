@@ -14,7 +14,16 @@ class ThemeForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     """ Form model to submit comment """
-    comment_body = forms.CharField(widget=SummernoteWidget())
+    comment_body = forms.CharField(widget=SummernoteWidget(
+                                        attrs={
+                                            'summernote': {
+                                                'width': '100%',
+                                                'height': '400px',
+                                                'align-item': 'center'
+                                            }
+                                        }
+                                        )
+                                   )
 
     class Meta:
         """ Handle the column in form """

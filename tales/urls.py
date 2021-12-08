@@ -26,5 +26,4 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
     path('promote_request/', include('promote_request.urls')),
     path('theme/', include('theme.urls')),
-    path('post/', include('post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

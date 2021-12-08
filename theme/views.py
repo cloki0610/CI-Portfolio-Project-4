@@ -7,13 +7,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.text import slugify
 from django.http import HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Theme
 from .forms import CommentForm, ThemeForm
 
 
 class ThemeOverView(LoginRequiredMixin, View):
     """ Overview page to show the details and comments """
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         """ GET method """
         theme = get_object_or_404(Theme, slug=slug)
         comments = theme.theme_comments.order_by('created_on')
@@ -26,7 +27,7 @@ class ThemeOverView(LoginRequiredMixin, View):
                 "comment_form": CommentForm(),
             })
 
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, slug):
         """ POST method """
         theme = get_object_or_404(Theme, slug=slug)
         comments = theme.theme_comments.order_by('created_on')
@@ -94,7 +95,7 @@ class NewThemeView(LoginRequiredMixin, View):
 
 class EditThemeView(LoginRequiredMixin, View):
     """ return a form model to edit a exist theme record """
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         """ GET method"""
         edit_theme = get_object_or_404(Theme, slug=slug)
         theme_form = ThemeForm(instance=edit_theme)
@@ -107,7 +108,7 @@ class EditThemeView(LoginRequiredMixin, View):
             },
         )
 
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, slug):
         """ POST method """
         edit_theme = get_object_or_404(Theme, slug=slug)
         theme_form = ThemeForm(request.POST, request.FILES,
@@ -122,6 +123,8 @@ class EditThemeView(LoginRequiredMixin, View):
         else:
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[edit_theme.slug]))
         return HttpResponseRedirect(reverse('theme_overview',
                                     args=[edited_theme.slug]))
 
@@ -129,10 +132,14 @@ class EditThemeView(LoginRequiredMixin, View):
 class DeleteTheme(LoginRequiredMixin, View):
     """ View to delete theme after confirmation """
 
-    def get(self, request, slug):
-        """ get method """
-        delete_theme = get_object_or_404(Theme, slug=slug)
-        delete_theme.delete()
-        messages.success(request,
-                         'Your theme is successfully deleted.')
+    def post(self, request, slug):
+        """ POST method """
+        try:
+            delete_theme = get_object_or_404(Theme, slug=slug)
+            delete_theme.delete()
+            messages.success(request,
+                             'Your theme is successfully deleted.')
+        except ObjectDoesNotExist:
+            messages.error(request, "Record does not exist.")
+            return redirect(reverse('home'))
         return redirect(reverse('home'))

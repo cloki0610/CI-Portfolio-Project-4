@@ -6,9 +6,9 @@
 <!--Header-->
 <h1></h1>
 <!--A form to allowed user to edit their post-->
-<form action="{% url '' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'edit_post' slug=theme.slug pk=post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ profile_form | crispy }}
+    {{ post_form | crispy }}
     <input type="submit" value="SUBMIT">
 </form>
 <a href="#">Back to Menu</a>

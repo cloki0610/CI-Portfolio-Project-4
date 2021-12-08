@@ -62,10 +62,18 @@
         {% if user.is_authenticated %}
         {% if request.user == theme.author %}
         <div class="col-sm-3 col-md-3 p-1">
+            <!-- Edit current theme -->
             <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Theme info</a>
         </div>
         <div class="col-sm-3 col-md-3 p-1">
-            <a href="{% url 'delete_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Delete Theme</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-dark btn-block btn-lg w-100" data-bs-toggle="modal" data-bs-target="#confirmdelete">
+                Remove Theme
+            </button>
+        </div>
+        <div class="col-sm-3 col-md-3 p-1">
+            <!-- Add a new post -->
+            <a href="{% url 'new_post' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Add new post</a>
         </div>
         {% endif %}
         {% endif %}
@@ -111,5 +119,23 @@
 {% empty %}
 <p class="text-center">Here is no comment yet.</p>
 {% endfor %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirm-delete-theme" tabindex="-1" aria-labelledby="confirm-delete-theme" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="ThemeModalTitle">Confirm</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Do you really want to remove {{ theme.title }}?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a class="btn btn-danger" href="{% url 'delete_theme' theme.slug %}">Delete Account</a>
+        </div>
+      </div>
+    </div>
 </div>
 {% endblock %}

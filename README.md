@@ -63,4 +63,6 @@ Django allauth was used to set up user registration and built in decorators allo
  - https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
  - https://stackoverflow.com/questions/36317816/relatedobjectdoesnotexist-user-has-no-userprofile
  - https://stackoverflow.com/questions/28165243/cannot-upload-image-in-django-modelform
+ - https://stackoverflow.com/questions/33715879/how-to-delete-user-in-django
+ - https://www.itread01.com/content/1558923602.html
 ### **Acknowledgment**

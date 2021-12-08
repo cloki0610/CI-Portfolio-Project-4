@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import UserProfilesForm
 
 
@@ -64,9 +65,13 @@ class DeleteAccount(LoginRequiredMixin, View):
 class DeleteAction(LoginRequiredMixin, View):
     """ View to delete account after confirmation """
 
-    def get(self, request):
-        """ get method """
-        request.user.delete()
-        messages.success(request,
-                         'Thanks for join us and hope to see you again!')
+    def post(self, request):
+        """ POST method """
+        try:
+            request.user.delete()
+            messages.success(request,
+                             'Thanks for join us and hope to see you again!')
+        except ObjectDoesNotExist:
+            messages.error(request, "Record does not exist.")
+            return redirect(reverse('home'))
         return redirect(reverse('home'))
