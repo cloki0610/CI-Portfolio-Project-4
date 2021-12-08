@@ -2,7 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-{% if user.userprofile.name is None %}
+{% if not user.userprofile.name%}
 <!--if name in user profile is none display default header-->
 <h1 class="text-center">Your Profile</h1>
 {% else %}
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="row" id="bio">
-        {% if user.usereprofile.bio is "" %}
+        {% if not user.usereprofile.bio %}
         <div class="col text-center">
             <p>Keep secret for now :)</p>
         </div>

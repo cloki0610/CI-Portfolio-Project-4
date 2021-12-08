@@ -2,15 +2,34 @@
 POST APPLICATION VIEWS
 """
 from django.shortcuts import render, get_object_or_404, reverse
-from django.views import View
+from django.views import View, generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.utils.text import slugify
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from theme.models import Theme
 from .models import Post
 from .forms import PostForm
+
+
+class ContentsView(generic.ListView):
+    """ Content page display all post of the theme """
+    model = Post
+    template_name = 'post/contents.html'
+    paginate_by = 10
+
+    def get_queryset(self, *args, **kwargs):
+        """ Queryset to get the query with argument """
+        post = self.model.objects.all()
+        if self.kwargs.get('slug'):
+            theme = get_object_or_404(Theme, slug=self.kwargs['slug'])
+            post = post.filter(theme=theme).order_by('-publish_on')
+
+        return post
+
+    def get_theme(self, *args, **kwargs):
+        """ get the theme slug for return to overview page"""
+        return get_object_or_404(Theme, slug=self.kwargs['slug'])
 
 
 class NewPostView(LoginRequiredMixin, View):
@@ -40,7 +59,7 @@ class NewPostView(LoginRequiredMixin, View):
         else:
             messages.warning(request,
                              'Submit failed, Please check and Try Again!')
-        return HttpResponseRedirect(reverse('theme_overview',
+        return HttpResponseRedirect(reverse('contents',
                                     args=[theme.slug]))
 
 
@@ -69,14 +88,13 @@ class EditPostView(LoginRequiredMixin, View):
         if post_form.is_valid():
             edited_post = post_form.save(commit=False)
             edited_post.theme = theme
-            edited_post.slug = slugify(edited_post.title)
             edited_post.save()
             messages.success(request,
                              'Your post have been successfully updated.')
         else:
             messages.warning(request,
                              'Updated failed, Please check and Try Again!')
-        return HttpResponseRedirect(reverse('theme_overview',
+        return HttpResponseRedirect(reverse('contents',
                                     args=[theme.slug]))
 
 
@@ -90,10 +108,8 @@ class DeletePost(LoginRequiredMixin, View):
             delete_post = get_object_or_404(Post, pk=post_pk)
             delete_post.delete()
             messages.success(request,
-                             'Your theme is successfully deleted.')
+                             'Selected post is successfully deleted.')
         except ObjectDoesNotExist:
             messages.error(request, "Record does not exist.")
-            return HttpResponseRedirect(reverse('theme_overview',
-                                        args=[theme.slug]))
-        return HttpResponseRedirect(reverse('theme_overview',
+        return HttpResponseRedirect(reverse('contents',
                                     args=[theme.slug]))

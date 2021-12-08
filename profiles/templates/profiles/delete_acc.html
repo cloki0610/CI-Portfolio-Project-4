@@ -60,7 +60,10 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-danger" href="{% url 'delete_action' %}">Delete Account</a>
+            <form action="{% url 'delete_action' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete Account</button>
+            </form>
         </div>
       </div>
     </div>

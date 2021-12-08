@@ -20,4 +20,4 @@ class PostForm(forms.ModelForm):
     class Meta:
         """ Form model to submit comment """
         model = Post
-        fields = ('title', 'post_body')
+        fields = ('title', 'excerpt', 'post_body')

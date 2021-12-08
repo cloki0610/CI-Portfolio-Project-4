@@ -11,5 +11,5 @@
     {{ post_form | crispy }}
     <input type="submit" value="SUBMIT">
 </form>
-<a href="#">Back to Menu</a>
+<a href="{% url 'contents' theme.slug %}">Back to Menu</a>
 {% endblock %}

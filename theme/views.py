@@ -8,11 +8,13 @@ from django.contrib import messages
 from django.utils.text import slugify
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import Theme
 from .forms import CommentForm, ThemeForm
 
 
-class ThemeOverView(LoginRequiredMixin, View):
+class ThemeOverView(View):
     """ Overview page to show the details and comments """
     def get(self, request, slug):
         """ GET method """
@@ -27,6 +29,7 @@ class ThemeOverView(LoginRequiredMixin, View):
                 "comment_form": CommentForm(),
             })
 
+    @method_decorator(login_required)
     def post(self, request, slug):
         """ POST method """
         theme = get_object_or_404(Theme, slug=slug)
