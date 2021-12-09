@@ -100,7 +100,11 @@
 {% for comment in comments %}
 <div class="card">
     <div class="card-header">
-        <h4>{{ comment.user.userprofile.name }}</h4>
+        {% if not comment.user.userprofile.name %}
+            <h4>{{ comment.user.username }}</h4>
+        {% else %}
+            <h4>{{ comment.user.userprofile.name }}</h4>
+        {% endif %}
     </div>
     <div class="card-body">
         <p>{{ comment.comment_body | safe }}</p>
