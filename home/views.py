@@ -20,9 +20,9 @@ class CategoryView(View):
     """ List all the theme in the category """
     def get(self, request, category_slug):
         """ GET method """
-        category = get_object_or_404(Category, name=category_slug)
+        category = get_object_or_404(Category, slug=category_slug)
         themes = category.category_theme.order_by('-updated_on')
-        paginator = Paginator(themes, 25) # Show 25 contacts per page.
+        paginator = Paginator(themes, 10) # Show 25 contacts per page.
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(

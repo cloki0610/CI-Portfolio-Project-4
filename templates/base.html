@@ -41,11 +41,11 @@
                             Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">FICTION</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category' category_slug='fiction' %}">Fiction</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">NON-FICTION</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category' category_slug='non-fiction' %}">Non-fiction</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">LIFE STYLE</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category' category_slug='lifestyle' %}">Lifestyle</a></li>
                         </ul>
                     </li>
                     {% if user.is_authenticated %}
