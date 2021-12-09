@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+{% load crispy_forms_tags %}
+<h1>Report</h1>
+<!--Report form-->
+<form action="{% url 'report' theme.slug %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Your username: {{ user.username }}</p>
+    <p>Report theme: {{ theme.title }}</p>
+    {{ report_form | crispy }}
+    <p>Please provide your E-mail address if you do not provide your E-mail when sign up your account.</p>
+    <input type="submit" value="SUBMIT">
+</form>
+<a href="{% url 'theme_overview' theme.slug %}">Back</a>
+{% endblock %}

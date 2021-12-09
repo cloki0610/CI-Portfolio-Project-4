@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'promote_request',
     'theme',
     'post',
+    'report',
 ]
 
 SITE_ID = 1

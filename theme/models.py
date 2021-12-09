@@ -32,7 +32,7 @@ class Theme(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"{self.title} by {self.author.userprofile.name}"
+        return str(self.title)
 
 
 @receiver(pre_delete, sender=Theme)
@@ -67,4 +67,4 @@ class Comment(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"Comment on {self.theme} by {self.user.userprofile.name}"
+        return f"Comment on {self.theme}"

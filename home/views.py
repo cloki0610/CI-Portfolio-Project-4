@@ -22,14 +22,14 @@ class CategoryView(View):
         """ GET method """
         category = get_object_or_404(Category, slug=category_slug)
         themes = category.category_theme.order_by('-updated_on')
-        paginator = Paginator(themes, 10) # Show 25 contacts per page.
+        theme_paginator = Paginator(themes, 10) # Show 25 contacts per page.
         page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+        theme_page = theme_paginator.get_page(page_number)
         return render(
             request,
             "home/category.html",
             {
                 "category": category,
-                "page_obj": page_obj
+                "theme_page": theme_page
             }
         )

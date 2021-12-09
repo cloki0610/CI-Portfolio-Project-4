@@ -1,4 +1,4 @@
-""" Theme URL Configuration
+""" Report URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -13,18 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
-    path('new_theme/', views.NewThemeView.as_view(), name='new_theme'),
-    path('<slug:slug>/', views.ThemeOverView.as_view(),
-         name='theme_overview'),
-    path('edit_theme/<slug:slug>/',
-         views.EditThemeView.as_view(), name='edit_theme'),
-    path('delete_theme/<slug:slug>/', views.DeleteTheme.as_view(),
-         name='delete_theme'),
-    path('<slug:slug>/post/', include('post.urls')),
-    path('<slug:slug>/report/', include('report.urls')),
+    path('', views.ReportView.as_view(),
+         name='report'),
 ]

@@ -9,7 +9,7 @@ from .forms import PromoteRequestForm
 
 
 class PromoteRequestView(LoginRequiredMixin, View):
-    """ Return a form model to subit request """
+    """ Return a form model to submit request """
 
     def get(self, request):
         """ get method """
