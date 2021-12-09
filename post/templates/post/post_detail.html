@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+<!--Header with post title-->
+<div class="row">
+    <div class="col text-center">
+        <h1>{{ theme.title }}    {{ post.title }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center">
+        <p>{{ post.publish_on }}    {{ post.updated_on }}</p>
+    </div>
+</div>
+<!--post content-->
+<div class="row">
+    <div class="col text-center">
+        <p>{{ post.post_body | safe }}</p>
+    </div>
+</div>
+<!--previous page/next page-->
+<!--Back to content-->
+<div class="row">
+    <div class="col text-center">
+        <a href="{% url 'contents' theme.slug %}">Return</a>
+    </div>
+</div>
+{% endblock %}

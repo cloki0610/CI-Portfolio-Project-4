@@ -32,6 +32,21 @@ class ContentsView(generic.ListView):
         return get_object_or_404(Theme, slug=self.kwargs['slug'])
 
 
+class PostDetailView(View):
+    """ Page to disply full content of the posst """
+    def get(self, request, slug, post_pk):
+        theme = get_object_or_404(Theme, slug=slug)
+        post = get_object_or_404(Post, pk=post_pk)
+        return render(
+            request,
+            "post/post_detail.html",
+            {
+                "theme": theme,
+                "post": post
+            }
+        )
+
+
 class NewPostView(LoginRequiredMixin, View):
     """ View to add a new post to the theme last visit """
     def get(self, request, slug):

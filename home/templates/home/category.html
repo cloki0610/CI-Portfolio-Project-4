@@ -2,13 +2,14 @@
 {% load static %}
 {% block content %}
 <!--Header-->
-<h1>TALES</h1>
-<!--Welome message if user login successfully-->
+<h1>{{ category.name }}</h1>
+<p>{{ category.introduction }}</p>
+<!--Welcome message if user login-->
 {% if user.is_authenticated %}
 <h2>Welcome, {{ request.user.username }}</h2>
 {% endif %}
 <!--Full theme list-->
-{% for theme in theme_list %}
+{% for theme in themes_list %}
 <a href="{% url 'theme_overview' theme.slug %}">
     {{ theme.title }} {{ theme.category.name }}
 </a>
@@ -33,5 +34,4 @@
         {% endif %}
     </span>
 </nav>
-{% endif %}
 {% endblock %}

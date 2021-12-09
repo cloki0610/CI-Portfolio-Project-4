@@ -5,7 +5,7 @@ from theme.models import Theme
 
 class Post(models.Model):
     """ To manage the post written by creators """
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE,
                               related_name="theme_posts")
     publish_on = models.DateTimeField(auto_now_add=True)

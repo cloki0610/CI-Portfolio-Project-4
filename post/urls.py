@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', views.ContentsView.as_view(), name='contents'),
+    path('<int:post_pk>', views.PostDetailView.as_view(), name='post_detail'),
     path('new_post/', views.NewPostView.as_view(), name='new_post'),
     path('edit_post/<int:post_pk>/',
          views.EditPostView.as_view(), name='edit_post'),
