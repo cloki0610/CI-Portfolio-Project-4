@@ -40,15 +40,13 @@ class EditUserProfileView(LoginRequiredMixin, View):
                                         request.FILES,
                                         instance=request.user.userprofile)
         if profile_form.is_valid():
-            messages.success(request, 'Your Profile Has Updated.')
             profile_form.save()
+            messages.success(request, 'Your Profile Has Updated.')
         else:
+            print(profile_form.errors)
             messages.error(request,
                            'Updated Invalid, Edit and Try Again!')
-        return render(
-            request,
-            "profiles/profile.html",
-        )
+        return redirect(reverse('profile'))
 
 
 class DeleteAccount(LoginRequiredMixin, View):

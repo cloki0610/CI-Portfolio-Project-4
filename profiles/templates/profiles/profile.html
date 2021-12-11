@@ -76,15 +76,15 @@
         </div>
     </div>
     <div class="row" id="bio">
-        {% if not user.usereprofile.bio %}
-        <div class="col text-center">
-            <p>Keep secret for now :)</p>
-        </div>
-            {% else %}
+        {% if user.userprofile.bio %}
         <div class="col text-center">
             {{ user.userprofile.bio | safe }}
         </div>
-            {% endif %}
+        {% else %}
+        <div class="col text-center">
+            <p>Keep secret for now :)</p>
+        </div>
+        {% endif %}
     </div>
     <!--Buttons-->
     <div class="row gap-1 justify-content-center align-items-center">

@@ -24,7 +24,11 @@
     </div>
     <div class="row">
         <div class="col text-center">
+            {% if theme.excerpt %}
             <p>{{ theme.excerpt }}</p>
+            {% else %}
+            <p>Author do not write any excerpt.</p>
+            {% endif %}
         </div>
     </div>
     <div class="row">
