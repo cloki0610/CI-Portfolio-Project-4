@@ -43,8 +43,8 @@ class EditUserProfileView(LoginRequiredMixin, View):
             messages.success(request, 'Your Profile Has Updated.')
             profile_form.save()
         else:
-            messages.warning(request,
-                             'Updated Invalid, Edit and Try Again!')
+            messages.error(request,
+                           'Updated Invalid, Edit and Try Again!')
         return render(
             request,
             "profiles/profile.html",

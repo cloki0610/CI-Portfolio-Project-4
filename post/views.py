@@ -33,8 +33,9 @@ class ContentsView(generic.ListView):
 
 
 class PostDetailView(View):
-    """ Page to disply full content of the posst """
+    """ Page to disply full content of the post """
     def get(self, request, slug, post_pk):
+        """ GET method """
         theme = get_object_or_404(Theme, slug=slug)
         post = get_object_or_404(Post, pk=post_pk)
         return render(
@@ -72,8 +73,8 @@ class NewPostView(LoginRequiredMixin, View):
             messages.success(request,
                              'New post has been created.')
         else:
-            messages.warning(request,
-                             'Submit failed, Please check and Try Again!')
+            messages.error(request,
+                           'Submit failed, Please check and Try Again!')
         return HttpResponseRedirect(reverse('contents',
                                     args=[theme.slug]))
 
@@ -107,8 +108,8 @@ class EditPostView(LoginRequiredMixin, View):
             messages.success(request,
                              'Your post have been successfully updated.')
         else:
-            messages.warning(request,
-                             'Updated failed, Please check and Try Again!')
+            messages.error(request,
+                           'Updated failed, Please check and Try Again!')
         return HttpResponseRedirect(reverse('contents',
                                     args=[theme.slug]))
 

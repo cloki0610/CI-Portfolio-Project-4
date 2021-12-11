@@ -39,7 +39,7 @@ class ReportView(LoginRequiredMixin, View):
             messages.success(request,
                              'Form submited, Thank you your report.')
         else:
-            messages.warning(request,
+            messages.error(request,
                              'Submit failed, Please check and Try Again!')
         return render(
             request,

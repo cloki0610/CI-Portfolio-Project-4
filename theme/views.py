@@ -82,8 +82,8 @@ class NewThemeView(LoginRequiredMixin, View):
                              'New theme has been created. '
                              + 'Thanks your support!')
         else:
-            messages.warning(request,
-                             'Submit failed, Please check and Try Again!')
+            messages.error(request,
+                           'Submit failed, Please check and Try Again!')
             return redirect(reverse('home'))
         return render(
             request,
@@ -124,8 +124,8 @@ class EditThemeView(LoginRequiredMixin, View):
             messages.success(request,
                              'Your theme has been updated.')
         else:
-            messages.warning(request,
-                             'Updated failed, Please check and Try Again!')
+            messages.error(request,
+                           'Updated failed, Please check and Try Again!')
             return HttpResponseRedirect(reverse('theme_overview',
                                         args=[edit_theme.slug]))
         return HttpResponseRedirect(reverse('theme_overview',

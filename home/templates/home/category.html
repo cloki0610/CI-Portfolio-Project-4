@@ -16,6 +16,8 @@
 <p>{{ theme.excerpt}}</p>
 <p>Created on {{ theme.created_on }} Last updated {{ theme.updated_on }}</p>
 <p>upvote {{ theme.upvote.count }} downvote {{ theme.downvote.count }} comment {{ theme.theme_comments.count }}</p>
+{% empty %}
+<p class="text-center">Here is no any theme yet.</p>
 {% endfor %}
 <!--previous/next button provide by paginator-->
 {% if is_paginated %}

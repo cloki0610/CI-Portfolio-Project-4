@@ -31,8 +31,8 @@ class PromoteRequestView(LoginRequiredMixin, View):
             messages.success(request,
                              'Form submited, please wait for approved')
         else:
-            messages.warning(request,
-                             'Submit failed, Please check and Try Again!')
+            messages.error(request,
+                           'Submit failed, Please check and Try Again!')
         return render(
             request,
             "profiles/profile.html",
