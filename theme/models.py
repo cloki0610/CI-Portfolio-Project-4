@@ -57,10 +57,6 @@ class Comment(models.Model):
     comment_body = models.TextField(blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    upvote = models.ManyToManyField(User, related_name='comment_upvote',
-                                    blank=True)
-    downvote = models.ManyToManyField(User, related_name='comment_downvote',
-                                      blank=True)
 
     class Meta:
         """ The data should order by created date from latest """

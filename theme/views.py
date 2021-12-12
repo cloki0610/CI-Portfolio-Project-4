@@ -20,6 +20,14 @@ class ThemeOverView(View):
         """ GET method """
         theme = get_object_or_404(Theme, slug=slug)
         comments = theme.theme_comments.order_by('created_on')
+        theme_upvote = False
+        theme_downvote = False
+        if theme.upvote.filter(id=self.request.user.id).exists():
+            theme_upvote = True
+
+        if theme.downvote.filter(id=self.request.user.id).exists():
+            theme_downvote = True
+
         return render(
             request,
             "theme/theme_overview.html",
@@ -27,6 +35,8 @@ class ThemeOverView(View):
                 "theme": theme,
                 "comments": comments,
                 "comment_form": CommentForm(),
+                "theme_upvote": theme_upvote,
+                "theme_downvote": theme_downvote
             })
 
     @method_decorator(login_required)
@@ -146,3 +156,33 @@ class DeleteTheme(LoginRequiredMixin, View):
             messages.error(request, "Record does not exist.")
             return redirect(reverse('home'))
         return redirect(reverse('home'))
+
+
+class ThemeUpvote(LoginRequiredMixin, View):
+    """ View to upvote a theme """
+    def post(self, request, theme_pk):
+        """ POST method """
+        theme = get_object_or_404(Theme, pk=theme_pk)
+
+        if theme.upvote.filter(id=request.user.id).exists():
+            theme.upvote.remove(request.user)
+        else:
+            theme.upvote.add(request.user)
+
+        return HttpResponseRedirect(reverse('theme_overview',
+                                    args=[theme.slug]))
+
+
+class ThemeDownvote(LoginRequiredMixin, View):
+    """ View to downvote a theme """
+    def post(self, request, theme_pk):
+        """ POST method """
+        theme = get_object_or_404(Theme, pk=theme_pk)
+
+        if theme.downvote.filter(id=request.user.id).exists():
+            theme.downvote.remove(request.user)
+        else:
+            theme.downvote.add(request.user)
+
+        return HttpResponseRedirect(reverse('theme_overview',
+                                    args=[theme.slug]))
