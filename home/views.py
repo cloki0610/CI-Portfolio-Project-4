@@ -2,18 +2,31 @@
 HOME APPLICATION VIEWS
 """
 from django.shortcuts import render, get_object_or_404
-from django.views import generic, View
+from django.views import View
 from django.core.paginator import Paginator
+from django.db.models import Count
 from theme.models import Theme
 from .models import Category
 
 
-class HomePage(generic.ListView):
+class HomePage(View):
     """ List all the theme from latest to oldest """
-    model = Theme
-    query_set = Theme.objects.all().order_by('-updated_on')
-    template_name = 'home/index.html'
-    paginate_by = 10
+    def get(self, request):
+        """ GET method """
+        all_theme = Theme.objects.all()
+        top_theme = Theme.objects.annotate(most_upvote=Count('upvote')) \
+                         .order_by('-most_upvote')[:1].get()
+        theme_paginator = Paginator(all_theme, 10)
+        page_number = request.GET.get('page')
+        theme_page = theme_paginator.get_page(page_number)
+        return render(
+            request,
+            "home/index.html",
+            {
+                "theme_page": theme_page,
+                "top_theme": top_theme
+            }
+        )
 
 
 class CategoryView(View):

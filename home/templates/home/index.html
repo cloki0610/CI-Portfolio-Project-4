@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
 {% block content %}
 <!--Header-->
 <h1>TALES</h1>
@@ -7,8 +8,20 @@
 {% if user.is_authenticated %}
 <h2>Welcome, {{ request.user.username }}</h2>
 {% endif %}
+<!--Show most popular theme-->
+<div class="row">
+    <a href="{% url 'theme_overview' top_theme.slug %}">
+        {% if "featureimg" in top_theme.feature_image.url %}
+            <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" class="d-block w-100" alt="popular-theme">
+        {% else %}
+            <img src="{{ top_theme.feature_image.url }}" alt="{{ top_theme.title }}" class="d-block w-100" alt="popular-theme">
+        {% endif %}
+        <h3>Most Popular</h3>
+        <h4>{{ top_theme.title }}</h4>
+    </a>
+</div>
 <!--Full theme list-->
-{% for theme in theme_list %}
+{% for theme in theme_page %}
 <a href="{% url 'theme_overview' theme.slug %}">
     {{ theme.title }} {{ theme.category.name }}
 </a>

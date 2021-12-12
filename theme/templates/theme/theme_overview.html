@@ -48,29 +48,41 @@
     </div>
     <div class="row gap-1 justify-content-center align-items-center">
         <div class="col col-md-2 text-center">
-            <form action="{% url 'theme_upvote' theme.id %}" method="POST" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" id="{{ theme.id }}-upvote" class="votebtn">
-                    {% if theme_upvote %}
-                    <i class="fas fa-arrow-alt-circle-up"></i>
-                    {% else %}
-                    <i class="far fa-arrow-alt-circle-up"></i>
-                    {% endif %}
-                </button>
-            </form>
+            <span id="upvote-btn">
+                {% if user.is_authenticated %}
+                <form action="{% url 'theme_upvote' theme.id %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" id="{{ theme.id }}-upvote" class="votebtn">
+                        {% if theme_upvote %}
+                        <i class="fas fa-arrow-alt-circle-up"></i>
+                        {% else %}
+                        <i class="far fa-arrow-alt-circle-up"></i>
+                        {% endif %}
+                    </button>
+                </form>
+                {% else %}
+                <i class="fas fa-arrow-alt-circle-up"></i>
+                {% endif %}
+            </span>
             <span id="count-upvote">{{ theme.upvote.count }}</span>
         </div>
         <div class="col col-md-2 text-center">
-            <form action="{% url 'theme_downvote' theme.id %}" method="POST" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" id="{{ theme.id }}-downvote" class="votebtn">
-                    {% if theme_downvote %}
-                    <i class="fas fa-arrow-alt-circle-down"></i>
-                    {% else %}
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                    {% endif %}
-                </button>
-            </form>
+            <span id="downvote-btn">
+                {% if user.is_authenticated %}
+                <form action="{% url 'theme_downvote' theme.id %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" id="{{ theme.id }}-downvote" class="votebtn">
+                        {% if theme_downvote %}
+                        <i class="fas fa-arrow-alt-circle-down"></i>
+                        {% else %}
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                        {% endif %}
+                    </button>
+                </form>
+                {% else %}
+                <i class="fas fa-arrow-alt-circle-up"></i>
+                {% endif %}
+            </span>
             <span id="count-downvote">{{ theme.downvote.count }}</span>
         </div>
         <div class="col col-md-2 text-center">
