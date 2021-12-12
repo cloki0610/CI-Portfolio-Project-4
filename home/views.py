@@ -15,7 +15,7 @@ class HomePage(View):
         """ GET method """
         all_theme = Theme.objects.all()
         top_theme = Theme.objects.annotate(most_upvote=Count('upvote')) \
-                         .order_by('-most_upvote')[:1].get()
+                         .order_by('-most_upvote')[:3]
         theme_paginator = Paginator(all_theme, 10)
         page_number = request.GET.get('page')
         theme_page = theme_paginator.get_page(page_number)

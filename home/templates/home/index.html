@@ -10,15 +10,53 @@
 {% endif %}
 <!--Show most popular theme-->
 <div class="row">
-    <a href="{% url 'theme_overview' top_theme.slug %}">
-        {% if "featureimg" in top_theme.feature_image.url %}
-            <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" class="d-block w-100" alt="popular-theme">
-        {% else %}
-            <img src="{{ top_theme.feature_image.url }}" alt="{{ top_theme.title }}" class="d-block w-100" alt="popular-theme">
-        {% endif %}
-        <h3>Most Popular</h3>
-        <h4>{{ top_theme.title }}</h4>
-    </a>
+    <!--Carousel-->
+    <div id="indexCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#indexCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#indexCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#indexCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            {% for theme in top_theme %}
+            {% if forloop.counter == 1 %}
+            <div class="carousel-item active">
+                <a href="{% url 'theme_overview' theme.slug %}">
+                {% if "featureimg" in theme.feature_image.url %}
+                <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" class="d-block w-100" alt="popular-theme">
+                {% else %}
+                <img src="{{ theme.feature_image.url }}" alt="{{ theme.title }}" class="d-block w-100" alt="popular-theme">
+                {% endif %}
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ theme.title }}</h5>
+                </div>
+            </div>
+            {% else %}
+            <div class="carousel-item">
+                <a href="{% url 'theme_overview' theme.slug %}">
+                {% if "featureimg" in theme.feature_image.url %}
+                <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638821572/tisbV2F_xbcvxz.jpg" class="d-block w-100" alt="popular-theme">
+                {% else %}
+                <img src="{{ theme.feature_image.url }}" alt="{{ theme.title }}" class="d-block w-100" alt="popular-theme">
+                {% endif %}
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ theme.title }}</h5>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#indexCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#indexCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
 </div>
 <!--Full theme list-->
 {% for theme in theme_page %}
