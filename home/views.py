@@ -8,7 +8,7 @@ from theme.models import Theme
 from .models import Category
 
 
-class index(generic.ListView):
+class HomePage(generic.ListView):
     """ List all the theme from latest to oldest """
     model = Theme
     query_set = Theme.objects.all().order_by('-updated_on')
@@ -22,7 +22,7 @@ class CategoryView(View):
         """ GET method """
         category = get_object_or_404(Category, slug=category_slug)
         themes = category.category_theme.order_by('-updated_on')
-        theme_paginator = Paginator(themes, 10) # Show 25 contacts per page.
+        theme_paginator = Paginator(themes, 10)
         page_number = request.GET.get('page')
         theme_page = theme_paginator.get_page(page_number)
         return render(
