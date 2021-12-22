@@ -1,40 +1,54 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<!--Header-->
-<h1>{{ category.name }}</h1>
-<p>{{ category.introduction }}</p>
 <!--Welcome message if user login-->
 {% if user.is_authenticated %}
-<h2>Welcome, {{ request.user.username }}</h2>
+<p class="text-end">You're now login as {{ request.user.username }}</p>
 {% endif %}
+<!--Header-->
+<h1 class="text-center fw-bolder my-2">{{ category.name }}</h1>
+<p class="text-center">{{ category.introduction }}</p>
 <!--Full theme list-->
-{% for theme in theme_page %}
-<a href="{% url 'theme_overview' theme.slug %}">
-    {{ theme.title }} {{ theme.category.name }}
-</a>
-<p>{{ theme.excerpt}}</p>
-<p>Created on {{ theme.created_on }} Last updated {{ theme.updated_on }}</p>
-<p>upvote {{ theme.upvote.count }} downvote {{ theme.downvote.count }} comment {{ theme.theme_comments.count }}</p>
-{% empty %}
-<p class="text-center">Here is no any theme yet.</p>
-{% endfor %}
+<div id="category-list" class="mx-auto w-75 p-3 bg-light border-lightblack rounded">
+    {% for theme in theme_page %}
+    <div class="card d-block w-75 my-4 noselect hvr-grow-shadow mx-auto">
+        <div class="card-header bg-lightblack text-light">
+            {{ theme.category.name }}
+        </div>
+        <div class="card-body text-center">
+            <a href="{% url 'theme_overview' theme.slug %}" class="text-dark">
+                <h5 class="card-title">{{ theme.title }}</h5>
+                <p class="card-text">{{ theme.excerpt}}...</p>
+            </a>
+        </div>
+        <div class="card-footer text-center bg-lightblack text-light">
+            <p>
+                <span class="mx-2"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
+                <span class="mx-2"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
+                <span class="mx-2"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
+                <span class="mx-2">
+                    Last updated {{ theme.updated_on }}
+                </span>
+            </p>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Here is no any theme yet.</p>
+    {% endfor %}
 <!--previous/next button provide by paginator-->
-{% if is_paginated %}
+<p class="current text-center my-3">
+    Page {{ theme_page.number }} of {{ theme_page.paginator.num_pages }}.
+</p>
 <nav class="pagination">
-    <span class="step-links">
+    <p class="step-links mx-auto">
         {% if theme_page.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ theme_page.previous_page_number }}">previous</a>
+        <a href="?page=1" class="btn btn-outline-dark btn-block btn-sm">&laquo; first</a>
+        <a href="?page={{ theme_page.previous_page_number }}" class="btn btn-outline-dark btn-block btn-sm">previous</a>
         {% endif %}
-        <span class="current">
-            Page {{ theme_page.number }} of {{ theme_page.paginator.num_pages }}.
-        </span>
         {% if theme_page.has_next %}
-            <a href="?page={{ theme_page.next_page_number }}">next</a>
-            <a href="?page={{ theme_page.paginator.num_pages }}">last &raquo;</a>
+        <a href="?page={{ theme_page.next_page_number }}" class="btn btn-outline-dark btn-block btn-sm">next</a>
+        <a href="?page={{ theme_page.paginator.num_pages }}" class="btn btn-outline-dark btn-block btn-sm">last &raquo;</a>
         {% endif %}
-    </span>
+    </p>
 </nav>
-{% endif %}
 {% endblock %}
