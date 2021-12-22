@@ -30,6 +30,10 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
+            <!--Welcome message if user login-->
+            {% if user.is_authenticated %}
+                <p class="my-auto text-start text-light noselect">Welcome back, {{ request.user.username }}</p>
+            {% endif %}
             <!--Brand-->
             <a class="navbar-brand icon" href="{% url 'home' %}">
                 <i class="fas fa-quran"></i>  

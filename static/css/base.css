@@ -42,3 +42,15 @@ body {
 .border-lightblack {
   border: 1px solid #676767;
 }
+
+.bg-brown {
+  background-color: #D9610D;
+}
+
+.bg-lightblue {
+  background-color: #8AC8FA;
+}
+
+.bg-purple {
+  background-color: #B446DB;
+}

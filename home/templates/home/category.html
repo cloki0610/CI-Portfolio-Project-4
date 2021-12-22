@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<!--Welcome message if user login-->
-{% if user.is_authenticated %}
-<p class="text-end">You're now login as {{ request.user.username }}</p>
-{% endif %}
 <!--Header-->
 <h1 class="text-center fw-bolder my-2">{{ category.name }}</h1>
 <p class="text-center">{{ category.introduction }}</p>
@@ -12,24 +8,36 @@
 <div id="category-list" class="mx-auto w-75 p-3 bg-light border-lightblack rounded">
     {% for theme in theme_page %}
     <div class="card d-block w-75 my-4 noselect hvr-grow-shadow mx-auto">
-        <div class="card-header bg-lightblack text-light">
+        {% if theme.category.name == 'Fiction' %}
+        <div class="card-header text-light bg-brown">
             {{ theme.category.name }}
         </div>
+        {% elif theme.category.name == 'Non-fiction' %}
+        <div class="card-header text-light bg-lightblue">
+            {{ theme.category.name }}
+        </div>
+        {% elif theme.category.name == 'Lifestyle'%}
+        <div class="card-header text-light bg-purple">
+            {{ theme.category.name }}
+        </div>
+        {% else %}
+        <div class="card-header text-light bg-lightblack">
+            {{ theme.category.name }}
+        </div>
+        {% endif %}
         <div class="card-body text-center">
             <a href="{% url 'theme_overview' theme.slug %}" class="text-dark">
                 <h5 class="card-title">{{ theme.title }}</h5>
                 <p class="card-text">{{ theme.excerpt}}...</p>
             </a>
         </div>
-        <div class="card-footer text-center bg-lightblack text-light">
-            <p>
-                <span class="mx-2"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
-                <span class="mx-2"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
-                <span class="mx-2"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
-                <span class="mx-2">
-                    Last updated {{ theme.updated_on }}
-                </span>
-            </p>
+        <div class="card-footer">
+            <span class="mx-2"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
+            <span class="mx-2"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
+            <span class="mx-2"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
+            <span class="mx-2 float-end">
+                Last updated {{ theme.updated_on }}
+            </span>
         </div>
     </div>
     {% empty %}
