@@ -1,6 +1,8 @@
 """ Create form model to leave comment on the theme overview page """
 from django import forms
 from django_summernote.widgets import SummernoteWidget
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
 from .models import Comment, Theme
 
 
@@ -10,6 +12,23 @@ class ThemeForm(forms.ModelForm):
         """ Handle the column in form """
         model = Theme
         fields = ('title', 'category', 'excerpt', 'feature_image')
+        labels = {
+            'title': 'Title',
+            'category': 'Category',
+            'excerpt': 'Excerpt',
+            'feature_image': 'Feature Image'
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field('title', css_class='mb-3', placeholder="Title"),
+            Field('category', css_class='mb-3'),
+            Field('excerpt', css_class='mb-3',
+                  placeholder="Write some excerpt(Optional)"),
+            Field('feature_image', css_class='mb-3 text-center')
+        )
 
 
 class CommentForm(forms.ModelForm):
@@ -29,3 +48,10 @@ class CommentForm(forms.ModelForm):
         """ Handle the column in form """
         model = Comment
         fields = ('comment_body',)
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = True
+        for field in CommentForm.Meta.fields:
+            self.fields[field].label = False

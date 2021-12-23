@@ -39,18 +39,36 @@ body {
   background-color: #676767!important;
 }
 
-.border-lightblack {
-  border: 1px solid #676767;
-}
-
 .bg-brown {
-  background-color: #D9610D;
+  background-color: #D9610D!important;
 }
 
 .bg-lightblue {
-  background-color: #8AC8FA;
+  background-color: #8AC8FA!important;
 }
 
 .bg-purple {
-  background-color: #B446DB;
+  background-color: #B446DB!important;
+}
+
+/* borders */
+.border-lightblack {
+  border: 2px solid #676767;
+}
+
+.border-brown {
+  border: 2px solid #D9610D;
+}
+
+.border-lightblue {
+  border: 2px solid #8AC8FA;
+}
+
+.border-purple {
+  border: 2px solid #B446DB;
+}
+
+/* crispy form*/
+.asteriskField {
+  display: none!important;
 }
