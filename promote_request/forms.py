@@ -13,10 +13,10 @@ class PromoteRequestForm(forms.ModelForm):
                                             'width': '100%',
                                             'height': '400px',
                                             'align-item': 'center',
-                                            'placeholder': 'Write here'
+                                            'placeholder': 'Write it here'
                                         }
                                     }
-                                ), label="Explain reason"
+                                ), label="Descript your creation"
                              )
 
     class Meta:

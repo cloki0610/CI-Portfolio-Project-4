@@ -16,7 +16,7 @@ class ReportForm(forms.ModelForm):
                                             'placeholder': 'Write it here'
                                         }
                                     }
-                                    ), label="Descript your creation"
+                                    ), label="Explain reason"
                                   )
 
     class Meta:
