@@ -97,7 +97,7 @@
             <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSOWRD</a>
         </div>
         <!--if user membership is member display a button to request form-->
-        {% if user.userprofile.get_membership_display is "member" %}
+        {% if user.userprofile.membership == 0 %}
         <div class="col-sm-5 col-md-5 p-1">
             <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
         </div>

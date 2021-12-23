@@ -61,7 +61,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <!--only show if user successfullylogin-->
-                    {% if user.userprofile.membership == 1 or user.userprofile.membership == 2%}
+                    {% if user.userprofile.membership == 1 or user.userprofile.membership == 2 %}
                     <li class="nav-item">
                         <a href="{% url 'new_theme' %}" class="nav-link">NEW THEME</a>
                     </li>

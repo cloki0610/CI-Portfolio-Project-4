@@ -1,6 +1,8 @@
 """ Create form model to display request form to become creator """
 from django import forms
 from django_summernote.widgets import SummernoteWidget
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
 from .models import PromoteRequest
 
 
@@ -19,3 +21,11 @@ class PromoteRequestForm(forms.ModelForm):
         """ Handle the column in form """
         model = PromoteRequest
         fields = ('category', 'reason')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field('category', css_class="mb-3"),
+            Field('reason', css_class="mb-3")
+        )

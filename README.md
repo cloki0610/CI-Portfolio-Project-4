@@ -66,4 +66,5 @@ Django allauth was used to set up user registration and built in decorators allo
  - https://stackoverflow.com/questions/33715879/how-to-delete-user-in-django
  - https://www.itread01.com/content/1558923602.html
  - https://michealscode.medium.com/django-ajax-like-and-upvote-button-on-listview-solved-in-5-simple-steps-96dbdc39daca
+ - https://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
 ### **Acknowledgment**
