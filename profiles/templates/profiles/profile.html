@@ -2,109 +2,89 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-{% if not user.userprofile.name %}
-<!--if name in user profile is none display default header-->
-<h1 class="text-center">Your Profile</h1>
-{% else %}
-<!--else display header with user's name-->
-<h1 class="text-center">{{ user.userprofile.name }}'s Profile</h1>
-{% endif %}
+<h1 class="text-center">PROFILE</h1>
 <!--Display user's personal information-->
-<div class="container-fluid">
-    <div class="row" id="user_icon">
-        <div class="col text-center">
-            {% if "placeholder" in user.userprofile.user_icon.url %}
-            <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638377322/lx9f54ugcciywep0ifke.jpg" alt="{{ user.userprofile.name }}" class="img-thumbnail">
-            {% else %}
-            <img src="{{ user.userprofile.user_icon.url }}" alt="{{ user.userprofile.name }}" class="img-thumbnail">
-            {% endif %}
+<div class="container mx-auto">
+    <div class="card mx-5 my-3 p-md-5 mx-auto border-lightblack bg-light" id="profile-card">
+        <div class="row g-0">
+            <div class="col-6 mx-auto text-center" id="user-icon">
+                {% if "placeholder" in user.userprofile.user_icon.url %}
+                <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638377322/lx9f54ugcciywep0ifke.jpg" alt="{{ user.userprofile.name }}" class="img-fluid">
+                {% else %}
+                <img src="{{ user.userprofile.user_icon.url }}" alt="{{ user.userprofile.name }}" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="row text-center mx-auto">
+                <div class="card-body noselect">
+                    {% if not user.userprofile.name %}
+                    <!--if name in user profile is none display default header-->
+                    <h3 class="card-title fw-bolder">{{ user.username }}</h3>
+                    {% else %}
+                    <!--else display header with user's name-->
+                    <h3 class="card-title fw-bolder">{{ user.userprofile.name }}</h3>
+                    {% endif %}
+                    <p class="card-subtitle text-muted">{{ user.userprofile.get_membership_display }}</p>
+                    <div class="card-text row mb-3">
+                        <div class="text-md-start fw-bolder col-md-4">USER NAME</div>
+                        <div class="float-end col-md-8">{{ user.username }}</div>
+                    </div>
+                    <div class="card-text row mb-3">
+                        <div class="text-md-start fw-bolder col-md-4">REGISTER DATE</div>
+                        <div class="float-end col-md-8">{{ user.userprofile.registered_on | date:"j M Y f A" }}</div>
+                    </div>
+                    <div class="card-text row mb-3">
+                        <div class="text-md-start fw-bolder col-md-4">LOCATION</div>
+                        {% if user.userprofile.location %}
+                        <div class="float-end col-md-8">{{ user.userprofile.location }}</div>
+                        {% else %}
+                        <div class="float-end col-md-8">Secret</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-text row mb-3">
+                        <div class="text-md-start fw-bolder col-md-4">BIO</div>
+                        <div class="float-end col-md-8">
+                            {% if user.userprofile.bio %}
+                            <div class="col text-center">
+                                {{ user.userprofile.bio | safe }}
+                            </div>
+                            {% else %}
+                            <div class="col text-center">
+                                <p>Keep secret for now :)</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Username
-        </div>
-    </div>
-    <div class="row" id="user_name">
-        <div class="col text-center">
-            {{ user.username }}
-        </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Display Name
-        </div>
-    </div>
-    <div class="row" id="user_name">
-        <div class="col text-center">
-            {{ user.userprofile.name }}
-        </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Membership
-        </div>
-    </div>
-    <div class="row" id="membership">
-        <div class="col text-center">
-            {{ user.userprofile.get_membership_display }}
-        </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Registered Date
-        </div>
-    </div>
-    <div class="row" id="registered_date">
-        <div class="col text-center">
-            {{ user.userprofile.registered_on }}
-        </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Location
-        </div>
-    </div>
-    <div class="row" id="location">
-        <div class="col text-center">
-            {{ user.userprofile.location }}
-        </div>
-    </div>
-    <div class="row profile-tables">
-        <div class="col text-center">
-            Bio
-        </div>
-    </div>
-    <div class="row" id="bio">
-        {% if user.userprofile.bio %}
-        <div class="col text-center">
-            {{ user.userprofile.bio | safe }}
-        </div>
-        {% else %}
-        <div class="col text-center">
-            <p>Keep secret for now :)</p>
-        </div>
-        {% endif %}
     </div>
     <!--Buttons-->
-    <div class="row gap-1 justify-content-center align-items-center">
-        <!--Edit probile-->
-        <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'editprofile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">EDIT PROFILE</a>
-        </div>
-        <!--Change password-->
-        <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSOWRD</a>
-        </div>
-        <!--if user membership is member display a button to request form-->
-        {% if user.userprofile.membership == 0 %}
-        <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME OUR CREATOR</a>
-        </div>
-        {% endif %}
-        <!--Delete account-->
-        <div class="col-sm-5 col-md-5 p-1">
-            <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+    <div class="mx-auto my-3 p-md-5 mx-auto border-lightblack bg-light rounded">
+        <div class="row mx-auto">
+            <!--Edit probile-->
+            <div class="col-md-6 p-2">
+                <a href="{% url 'editprofile' %}" class="btn btn-outline-dark btn-block btn-lg w-100 fs-5">UPDATE PROFILE</a>
+            </div>
+            <!--Change password-->
+            <div class="col-md-6 p-2">
+                <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSWORD</a>
+            </div>
+            <!--if user membership is member display a button to request form-->
+            {% if user.userprofile.membership == 0 %}
+            <div class="col-md-6 p-2">
+                <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME CREATOR</a>
+            </div>
+            {% endif %}
+            <!--Delete account-->
+            {% if user.userprofile.membership == 1 or user.userprofile.membership == 2 %}
+            <div class="col-md-12 p-2">
+                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+            </div>
+            {% else %}
+            <div class="col-md-6 p-2">
+                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

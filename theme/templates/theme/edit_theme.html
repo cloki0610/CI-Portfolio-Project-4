@@ -3,7 +3,7 @@
 {% load cloudinary %}
 {% block content %}
 {% load crispy_forms_tags %}
-<h1 class="text-center">EDIT {{ theme.title | upper }}</h1>
+<h1 class="text-center fw-bold">EDIT {{ theme.title | upper }}</h1>
 <!--Edit theme form-->
 <div class="px-md-5 mx-md-5">
     <form action="{% url 'edit_theme' theme.slug %}" method="POST" enctype="multipart/form-data" class="mb-3">

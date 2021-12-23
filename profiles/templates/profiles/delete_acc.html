@@ -2,44 +2,41 @@
 {% load static %}
 {% block content %}
 <!--Block content-->
-{% if user.username is "admin" %}
+{% if user.username == "admin" or request.user.userprofile.membership == 2 %}
 <!--if user is admin display the waring message and return link-->
-<div class="container-fluid position-absolute top-50 start-50 translate-middle">
-    <div class="row">
+<div class="container w-75 my-5 mx-auto rounded">
+    <div class="row p-5 bg-light">
         <div class="col-md-8 offset-md-2 text-center">
-            <h1>SORRY, ADMIN IS NOT ALLOWED TO USE THIS FUNCTION</h1>
+            <p class="fs-5">SORRY, ADMIN IS NOT ALLOWED TO USE THIS FUNCTION</p>
         </div>
     </div>
-    <div class="row  justify-content-center align-items-center">
-        <div class="col-sm-5 col-md-5 p-1">
+    <div class="row mt-5 mx-auto">
+        <div class="col-md-6 mx-auto">
             <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">Return</a>
         </div>
     </div>
 </div>
 {% else %}
 <!--Else show the confirm components-->
-<div class="container-fluid  position-absolute top-50 start-50 translate-middle">
-    <div class="row">
-        <div class="col-md-8 offset-md-2 text-center">
-            <h1>DELETE YOUR ACCOUNT</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 offset-md-2 text-center">
-            <p>We are regret for your desicion to leave us, {{ user.userprofile.name }}</p><br/>
-            <p>But we still hope to remind you to confirm that once you delete your account</p>
-            <p>You will not allow to login as same account anymore</p>
-            <p>All your informaion and record will be completely remove</p><br/>
-            <p>If you still want to remove your account, then press the 'DELETE' button</p>
+<div class="container w-75 mx-auto">
+    <h1 class="text-center">DELETE YOUR ACCOUNT</h1>
+    <div class="row mx-auto mb-3 p-5 bg-light border-lightblack rounded">
+        <div class="col-md-8 mx-auto text-center">
+            <p>We are regret for your desicion to leave us, {{ user.userprofile.name }}.</p><br/>
+            <p>But we still hope to remind you, once you delete your account,</p>
+            <p>you will not allow to login as same account anymore.</p>
+            <p>All your informaion and record will be completely remove.</p>
+            <p>If you still want to remove your account,</p>
+            <p>then press the 'DELETE' button.</p>
             <p>Or you can press 'RETURN' button to return to your profile</p>
         </div>
     </div>
-    <div class="row gap-1 justify-content-center align-items-center">
+    <div class="row gap-1 mx-auto">
         <!--Return button-->
-        <div class="col-sm-5 col-md-5 p-1">
+        <div class="col-md-6 mx-auto mb-2">
             <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">Back to Profile</a>
         </div>
-        <div class="col-sm-5 col-md-5 p-1">
+        <div class="col-md-6 mx-auto mb-2">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-danger btn-block btn-lg w-100" data-bs-toggle="modal" data-bs-target="#confirmdelete">
                 Delete Account

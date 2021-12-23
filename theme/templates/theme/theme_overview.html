@@ -4,10 +4,10 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!--Header-->
-<h1 class="text-center">{{ theme.title }}</h1>
+<h1 class="text-center fw-bold">{{ theme.title }}</h1>
 <!--theme details-->
-<div class="container-fluid">
-    <div class="card mb-3 w-md-75 p-md-5 mx-auto border-lightblack bg-light">
+<div class="container mx-auto">
+    <div class="card my-3 p-md-5 mx-auto border-lightblack bg-light">
         <div class="row g-0">
             <div class="col-md-6">
                 {% if "featureimg" in theme.feature_image.url %}
@@ -18,23 +18,23 @@
             </div>
             <div class="col-md-6">
                 <div class="card-body ms-md-4 noselect">
-                    <p class="card-text">
-                        <span>Author:</span>
-                        <span>{{ theme.author.userprofile.name }}</span>
-                    </p>
-                    <p class="card-text">
-                        <span>Category:</span>
-                        <span>{{ theme.category.name }}</span>
-                    </p>
-                    <p class="card-text">
-                        <span>Created on:</span>
-                        <span>{{ theme.created_on }}</span>
-                    </p>
-                    <p class="card-text">
-                        <span>Last updated:</span>
-                        <span>{{ theme.updated_on }}</span>
-                    </p>
-                    <div class="card-text row gap-md-1">
+                    <div class="card-text row text-center mb-3">
+                        <div class="text-md-start fw-bolder col-md-5">Author</div>
+                        <div class="float-end col-md-7">{{ theme.author.userprofile.name }}</div>
+                    </div>
+                    <div class="card-text row text-center  mb-3">
+                        <div class="text-md-start fw-bolder col-md-5">Category</div>
+                        <div class="float-end col-md-7">{{ theme.category.name }}</div>
+                    </div>
+                    <div class="card-text row text-center mb-3">
+                        <div class="text-md-start fw-bolder col-md-5">Created on</div>
+                        <div class="float-end col-md-7">{{ theme.created_on | date:"j M Y G:i" }}</div>
+                    </div>
+                    <div class="card-text row text-center mb-md-3">
+                        <div class="text-md-start fw-bolder col-md-5">Last updated</div>
+                        <div class="float-end col-md-7">{{ theme.updated_on | date:"j M Y G:i" }}</div>
+                    </div>
+                    <div class="card-text row gap-md-1 pt-md-5">
                         <div class="col col-md-3 d-flex justify-content-center align-items-center">
                             <span id="upvote-btn">
                                 {% if user.is_authenticated %}
@@ -83,9 +83,9 @@
     </div>
     <!--Excerpt section-->
     {% if theme.category.name == 'Fiction' %}
-    <section class="row mx-auto w-md-75 p-5 mb-3 text-center bg-light rounded border-brown">
+    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-brown">
         <div class="col-12">
-            Excerpt
+            <h3 class="fw-bold">Excerpt</h3>
             <hr>
         </div>
         <div class="col-12">
@@ -97,9 +97,9 @@
         </div>
     </section>
     {% elif theme.category.name == 'Non-fiction' %}
-    <section class="row mx-auto w-md-75 p-5 mb-3 text-center bg-light rounded border-lightblue">
+    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-lightblue">
         <div class="col-12">
-            Excerpt
+            <h3 class="fw-bold">Excerpt</h3>
             <hr>
         </div>
         <div class="col-12">
@@ -111,9 +111,9 @@
         </div>
     </section>
     {% elif theme.category.name == 'Lifestyle'%}
-    <section class="row mx-auto w-md-75 p-5 mb-3 text-center bg-light rounded border-purple">
+    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-purple">
         <div class="col-12">
-            Excerpt
+            <h3 class="fw-bold">Excerpt</h3>
             <hr>
         </div>
         <div class="col-12">
@@ -125,9 +125,9 @@
         </div>
     </section>
     {% else %}
-    <section class="row mx-auto w-md-75 p-5 mb-3 text-center bg-light rounded">
+    <section class="row mx-auto p-5 my-3 text-center bg-light rounded">
         <div class="col-12">
-            Excerpt
+            <h3 class="fw-bold">Excerpt</h3>
             <hr>
         </div>
         <div class="col-12">
@@ -141,7 +141,7 @@
     {% endif %}
     <!--button to post list-->
     <!--if user is author also display edit theme and delete theme-->
-    <div class="row mx-auto w-md-75 p-5 mb-3 bg-light rounded border-lightblack">
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblack">
         <div class="col-md-12 mb-3">
             <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Read</a>
         </div>
@@ -175,16 +175,16 @@
     </div>
     <!--comment form-->
     {% if user.is_authenticated %}
-    <div class="p-1 mb-3 bg-light rounded w-md-75 border-lightblack">
-        <div class="row">
-            <h3 class="text-center">Leave a comment:</h3>
+    <div class="p-1 my-3 bg-light rounded mx-auto border-lightblack">
+        <div class="row my-3">
+            <h3 class="text-center fw-bolder">Comments</h3>
             <p class="text-center">Posting as: {{ user.username }}</p>
         </div>
         <div class="row text-center px-md-5 mx-md-5">
             <form method="POST">
                 {% csrf_token %}
                 {{ comment_form | crispy }}
-                <div class="text-center">
+                <div class="text-center my-4">
                     <button type="submit" class="btn btn-outline-dark btn-block btn-lg w-100">Submit</button>
                 </div>
             </form>
@@ -193,9 +193,9 @@
     {% endif %}
 </div>
 <!--display all comment-->
-<div class="container-fluid">
+<div class="container mx-auto">
 {% for comment in comments %}
-<div class="card rounded w-md-75 border-lightblack">
+<div class="card rounded mx-auto border-lightblack">
     <div class="card-body">
         {% if not comment.user.userprofile.name %}
             <h4>

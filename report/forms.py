@@ -21,6 +21,11 @@ class ReportForm(forms.ModelForm):
         """ Handle the column in form """
         model = Report
         fields = ('report_type', 'description', 'email')
+        labels = {
+            'report_type': 'Report Type',
+            'description': 'Description',
+            'email': 'E-mail (Optional)'
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
