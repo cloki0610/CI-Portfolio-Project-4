@@ -4,12 +4,8 @@
 {% block content %}
 <div class="container-fluid">
     <!--Header-->
-    <h1>{{ view.get_theme.title }}</h1>
-    <h2>{{ view.get_theme.author }}</h2>
-    <!--button to back overview page-->
-    <div class="row">
-        <a href="{% url 'theme_overview' view.get_theme.slug %}" class="btn btn-outline-dark btn-block btn-lg">Back to Overview</a>
-    </div>
+    <h1 class="text-center fw-bold">{{ view.get_theme.title }}</h1>
+    <h2 class="text-center fw-bolder text-muted">{{ view.get_theme.author }}</h2>
     <!--list of posts-->
     {% for post in post_list%}
     <div class="row">
@@ -37,22 +33,24 @@
     </div>
     {% endfor %}
     <!--previous/next button provide by paginator-->
-    {% if is_paginated %}
+    <p class="current text-center my-3">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </p>
     <nav class="pagination">
-        <span class="step-links">
+        <p class="step-links mx-auto">
             {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-fast-backward"></i></a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-caret-left"></i></a>
             {% endif %}
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-caret-right"></i></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-fast-forward"></i></a>
             {% endif %}
-        </span>
+        </p>
     </nav>
-    {% endif %}
+        <!--button to back overview page-->
+        <div class="row">
+            <a href="{% url 'theme_overview' view.get_theme.slug %}" class="btn btn-outline-dark btn-block btn-lg">Back to Overview</a>
+        </div>
 </div>
 {% endblock %}

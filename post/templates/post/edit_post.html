@@ -4,12 +4,16 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!--Header-->
-<h1></h1>
+<h1 class="text-center fw-bold">EDIT POST</h1>
 <!--A form to allowed user to edit their post-->
-<form action="{% url 'edit_post' theme.slug post.id %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ post_form | crispy }}
-    <input type="submit" value="SUBMIT">
-</form>
-<a href="{% url 'contents' theme.slug %}">Back to Menu</a>
+<div class="px-md-5 mx-md-5">
+    <form action="{% url 'edit_post' theme.slug post.id %}" method="POST" enctype="multipart/form-data"  class="mb-3">
+        {% csrf_token %}
+        <div class="p-3 bg-light border-lightblack rounded">
+            {% crispy post_form post_form.helper %}
+            <input type="submit" value="SUBMIT" class="btn btn-outline-dark btn-block btn-lg w-100 mt-3">
+        </div>
+    </form>
+    <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Back to Menu</a>
+</div>
 {% endblock %}

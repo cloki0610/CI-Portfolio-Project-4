@@ -53,19 +53,19 @@ body {
 
 /* borders */
 .border-lightblack {
-  border: 2px solid #676767;
+  border: 4px solid #676767;
 }
 
 .border-brown {
-  border: 2px solid #D9610D;
+  border: 4px solid #D9610D;
 }
 
 .border-lightblue {
-  border: 2px solid #8AC8FA;
+  border: 4px solid #8AC8FA;
 }
 
 .border-purple {
-  border: 2px solid #B446DB;
+  border: 4px solid #B446DB;
 }
 
 /* crispy form*/

@@ -7,7 +7,15 @@
 <h1 class="text-center fw-bold">{{ theme.title }}</h1>
 <!--theme details-->
 <div class="container mx-auto">
-    <div class="card my-3 p-md-5 mx-auto border-lightblack bg-light">
+    {% if theme.category.name == 'Fiction' %}
+    <div class="card my-3 p-md-5 mx-auto bg-light border-brown">
+    {% elif theme.category.name == 'Non-fiction' %}
+    <div class="card my-3 p-md-5 mx-auto bg-light border-lightblue">
+    {% elif theme.category.name == 'Lifestyle'%}
+    <div class="card my-3 p-md-5 mx-auto bg-light border-purple">
+    {% else %}
+    <div class="card my-3 p-md-5 mx-auto bg-light border-lightblack">
+    {% endif %}
         <div class="row g-0">
             <div class="col-md-6">
                 {% if "featureimg" in theme.feature_image.url %}
@@ -84,48 +92,13 @@
     <!--Excerpt section-->
     {% if theme.category.name == 'Fiction' %}
     <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-brown">
-        <div class="col-12">
-            <h3 class="fw-bold">Excerpt</h3>
-            <hr>
-        </div>
-        <div class="col-12">
-            {% if theme.excerpt %}
-            <p>{{ theme.excerpt }}</p>
-            {% else %}
-            <p>Author do not write any excerpt.</p>
-            {% endif %}
-        </div>
-    </section>
     {% elif theme.category.name == 'Non-fiction' %}
     <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-lightblue">
-        <div class="col-12">
-            <h3 class="fw-bold">Excerpt</h3>
-            <hr>
-        </div>
-        <div class="col-12">
-            {% if theme.excerpt %}
-            <p>{{ theme.excerpt }}</p>
-            {% else %}
-            <p>Author do not write any excerpt.</p>
-            {% endif %}
-        </div>
-    </section>
     {% elif theme.category.name == 'Lifestyle'%}
     <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-purple">
-        <div class="col-12">
-            <h3 class="fw-bold">Excerpt</h3>
-            <hr>
-        </div>
-        <div class="col-12">
-            {% if theme.excerpt %}
-            <p>{{ theme.excerpt }}</p>
-            {% else %}
-            <p>Author do not write any excerpt.</p>
-            {% endif %}
-        </div>
-    </section>
     {% else %}
-    <section class="row mx-auto p-5 my-3 text-center bg-light rounded">
+    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-lightblack">
+    {% endif %}
         <div class="col-12">
             <h3 class="fw-bold">Excerpt</h3>
             <hr>
@@ -138,10 +111,17 @@
             {% endif %}
         </div>
     </section>
-    {% endif %}
     <!--button to post list-->
     <!--if user is author also display edit theme and delete theme-->
+    {% if theme.category.name == 'Fiction' %}
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-brown">
+    {% elif theme.category.name == 'Non-fiction' %}
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblue">
+    {% elif theme.category.name == 'Lifestyle'%}
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-purple">
+    {% else %}
     <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblack">
+    {% endif %}
         <div class="col-md-12 mb-3">
             <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Read</a>
         </div>
@@ -149,7 +129,7 @@
         {% if request.user == theme.author %}
         <div class="col-md-6 mb-3">
             <!-- Add a new post -->
-            <a href="{% url 'new_post' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Create post</a>
+            <a href="{% url 'new_post' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">New post</a>
         </div>
         <div class="col-md-6 mb-3">
             <!-- Edit current theme -->
@@ -175,7 +155,15 @@
     </div>
     <!--comment form-->
     {% if user.is_authenticated %}
+    {% if theme.category.name == 'Fiction' %}
+    <div class="p-1 my-3 bg-light rounded mx-auto border-brown">
+    {% elif theme.category.name == 'Non-fiction' %}
+    <div class="p-1 my-3 bg-light rounded mx-auto border-lightblue">
+    {% elif theme.category.name == 'Lifestyle'%}
+    <div class="p-1 my-3 bg-light rounded mx-auto border-purple">
+    {% else %}
     <div class="p-1 my-3 bg-light rounded mx-auto border-lightblack">
+    {% endif %}
         <div class="row my-3">
             <h3 class="text-center fw-bolder">Comments</h3>
             <p class="text-center">Posting as: {{ user.username }}</p>
@@ -195,7 +183,15 @@
 <!--display all comment-->
 <div class="container mx-auto">
 {% for comment in comments %}
+{% if theme.category.name == 'Fiction' %}
+<div class="card rounded mx-auto border-brown">
+{% elif theme.category.name == 'Non-fiction' %}
+<div class="card rounded mx-auto border-lightblue">
+{% elif theme.category.name == 'Lifestyle'%}
+<div class="card rounded mx-auto border-purple">
+{% else %}
 <div class="card rounded mx-auto border-lightblack">
+{% endif %}
     <div class="card-body">
         {% if not comment.user.userprofile.name %}
             <h4>

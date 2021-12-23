@@ -3,28 +3,22 @@
 {% block content %}
 <!--Header-->
 <h1 class="text-center fw-bolder my-2">{{ category.name }}</h1>
-<p class="text-center">{{ category.introduction }}</p>
+<p class="text-center fs-4">{{ category.introduction }}</p>
 <!--Full theme list-->
 <div id="category-list" class="mx-auto w-75 p-3 bg-light border-lightblack rounded">
     {% for theme in theme_page %}
     <div class="card d-block w-75 my-4 noselect hvr-grow-shadow mx-auto">
         {% if theme.category.name == 'Fiction' %}
         <div class="card-header text-light bg-brown">
-            {{ theme.category.name }}
-        </div>
         {% elif theme.category.name == 'Non-fiction' %}
         <div class="card-header text-light bg-lightblue">
-            {{ theme.category.name }}
-        </div>
         {% elif theme.category.name == 'Lifestyle'%}
         <div class="card-header text-light bg-purple">
-            {{ theme.category.name }}
-        </div>
         {% else %}
         <div class="card-header text-light bg-lightblack">
+        {% endif %}
             {{ theme.category.name }}
         </div>
-        {% endif %}
         <div class="card-body text-center">
             <a href="{% url 'theme_overview' theme.slug %}" class="text-dark">
                 <h5 class="card-title">{{ theme.title }}</h5>
@@ -50,12 +44,12 @@
 <nav class="pagination">
     <p class="step-links mx-auto">
         {% if theme_page.has_previous %}
-        <a href="?page=1" class="btn btn-outline-dark btn-block btn-sm">&laquo; first</a>
-        <a href="?page={{ theme_page.previous_page_number }}" class="btn btn-outline-dark btn-block btn-sm">previous</a>
+        <a href="?page=1" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-fast-backward"></i></a>
+        <a href="?page={{ theme_page.previous_page_number }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-caret-left"></i></a>
         {% endif %}
         {% if theme_page.has_next %}
-        <a href="?page={{ theme_page.next_page_number }}" class="btn btn-outline-dark btn-block btn-sm">next</a>
-        <a href="?page={{ theme_page.paginator.num_pages }}" class="btn btn-outline-dark btn-block btn-sm">last &raquo;</a>
+        <a href="?page={{ theme_page.next_page_number }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-caret-right"></i></a>
+        <a href="?page={{ theme_page.paginator.num_pages }}" class="btn btn-outline-dark btn-block btn-sm"><i class="fas fa-fast-forward"></i></a>
         {% endif %}
     </p>
 </nav>
