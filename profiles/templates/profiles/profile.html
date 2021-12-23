@@ -23,16 +23,16 @@
                     <!--else display header with user's name-->
                     <h3 class="card-title fw-bolder">{{ user.userprofile.name }}</h3>
                     {% endif %}
-                    <p class="card-subtitle text-muted">{{ user.userprofile.get_membership_display }}</p>
-                    <div class="card-text row mb-3">
+                    <p class="card-subtitle text-muted mb-5">{{ user.userprofile.get_membership_display }}</p>
+                    <div class="card-text row mb-3 ms-md-5">
                         <div class="text-md-start fw-bolder col-md-4">USER NAME</div>
                         <div class="float-end col-md-8">{{ user.username }}</div>
                     </div>
-                    <div class="card-text row mb-3">
+                    <div class="card-text row mb-3 ms-md-5">
                         <div class="text-md-start fw-bolder col-md-4">REGISTER DATE</div>
                         <div class="float-end col-md-8">{{ user.userprofile.registered_on | date:"j M Y f A" }}</div>
                     </div>
-                    <div class="card-text row mb-3">
+                    <div class="card-text row mb-3 ms-md-5">
                         <div class="text-md-start fw-bolder col-md-4">LOCATION</div>
                         {% if user.userprofile.location %}
                         <div class="float-end col-md-8">{{ user.userprofile.location }}</div>
@@ -40,7 +40,7 @@
                         <div class="float-end col-md-8">Secret</div>
                         {% endif %}
                     </div>
-                    <div class="card-text row mb-3">
+                    <div class="card-text row mb-3 ms-md-5">
                         <div class="text-md-start fw-bolder col-md-4">BIO</div>
                         <div class="float-end col-md-8">
                             {% if user.userprofile.bio %}
