@@ -13,10 +13,11 @@ class PostForm(forms.ModelForm):
                                         'summernote': {
                                             'width': '100%',
                                             'height': '400px',
-                                            'align-item': 'center'
+                                            'align-item': 'center',
+                                            'placeholder': 'Your Contents'
                                         }
                                     }
-                                    )
+                                    ), label="Contents"
                                 )
 
     class Meta:

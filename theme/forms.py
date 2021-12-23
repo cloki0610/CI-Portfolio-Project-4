@@ -38,7 +38,8 @@ class CommentForm(forms.ModelForm):
                                             'summernote': {
                                                 'width': '100%',
                                                 'height': '400px',
-                                                'align-item': 'center'
+                                                'align-item': 'center',
+                                                'placeholder': 'Comment here'
                                             }
                                         }
                                         )

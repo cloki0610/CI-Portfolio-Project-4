@@ -12,10 +12,12 @@ class ReportForm(forms.ModelForm):
                                         'summernote': {
                                             'width': '100%',
                                             'height': '400px',
-                                            'align-item': 'center'
+                                            'align-item': 'center',
+                                            'placeholder': 'Write it here'
                                         }
                                     }
-                            ))
+                                    ), label="Descript your creation"
+                                  )
 
     class Meta:
         """ Handle the column in form """

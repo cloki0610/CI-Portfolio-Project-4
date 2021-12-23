@@ -12,10 +12,12 @@ class UserProfilesForm(forms.ModelForm):
                                         'summernote': {
                                             'width': '100%',
                                             'height': '400px',
-                                            'align-item': 'center'
+                                            'align-item': 'center',
+                                            'placeholder': 'Write Bio here'
                                         }
                                     }
-                                    ))
+                                ), label="Bio"
+                          )
 
     class Meta:
         """ Handle the column in form"""
@@ -25,7 +27,7 @@ class UserProfilesForm(forms.ModelForm):
             'user_icon': 'User Icon',
             'name': 'Display Name',
             'location': 'User Location',
-            'bio': 'bio'
+            'bio': 'Bio'
         }
 
     def __init__(self, *args, **kwargs):
