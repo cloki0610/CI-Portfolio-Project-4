@@ -23,6 +23,9 @@ urlpatterns = [
     path('new_post/', views.NewPostView.as_view(), name='new_post'),
     path('edit_post/<int:post_pk>/',
          views.EditPostView.as_view(), name='edit_post'),
+    path('confirm_delete_post/<int:post_pk>/',
+         views.ConfirmDeletePost.as_view(),
+         name='confirm_delete_post'),
     path('delete_post/<int:post_pk>/', views.DeletePost.as_view(),
          name='delete_post'),
 ]

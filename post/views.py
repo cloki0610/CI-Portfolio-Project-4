@@ -114,6 +114,26 @@ class EditPostView(LoginRequiredMixin, View):
                                     args=[theme.slug]))
 
 
+class ConfirmDeletePost(LoginRequiredMixin, View):
+    """ View to confirm delete a psot """
+
+    def get(self, request, slug, post_pk):
+        """ GET method"""
+        try:
+            theme = get_object_or_404(Theme, slug=slug)
+            delete_post = get_object_or_404(Post, pk=post_pk)
+        except ObjectDoesNotExist:
+            messages.error(request, "Record does not exist.")
+        return render(
+            request,
+            'post/confirm_delete_post.html',
+            {
+                'theme': theme,
+                'post': delete_post
+            },
+        )
+
+
 class DeletePost(LoginRequiredMixin, View):
     """ View to delete post after confirmation """
 

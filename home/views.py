@@ -14,7 +14,7 @@ class HomePage(View):
     def get(self, request):
         """ GET method """
         # get the list of required data
-        all_theme = Theme.objects.all()
+        all_theme = Theme.objects.all().order_by('-updated_on')
         top_theme = Theme.objects.annotate(most_upvote=Count('upvote')) \
                          .order_by('-most_upvote')[:3]
         # use paginator to manage the result

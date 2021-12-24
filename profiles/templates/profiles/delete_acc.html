@@ -4,7 +4,7 @@
 <!--Block content-->
 {% if user.username == "admin" or request.user.userprofile.membership == 2 %}
 <!--if user is admin display the waring message and return link-->
-<div class="container w-75 my-5 mx-auto rounded">
+<div class="container my-5 mx-auto px-auto rounded">
     <div class="row p-5 bg-light">
         <div class="col-md-8 offset-md-2 text-center">
             <p class="fs-5">SORRY, ADMIN IS NOT ALLOWED TO USE THIS FUNCTION</p>
@@ -18,7 +18,7 @@
 </div>
 {% else %}
 <!--Else show the confirm components-->
-<div class="container w-75 mx-auto">
+<div class="container mx-auto px-auto">
     <h1 class="text-center">DELETE YOUR ACCOUNT</h1>
     <div class="row mx-auto mb-3 p-5 bg-light border-lightblack rounded">
         <div class="col-md-8 mx-auto text-center">

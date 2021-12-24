@@ -24,10 +24,7 @@
                             <a href="{% url 'edit_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Edit post</a>
                         </div>
                         <div class="col-12 mb-2">
-                            <form action="{% url 'delete_post' post.theme.slug post.id %}" method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-dark btn-block btn-sm w-100">Delete post</button>
-                            </form>
+                            <a href="{% url 'confirm_delete_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Delete post</a>
                         </div>
                     </div>
                     {% endif %}
