@@ -1,4 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content%}
+<div class="container">
+    <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
+        <h1 class="text-center">500 ERROR</h1>
+        <p class="text-center">Please press 'RETURN' to return homepage.</p>
+        <a href="{% url 'home' %}" class="btn btn-outline-dark btn-block btn-lg mx-auto">RETURN</a>
+    </div>
+</div>
 {% endblock %}
