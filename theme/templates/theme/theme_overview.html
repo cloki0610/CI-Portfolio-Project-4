@@ -28,7 +28,11 @@
                 <div class="card-body ms-md-4 noselect">
                     <div class="card-text row text-center mb-3">
                         <div class="text-md-start fw-bolder col-md-5">Author</div>
+                        {% if not theme.author.userprofile.name %}
+                        <div class="float-end col-md-7">{{ theme.author.username }}</div>
+                        {% else %}
                         <div class="float-end col-md-7">{{ theme.author.userprofile.name }}</div>
+                        {% endif %}
                     </div>
                     <div class="card-text row text-center  mb-3">
                         <div class="text-md-start fw-bolder col-md-5">Category</div>
