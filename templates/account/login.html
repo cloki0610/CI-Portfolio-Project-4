@@ -1,46 +1,45 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% load i18n %}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+<!-- Block Content -->
+<div class="container">
+  <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
+    <h1 class="text-center">SIGN IN</h1>
+    {% get_providers as socialaccount_providers %}
+    {% if socialaccount_providers %}
+    <p class="text-center">{% blocktrans with site.name as site_name %}Please sign in with Social Media Account. Or, <a href="{{ signup_url }}">sign up</a>
+    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-<h1>{% trans "Sign In" %}</h1>
+    <div class="socialaccount_ballot">
 
-{% get_providers as socialaccount_providers %}
+      <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+      <div class="login-or">{% trans 'or' %}</div>
 
-<div class="socialaccount_ballot">
+    </div>
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+    {% include "socialaccount/snippets/login_extra.html" %}
 
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+    {% else %}
+    <p class="text-center fw-bolder">{% blocktrans %}If you have not created an account yet.</p>
+    <p class="text-center fw-bolder">Press <a href="{{ signup_url }}">here</a> to sign up.{% endblocktrans %}</p>
+    {% endif %}
+    <div class="w-75 px-auto mx-auto text-center">
+      <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" class="mx-auto" />
+        {% endif %}
+        <button class="primaryAction btn btn-outline-dark btn-block btn-lg my-2" type="submit">SIGN IN</button>
+      </form>
+    </div>
 
 {% endblock %}

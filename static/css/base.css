@@ -39,6 +39,10 @@ p {
   position: absolute;
 }
 
+.nav-link {
+  font-weight: 900;
+}
+
 /* colors */
 .bg-lightblack {
   background-color: #676767!important;
@@ -76,6 +80,17 @@ p {
 /* crispy form*/
 .asteriskField {
   display: none!important;
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.form-check .form-check-input {
+  float: none!important;
 }
 
 /* contents */

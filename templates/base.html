@@ -44,10 +44,10 @@
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                     <!--category dropdown list-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categories
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu border-dark" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'category' category_slug='fiction' %}">Fiction</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'category' category_slug='non-fiction' %}">Non-fiction</a></li>
@@ -59,21 +59,21 @@
                     <!--only show if user successfullylogin-->
                     {% if user.userprofile.membership == 1 or user.userprofile.membership == 2 %}
                     <li class="nav-item">
-                        <a href="{% url 'new_theme' %}" class="nav-link">NEW THEME</a>
+                        <a href="{% url 'new_theme' %}" class="nav-link text-light">NEW THEME</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a href="{% url 'profile' %}" class="nav-link">{{ request.user.username | upper }}</a>
+                        <a href="{% url 'profile' %}" class="nav-link text-light">{{ request.user.username | upper }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="nav-link">LOGOUT</a>
+                        <a href="{% url 'account_logout' %}" class="nav-link text-light">LOGOUT</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a href="{% url 'account_login' %}" class="nav-link">LOGIN</a>
+                        <a href="{% url 'account_login' %}" class="nav-link text-light">LOGIN</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'account_signup' %}" class="nav-link">SIGN UP</a>
+                        <a href="{% url 'account_signup' %}" class="nav-link text-light">SIGN UP</a>
                     </li>
                     {% endif %}
                 </ul>
