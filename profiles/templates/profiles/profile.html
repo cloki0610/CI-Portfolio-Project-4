@@ -29,6 +29,14 @@
                         <div class="float-end col-md-8">{{ user.username }}</div>
                     </div>
                     <div class="card-text row mb-3 ms-md-5">
+                        <div class="text-md-start fw-bolder col-md-4">DISPLAY NAME</div>
+                        {% if user.userprofile.name %}
+                        <div class="float-end col-md-8">{{ user.userprofile.name }}</div>
+                        {% else %}
+                        <div class="float-end col-md-8">{{ user.username }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-text row mb-3 ms-md-5">
                         <div class="text-md-start fw-bolder col-md-4">REGISTER DATE</div>
                         <div class="float-end col-md-8">{{ user.userprofile.registered_on | date:"j M Y f A" }}</div>
                     </div>
