@@ -18,6 +18,11 @@ body {
             user-select: none;
 }
 
+p {
+  word-break: break-word;
+  white-space: normal;
+}
+
 /* Nav bar */
 .icon {
   font-size: 36px!important;
@@ -71,4 +76,18 @@ body {
 /* crispy form*/
 .asteriskField {
   display: none!important;
+}
+
+/* contents */
+.dates {
+  font-size: 12px;
+}
+
+/* post */
+.post-card {
+  min-height: 300px!important;
+}
+
+.post-card-body {
+  min-height: 200px!important;
 }

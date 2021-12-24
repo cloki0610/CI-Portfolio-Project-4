@@ -2,28 +2,18 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-<!--Header with post title-->
-<div class="row">
-    <div class="col text-center">
-        <h1>{{ theme.title }}    {{ post.title }}</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col text-center">
-        <p>{{ post.publish_on }}    {{ post.updated_on }}</p>
-    </div>
-</div>
-<!--post content-->
-<div class="row">
-    <div class="col text-center">
-        <p>{{ post.post_body | safe }}</p>
-    </div>
-</div>
-<!--previous page/next page-->
-<!--Back to content-->
-<div class="row">
-    <div class="col text-center">
-        <a href="{% url 'contents' theme.slug %}">Return</a>
+<div class="container-fluid">
+    <!--Post title-->
+    <h1 class="text-center fw-bold">{{ post.title }}</h1>
+    <h3 class="text-center fw-bolder">{{ theme.title }}</h2>
+    <!--post content-->
+    <div class="m-5 p-3 bg-light border-lightblack rounded mx-auto">
+        <div class="text-break m-5">{{ post.post_body | safe }}</div>
+        <!--Dates-->
+        <p class="text-center text-muted dates">Publish on: {{ post.publish_on }}</p>
+        <p class="text-center text-muted dates">Last Update: {{ post.updated_on }}</p>
+        <!--Back to content-->
+        <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">RETURN</a>
     </div>
 </div>
 {% endblock %}

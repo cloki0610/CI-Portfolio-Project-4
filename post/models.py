@@ -11,7 +11,7 @@ class Post(models.Model):
     publish_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     post_body = models.TextField(blank=True)
-    excerpt = models.TextField(blank=True, default='')
+    excerpt = models.TextField(blank=True, default='', max_length=200)
 
     class Meta:
         """ Data should order by update date """

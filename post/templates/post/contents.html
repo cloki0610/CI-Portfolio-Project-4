@@ -10,9 +10,9 @@
     <div class="mx-auto my-3 p-md-5 mx-auto border-lightblack bg-light rounded">
         <div class="row">
         {% for post in post_list%}
-            <div class="card col-md-5 bg-light border-lightblack p-0 mx-auto my-3 hvr-grow-shadow">
+            <div class="card h-100 col-md-5 bg-light border-lightblack p-0 mx-auto my-3 hvr-grow-shadow post-card">
                 <a href="{% url 'post_detail' post.theme.slug post.id %}">
-                    <div class="card-body text-dark">
+                    <div class="card-body text-dark post-card-body">
                         <h3 class="card-title">{{ post.title }}</h3>
                         <hr>
                         <p class="card-text">{{ post.excerpt }}</p>
@@ -58,7 +58,7 @@
         </nav>
         <!--button to back overview page-->
         <div class="row p-4">
-            <a href="{% url 'theme_overview' view.get_theme.slug %}" class="btn btn-outline-dark btn-block btn-lg">Back to Overview</a>
+            <a href="{% url 'theme_overview' view.get_theme.slug %}" class="btn btn-outline-dark btn-block btn-lg">RETURN</a>
         </div>
     </div>
 </div>
