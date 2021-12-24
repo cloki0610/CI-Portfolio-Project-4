@@ -70,6 +70,7 @@ class NewPostView(LoginRequiredMixin, View):
             new_post = post_form.save(commit=False)
             new_post.theme = theme
             new_post.save()
+            theme.save()
             messages.success(request,
                              'New post has been created.')
         else:
@@ -105,6 +106,7 @@ class EditPostView(LoginRequiredMixin, View):
             edited_post = post_form.save(commit=False)
             edited_post.theme = theme
             edited_post.save()
+            theme.save()
             messages.success(request,
                              'Your post have been successfully updated.')
         else:
