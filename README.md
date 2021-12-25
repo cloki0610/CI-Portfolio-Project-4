@@ -56,6 +56,7 @@ Django allauth was used to set up user registration and built in decorators allo
  - Python
  - PostgreSQL
  - Bootstrap
+ - hover.css
  - Google Fonts
  - GitHub
  - Git
