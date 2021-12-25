@@ -80,11 +80,11 @@
                 <p class="card-text">{{ theme.excerpt}}...</p>
             </a>
         </div>
-        <div class="card-footer">
-            <span class="mx-2"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
-            <span class="mx-2"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
-            <span class="mx-2"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
-            <span class="mx-2 float-end">
+        <div class="card-footer row mx-0">
+            <span class="mx-2 col-sm-3"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
+            <span class="mx-2 col-sm-3"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
+            <span class="mx-2 col-sm-3"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
+            <span class="mx-2 float-md-end  col-sm-12">
                 Last updated {{ theme.updated_on }}
             </span>
         </div>

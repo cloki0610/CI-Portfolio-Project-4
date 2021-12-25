@@ -7,10 +7,10 @@
     <h1 class="text-center fw-bold">{{ view.get_theme.title }}</h1>
     <h2 class="text-center fw-bolder text-muted">{{ view.get_theme.author }}</h2>
     <!--list of posts-->
-    <div class="mx-auto my-3 p-md-5 mx-auto border-lightblack bg-light rounded">
-        <div class="row">
+    <div class="mx-auto my-3 p-md-5 border-lightblack bg-light rounded">
+        <div class="row gx-0">
         {% for post in post_list%}
-            <div class="card h-100 col-md-5 bg-light border-lightblack p-0 mx-auto my-3 hvr-grow-shadow post-card">
+            <div class="card h-100 col-md-5 bg-light border-lightblack p-0 mx-auto my-md-3 hvr-grow-shadow post-card">
                 <a href="{% url 'post_detail' post.theme.slug post.id %}">
                     <div class="card-body text-dark post-card-body">
                         <h3 class="card-title">{{ post.title }}</h3>
@@ -33,7 +33,7 @@
             </div>
         {% if forloop.counter|divisibleby:2 %}
         </div>
-        <div class="row">
+        <div class="row gx-0">
         {% endif %}
         {% empty %}
         <p class="text-center fs-2">Here is no any post yet.</p>
