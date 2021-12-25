@@ -46,6 +46,8 @@ Django allauth was used to set up user registration and built in decorators allo
 ### **Features Left to Implement**
 ## **Testing**
 ### Issue found and solved
+ - Slug update by website
+ - Theme date update when post add or edited
 ## **Deployment**
 ## **Technologies**
  - HTML
