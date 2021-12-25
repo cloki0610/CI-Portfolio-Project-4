@@ -146,7 +146,7 @@
             </button>
         </div>
         {% endif %}
-        {% if request.user.userprofile.membership != 2 and request.user != theme.author %}
+        {% if request.user != theme.author %}
         <div class="col-md-12 mb-3">
             <a href="{% url 'report' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Report</a>
         </div>

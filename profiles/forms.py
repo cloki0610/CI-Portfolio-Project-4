@@ -16,7 +16,7 @@ class UserProfilesForm(forms.ModelForm):
                                             'placeholder': 'Write Bio here'
                                         }
                                     }
-                                ), label="Bio"
+                                ), label="Bio", required=False
                           )
 
     class Meta:

@@ -14,7 +14,7 @@ class Report(models.Model):
                                  related_name="theme_report")
     email = models.EmailField(max_length=50, blank=True, default='')
     report_type = models.IntegerField(choices=REPORT_TYPE, default=0)
-    description = models.TextField(blank=True, default='')
+    description = models.TextField(default='')
     submit_on = models.DateTimeField(auto_now_add=True)
     checked = models.BooleanField(default=False)
 

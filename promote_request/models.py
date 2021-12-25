@@ -10,7 +10,7 @@ class PromoteRequest(models.Model):
                              related_name="user_request")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name="category_request")
-    reason = models.TextField(blank=True, default='')
+    reason = models.TextField(default='')
     submit_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
