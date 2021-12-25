@@ -18,6 +18,10 @@ body {
             user-select: none;
 }
 
+main {
+  min-height: 900px!important;
+}
+
 p {
   word-break: break-word;
   white-space: normal;
