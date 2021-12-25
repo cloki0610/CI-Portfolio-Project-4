@@ -56,7 +56,7 @@
 <!--Full theme list-->
 <div id="index-list" class="mx-auto w-75 p-3 bg-light border-lightblack rounded">
     {% for theme in theme_page %}
-    <div class="card d-block w-75 my-4 noselect hvr-grow-shadow mx-auto">
+    <div class="card d-block my-4 noselect hvr-grow-shadow mx-auto">
         {% if theme.category.name == 'Fiction' %}
         <div class="card-header text-light bg-brown">
             {{ theme.category.name }}
@@ -80,13 +80,17 @@
                 <p class="card-text">{{ theme.excerpt}}...</p>
             </a>
         </div>
-        <div class="card-footer row mx-0">
-            <span class="mx-2 col-sm-3"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
-            <span class="mx-2 col-sm-3"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
-            <span class="mx-2 col-sm-3"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
-            <span class="mx-2 float-md-end  col-sm-12">
-                Last updated {{ theme.updated_on }}
-            </span>
+        <div class="card-footer mx-0">
+            <div class="row justify-content-center justify-content-md-end">
+                <span class="mx-2 col-1"><i class="far fa-arrow-alt-circle-up"></i> {{ theme.upvote.count }}</span>
+                <span class="mx-2 col-1"><i class="far fa-arrow-alt-circle-down"></i> {{ theme.downvote.count }}</span>
+                <span class="mx-2 col-1"><i class="far fa-comment"></i> {{ theme.theme_comments.count }}</span>
+            </div>
+            <div class="row justify-content-center justify-content-md-end">
+                <span class="text-end text-muted col-md-4">
+                    Last updated {{ theme.updated_on | date:"j M Y f A" }}
+                </span>
+            </div>
         </div>
     </div>
     {% empty %}

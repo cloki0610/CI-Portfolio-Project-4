@@ -10,8 +10,8 @@
     <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
         <div class="text-break m-5">{{ post.post_body | safe }}</div>
         <!--Dates-->
-        <p class="text-center text-muted dates">Publish on: {{ post.publish_on }}</p>
-        <p class="text-center text-muted dates">Last Update: {{ post.updated_on }}</p>
+        <p class="text-center text-muted dates">Publish on: {{ post.publish_on | date:"j M Y f A"  }}</p>
+        <p class="text-center text-muted dates">Last Update: {{ post.updated_on | date:"j M Y f A"  }}</p>
         <!--Back to content-->
         <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">RETURN</a>
     </div>
