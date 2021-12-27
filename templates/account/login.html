@@ -9,7 +9,7 @@
 <!-- Block Content -->
 <div class="container">
   <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
-    <h1 class="text-center">SIGN IN</h1>
+    <h1 class="text-center fw-bold">SIGN IN</h1>
     {% get_providers as socialaccount_providers %}
     {% if socialaccount_providers %}
     <p class="text-center">{% blocktrans with site.name as site_name %}Please sign in with Social Media Account. Or, <a href="{{ signup_url }}">sign up</a>

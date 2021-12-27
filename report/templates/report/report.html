@@ -3,7 +3,7 @@
 {% load cloudinary %}
 {% block content %}
 {% load crispy_forms_tags %}
-<h1 class="text-center fw-bold">REPORT {{ theme.title | upper }}</h1>
+<h1 class="text-center fw-bold mt-5">REPORT {{ theme.title | upper }}</h1>
 <!--Report form-->
 <div class="px-md-5 mx-md-5">
     <form action="{% url 'report' theme.slug %}" method="POST" enctype="multipart/form-data" class="mb-3">
