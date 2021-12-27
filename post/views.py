@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 from theme.models import Theme
 from .models import Post
 from .forms import PostForm
@@ -37,13 +38,16 @@ class PostDetailView(View):
     def get(self, request, slug, post_pk):
         """ GET method """
         theme = get_object_or_404(Theme, slug=slug)
-        post = get_object_or_404(Post, pk=post_pk)
+        posts = Post.objects.all().filter(theme=theme).order_by('-publish_on')
+        post_paginator = Paginator(posts, 1)
+        page_number = post_pk
+        post_page = post_paginator.get_page(page_number)
         return render(
             request,
             "post/post_detail.html",
             {
                 "theme": theme,
-                "post": post
+                "post_page": post_page
             }
         )
 
