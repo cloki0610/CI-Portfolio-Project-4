@@ -89,8 +89,8 @@ class NewThemeView(LoginRequiredMixin, View):
             comments = new_theme.theme_comments.order_by('created_on')
             new_theme.save()
             messages.success(request,
-                             'New theme has been created. '
-                             + 'Thanks your support!')
+                             'New theme has been created. ' +
+                             'Thanks your support!')
         else:
             messages.error(request,
                            'Submit failed, Please check and Try Again!')
