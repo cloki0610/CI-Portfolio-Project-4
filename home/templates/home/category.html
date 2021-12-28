@@ -3,25 +3,25 @@
 {% block content %}
 <!--Header-->
 <h1 class="text-center fw-bold mt-5">{{ category.name }}</h1>
-<p class="text-center fs-4">{{ category.introduction }}</p>
+<h2 class="text-center fs-4">{{ category.introduction }}</h2>
 <!--Full theme list-->
 {% if category.name == 'Fiction' %}
-<div id="category-list" class="mx-auto w-75 p-3 bg-light border-brown rounded">
+<div id="category-list" class="mx-auto w-75 p-3 bg-light border-fiction rounded">
 {% elif category.name == 'Non-fiction' %}
-<div id="category-list" class="mx-auto w-75 p-3 bg-light border-lightblue rounded">
+<div id="category-list" class="mx-auto w-75 p-3 bg-light border-nonfiction rounded">
 {% elif category.name == 'Lifestyle'%}
-<div id="category-list" class="mx-auto w-75 p-3 bg-light border-purple rounded">
+<div id="category-list" class="mx-auto w-75 p-3 bg-light border-lifestyle rounded">
 {% else %}
 <div id="category-list" class="mx-auto w-75 p-3 bg-light border-lightblack rounded">
 {% endif %}
     {% for theme in theme_page %}
     <div class="card d-block my-4 noselect hvr-grow-shadow mx-auto">
         {% if theme.category.name == 'Fiction' %}
-        <div class="card-header text-light bg-brown">
+        <div class="card-header text-light bg-fiction">
         {% elif theme.category.name == 'Non-fiction' %}
-        <div class="card-header text-light bg-lightblue">
+        <div class="card-header text-light bg-nonfiction">
         {% elif theme.category.name == 'Lifestyle'%}
-        <div class="card-header text-light bg-purple">
+        <div class="card-header text-light bg-lifestyle">
         {% else %}
         <div class="card-header text-light bg-lightblack">
         {% endif %}
@@ -29,7 +29,7 @@
         </div>
         <div class="card-body text-center">
             <a href="{% url 'theme_overview' theme.slug %}" class="text-dark">
-                <h5 class="card-title">{{ theme.title }}</h5>
+                <h2 class="card-title">{{ theme.title }}</h2>
                 <p class="card-text">{{ theme.excerpt}}...</p>
             </a>
         </div>

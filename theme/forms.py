@@ -39,20 +39,17 @@ class CommentForm(forms.ModelForm):
                                                 'width': '100%',
                                                 'height': '400px',
                                                 'align-item': 'center',
-                                                'placeholder': 'Comment here'
+                                                'placeholder': 'Comment here',
+                                                'aria-label': 'Comment'
                                             }
                                         }
-                                        )
+                                        ), label="Comment"
                                    )
 
     class Meta:
         """ Handle the column in form """
         model = Comment
         fields = ('comment_body',)
-
-    def __init__(self, *args, **kwargs):
-        super(CommentForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_show_labels = True
-        for field in CommentForm.Meta.fields:
-            self.fields[field].label = False
+        labels = {
+            'comment_body': 'Comment'
+        }

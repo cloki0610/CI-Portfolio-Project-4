@@ -50,7 +50,7 @@
     </div>
     <!--section title-->
     <div class="col-md-4">
-        <div class="text-center fs-2 fw-bolder position-relative top-50 start-50 translate-middle" id="carousel-title">MEMBER'S MOST UPVOTED</div>
+        <h1 class="text-center fs-2 fw-bold position-relative top-50 start-50 translate-middle noselect" id="carousel-title">MEMBER'S MOST UPVOTED</h1>
     </div>
 </div>
 <!--Full theme list-->
@@ -58,15 +58,15 @@
     {% for theme in theme_page %}
     <div class="card d-block my-4 noselect hvr-grow-shadow mx-auto">
         {% if theme.category.name == 'Fiction' %}
-        <div class="card-header text-light bg-brown">
+        <div class="card-header text-light bg-fiction">
             {{ theme.category.name }}
         </div>
         {% elif theme.category.name == 'Non-fiction' %}
-        <div class="card-header text-light bg-lightblue">
+        <div class="card-header text-light bg-nonfiction">
             {{ theme.category.name }}
         </div>
         {% elif theme.category.name == 'Lifestyle'%}
-        <div class="card-header text-light bg-purple">
+        <div class="card-header text-light bg-lifestyle">
             {{ theme.category.name }}
         </div>
         {% else %}
@@ -76,7 +76,7 @@
         {% endif %}
         <div class="card-body text-center">
             <a href="{% url 'theme_overview' theme.slug %}" class="text-dark">
-                <h5 class="card-title">{{ theme.title }}</h5>
+                <h2 class="card-title">{{ theme.title }}</h2>
                 <p class="card-text">{{ theme.excerpt}}...</p>
             </a>
         </div>

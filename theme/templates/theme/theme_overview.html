@@ -8,11 +8,11 @@
 <!--theme details-->
 <div class="container mx-auto">
     {% if theme.category.name == 'Fiction' %}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-brown">
+    <div class="card my-3 p-md-5 mx-auto bg-light border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-lightblue">
+    <div class="card my-3 p-md-5 mx-auto bg-light border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-purple">
+    <div class="card my-3 p-md-5 mx-auto bg-light border-lifestyle">
     {% else %}
     <div class="card my-3 p-md-5 mx-auto bg-light border-lightblack">
     {% endif %}
@@ -46,47 +46,47 @@
                         <div class="text-md-start fw-bolder col-md-5">Last updated</div>
                         <div class="float-end col-md-7">{{ theme.updated_on | date:"j M Y G:i" }}</div>
                     </div>
-                    <div class="card-text row gap-md-1 pt-md-5">
-                        <div class="col col-md-3 d-flex justify-content-center align-items-center">
-                            <span id="upvote-btn">
+                    <div class="card-text row gap-md-1 pt-md-5 justify-content-center">
+                        <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3">
+                            <span id="upvote-btn" aria-label="upvote-button">
                                 {% if user.is_authenticated %}
-                                <form action="{% url 'theme_upvote' theme.id %}" method="POST" class="d-inline">
+                                <form action="{% url 'theme_upvote' theme.id %}" method="POST" class="d-inline me-3">
                                     {% csrf_token %}
-                                    <button type="submit" id="{{ theme.id }}-upvote" class="votebtn btn p-2">
+                                    <button type="submit" id="{{ theme.id }}-upvote" class="votebtn btn p-2" aria-label="upvote">
                                         {% if theme_upvote %}
-                                        <i class="fas fa-arrow-alt-circle-up"></i>
+                                        <i class="fas fa-arrow-alt-circle-up me-2 fs-3"></i>
                                         {% else %}
-                                        <i class="far fa-arrow-alt-circle-up"></i>
+                                        <i class="far fa-arrow-alt-circle-up me-2 fs-3"></i>
                                         {% endif %}
                                     </button>
                                 </form>
                                 {% else %}
-                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <i class="fas fa-arrow-alt-circle-up me-2"></i>
                                 {% endif %}
                             </span>
-                            <span id="count-upvote">{{ theme.upvote.count }}</span>
+                            <span id="count-upvote" aria-label="upvote-count">{{ theme.upvote.count }}</span>
                         </div>
-                        <div class="col col-md-3 d-flex justify-content-center align-items-center">
-                            <span id="downvote-btn">
+                        <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3">
+                            <span id="downvote-btn"  aria-label="downvote-button">
                                 {% if user.is_authenticated %}
                                 <form action="{% url 'theme_downvote' theme.id %}" method="POST" class="d-inline">
                                     {% csrf_token %}
-                                    <button type="submit" id="{{ theme.id }}-downvote" class="votebtn btn p-2">
+                                    <button type="submit" id="{{ theme.id }}-downvote" class="votebtn btn p-2" aria-label="downvote">
                                         {% if theme_downvote %}
-                                        <i class="fas fa-arrow-alt-circle-down"></i>
+                                        <i class="fas fa-arrow-alt-circle-down me-2 fs-3"></i>
                                         {% else %}
-                                        <i class="far fa-arrow-alt-circle-down"></i>
+                                        <i class="far fa-arrow-alt-circle-down me-2 fs-3"></i>
                                         {% endif %}
                                     </button>
                                 </form>
                                 {% else %}
-                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <i class="fas fa-arrow-alt-circle-down me-2"></i>
                                 {% endif %}
                             </span>
-                            <span id="count-downvote">{{ theme.downvote.count }}</span>
+                            <span id="count-downvote" aria-label="downvote-count">{{ theme.downvote.count }}</span>
                         </div>
-                        <div class="col col-md-3 d-flex justify-content-center align-items-center">
-                            <i class="far fa-comment p-2"></i> {{ comments.count }}
+                        <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3" aria-label="comments">
+                            <i class="far fa-comment me-2"></i> {{ comments.count }}
                         </div>
                     </div>
                 </div>
@@ -95,19 +95,19 @@
     </div>
     <!--Excerpt section-->
     {% if theme.category.name == 'Fiction' %}
-    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-brown">
+    <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-lightblue">
+    <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-purple">
+    <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-lifestyle">
     {% else %}
-    <section class="row mx-auto p-5 my-3 text-center bg-light rounded border-lightblack">
+    <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-lightblack">
     {% endif %}
-        <div class="col-12">
-            <h3 class="fw-bold">Excerpt</h3>
+        <div class="col-12" aria-label="excerpt-title">
+            <h2 class="h3 fw-bold">Excerpt</h2>
             <hr>
         </div>
-        <div class="col-12">
+        <div class="col-12" aria-label="excerpt">
             {% if theme.excerpt %}
             <p>{{ theme.excerpt }}</p>
             {% else %}
@@ -118,41 +118,41 @@
     <!--button to post list-->
     <!--if user is author also display edit theme and delete theme-->
     {% if theme.category.name == 'Fiction' %}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-brown">
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblue">
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-purple">
+    <div class="row mx-auto p-5 my-3 bg-light rounded border-lifestyle">
     {% else %}
     <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblack">
     {% endif %}
-        <div class="col-md-12 mb-3 px-5">
-            <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Read</a>
+        <div class="col-md-12 mb-3 px-md-5">
+            <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="read">Read</a>
         </div>
         {% if user.is_authenticated %}
         {% if request.user == theme.author %}
-        <div class="col-md-6 mb-3 ps-5">
+        <div class="col-md-6 mb-3 ps-md-5">
             <!-- Add a new post -->
-            <a href="{% url 'new_post' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">New post</a>
+            <a href="{% url 'new_post' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="new post">New post</a>
         </div>
-        <div class="col-md-6 mb-3 pe-5">
+        <div class="col-md-6 mb-3 pe-md-5">
             <!-- Edit current theme -->
-            <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Edit Info</a>
+            <a href="{% url 'edit_theme' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="edit theme info">Edit Info</a>
         </div>
-        <div class="col-md-6 mb-3 ps-5">
+        <div class="col-md-6 mb-3 ps-md-5">
             <!-- Delete theme modal -->
-            <button type="button" class="btn btn-outline-danger btn-block btn-lg w-100" data-bs-toggle="modal" data-bs-target="#confirm-delete-theme">
+            <button type="button" class="btn btn-outline-danger btn-block btn-lg w-100" data-bs-toggle="modal" data-bs-target="#confirm-delete-theme" aria-label="delete theme">
                 Delete
             </button>
         </div>
         {% endif %}
         {% if request.user != theme.author %}
-        <div class="col-md-12 mb-3 px-5">
-            <a href="{% url 'report' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Report</a>
+        <div class="col-md-12 mb-3 px-md-5">
+            <a href="{% url 'report' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="report">Report</a>
         </div>
         {% else %}
-        <div class="col-md-6 mb-3 pe-5">
-            <a href="{% url 'report' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Report</a>
+        <div class="col-md-6 mb-3 pe-md-5">
+            <a href="{% url 'report' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="report">Report</a>
         </div>
         {% endif %}
         {% endif %}
@@ -160,23 +160,21 @@
     <!--comment form-->
     {% if user.is_authenticated %}
     {% if theme.category.name == 'Fiction' %}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-brown">
+    <div class="p-1 my-3 bg-light rounded mx-auto border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-lightblue">
+    <div class="p-1 my-3 bg-light rounded mx-auto border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-purple">
+    <div class="p-1 my-3 bg-light rounded mx-auto border-lifestyle">
     {% else %}
     <div class="p-1 my-3 bg-light rounded mx-auto border-lightblack">
     {% endif %}
-        <div class="row my-3">
-            <h3 class="text-center fw-bolder">Comments</h3>
-            <p class="text-center">Posting as: {{ user.username }}</p>
-        </div>
-        <hr>
-        <div class="row text-center px-md-5 mx-md-5 my-3">
-            <form method="POST">
+        <div class="row text-center px-md-5 mx-md-5 mb-3">
+            <form method="POST" aria-label="comment">
                 {% csrf_token %}
                 {{ comment_form | crispy }}
+                <div class="row">
+                    <p class="text-center">comment as: {{ user.username }}</p>
+                </div>
                 <div class="text-center my-4">
                     <button type="submit" class="btn btn-outline-dark btn-block btn-lg w-100">Submit</button>
                 </div>
@@ -189,11 +187,11 @@
 <div class="container mx-auto">
 {% for comment in comments %}
 {% if theme.category.name == 'Fiction' %}
-<div class="card rounded mx-auto border-brown">
+<div class="card rounded mx-auto border-fiction">
 {% elif theme.category.name == 'Non-fiction' %}
-<div class="card rounded mx-auto border-lightblue">
+<div class="card rounded mx-auto border-nonfiction">
 {% elif theme.category.name == 'Lifestyle'%}
-<div class="card rounded mx-auto border-purple">
+<div class="card rounded mx-auto border-lifestyle">
 {% else %}
 <div class="card rounded mx-auto border-lightblack">
 {% endif %}
