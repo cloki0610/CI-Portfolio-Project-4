@@ -187,13 +187,13 @@
 <div class="container mx-auto">
 {% for comment in comments %}
 {% if theme.category.name == 'Fiction' %}
-<div class="card rounded mx-auto border-fiction">
+<div class="card rounded mx-auto mb-3 border-fiction">
 {% elif theme.category.name == 'Non-fiction' %}
-<div class="card rounded mx-auto border-nonfiction">
+<div class="card rounded mx-auto mb-3 border-nonfiction">
 {% elif theme.category.name == 'Lifestyle'%}
-<div class="card rounded mx-auto border-lifestyle">
+<div class="card rounded mx-auto mb-3 border-lifestyle">
 {% else %}
-<div class="card rounded mx-auto border-lightblack">
+<div class="card rounded mx-auto mb-3 border-lightblack">
 {% endif %}
     <div class="card-body">
         {% if not comment.user.userprofile.name %}

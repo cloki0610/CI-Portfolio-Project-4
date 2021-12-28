@@ -52,7 +52,7 @@ class TestCommentForm(TestCase):
         """Set up test user and instance will use for testing """
         self.user = User.objects.create_user(
                     username='test',
-                    password='12test12',
+                    password='password',
                     email='test@example.com')
         self.user.save()
         self.category = Category.objects.create(
