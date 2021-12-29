@@ -14,7 +14,9 @@ class PromoteRequestView(LoginRequiredMixin, View):
 
     def get(self, request):
         """ get method """
+        # get required form model
         request_form = PromoteRequestForm()
+        # return form model with template
         return render(
             request,
             "promote_request/request.html", {
@@ -24,7 +26,9 @@ class PromoteRequestView(LoginRequiredMixin, View):
 
     def post(self, request):
         """ post method """
+        # get form model and fill the form with user input
         request_form = PromoteRequestForm(request.POST)
+        # form validation
         if request_form.is_valid():
             promote_request = request_form.save(commit=False)
             promote_request.user = request.user
@@ -32,9 +36,11 @@ class PromoteRequestView(LoginRequiredMixin, View):
             messages.success(request,
                              'Form submited, please wait for approved')
         else:
+            # if input invalid, show error message and redirect to profile page
             messages.error(request,
                            'Submit failed, Please check and Try Again!')
             return HttpResponseRedirect(reverse('profile'))
+        # return to profile page if success
         return render(
             request,
             "profiles/profile.html",

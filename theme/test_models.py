@@ -10,7 +10,7 @@ class TestThemeModels(TestCase):
     """ Test Theme app's models """
 
     def setUp(self):
-        """Set up test user and category instance """
+        """Set up required instance """
         self.user = User.objects.create_user(
                     username='test',
                     password='password',

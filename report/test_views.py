@@ -9,6 +9,7 @@ class TestReportViews(TestCase):
     """ Test report views """
 
     def setUp(self):
+        """ Set up required instance """
         self.user = User.objects.create_user(
                     username='test',
                     password='password',

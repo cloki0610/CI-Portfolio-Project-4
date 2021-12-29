@@ -9,7 +9,7 @@ from .models import PromoteRequest
 class TestPromoteRequestModels(TestCase):
     """ Test promote request models """
     def setUp(self):
-        """ set up test user and require instances """
+        """ Set up required instance """
         self.user = User.objects.create_user(
                     username='test',
                     password='password',

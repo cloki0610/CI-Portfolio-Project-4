@@ -1,9 +1,7 @@
 """ Theme Form and Comment Form test cases """
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from home.models import Category
-from .models import Theme
 from .forms import ThemeForm, CommentForm
 
 
@@ -11,7 +9,7 @@ class TestThemeForm(TestCase):
     """ Test Theme app's form model """
 
     def setUp(self):
-        """Set up test user and category instance """
+        """Set up required instance """
         self.category = Category.objects.create(
             name='Fiction',
             introduction='testonly'
@@ -27,10 +25,9 @@ class TestThemeForm(TestCase):
                           'feature_image': 'testimg'
                           })
         self.assertTrue(form.is_valid())
-    
+
     def test_form_is_invalid(self):
         """ Test if form is invalid """
-        category = get_object_or_404(Category, slug='fiction')
         form = ThemeForm({'title': 'Test',
                           'category': 'invalid input',
                           'excerpt': 'test optional field',

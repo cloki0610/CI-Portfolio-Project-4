@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     ROLES = ((0, "member"), (1, "creator"), (2, "admin"))
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=80, blank=True, default='')
+    name = models.CharField(max_length=20, blank=True, default='')
     membership = models.IntegerField(choices=ROLES, default=0)
     registered_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50, blank=True, default='')

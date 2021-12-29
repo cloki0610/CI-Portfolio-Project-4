@@ -9,7 +9,7 @@ class TestPromoteRequestForms(TestCase):
     """ Test report form model """
 
     def setUp(self):
-        """ set up test user and require instances """
+        """ Set up required instance """
         self.category = Category.objects.create(
             name='Fiction',
             introduction='testonly'
