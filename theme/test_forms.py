@@ -27,6 +27,16 @@ class TestThemeForm(TestCase):
                           'feature_image': 'testimg'
                           })
         self.assertTrue(form.is_valid())
+    
+    def test_form_is_invalid(self):
+        """ Test if form is invalid """
+        category = get_object_or_404(Category, slug='fiction')
+        form = ThemeForm({'title': 'Test',
+                          'category': 'invalid input',
+                          'excerpt': 'test optional field',
+                          'feature_image': 'testimg'
+                          })
+        self.assertFalse(form.is_valid())
 
     def test_title_is_required(self):
         """ Test if theme title is required """
@@ -75,40 +85,14 @@ class TestThemeForm(TestCase):
 class TestCommentForm(TestCase):
     """ Test Comment Form """
 
-    def setUp(self):
-        """Set up test user and instance will use for testing """
-        self.user = User.objects.create_user(
-                    username='test',
-                    password='password',
-                    email='test@example.com')
-        self.user.save()
-        self.category = Category.objects.create(
-            name='Fiction',
-            introduction='testonly'
-        )
-        self.category.save()
-        self.comment_theme = Theme.objects.create(
-            title='Test2',
-            author=self.user,
-            category=self.category)
-        self.comment_theme.save()
-
     def test_form_is_valid(self):
         """ Test if comment form is valid """
-        user = get_object_or_404(User, username='test')
-        theme = get_object_or_404(Theme, slug="test2")
-        form = CommentForm({'theme': theme,
-                            'user': user,
-                            'comment_body': '<i>Test comments</i>'})
+        form = CommentForm({'comment_body': '<i>Test comments</i>'})
         self.assertTrue(form.is_valid())
 
     def test_form_is_invalid(self):
         """ Test if comment form is invalid """
-        user = get_object_or_404(User, username='test')
-        theme = get_object_or_404(Theme, slug="test2")
-        form = CommentForm({'theme': theme,
-                            'user': user,
-                            'comment_body': ''})
+        form = CommentForm({'comment_body': ''})
         self.assertFalse(form.is_valid())
         self.assertIn('comment_body', form.errors.keys())
         self.assertEqual(form.errors[

@@ -21,11 +21,11 @@ class TestThemeModels(TestCase):
             introduction='testonly'
         )
         self.category.save()
-        self.comment_theme = Theme.objects.create(
+        self.theme = Theme.objects.create(
             title='Test2',
             author=self.user,
             category=self.category)
-        self.comment_theme.save()
+        self.theme.save()
 
     def test_theme_string_method(self):
         """ Test string method """

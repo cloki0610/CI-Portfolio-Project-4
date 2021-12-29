@@ -46,3 +46,11 @@ class TestReportForms(TestCase):
             'description': 'test report form'
         })
         self.assertTrue(form.is_valid())
+
+    def test_invalid_input(self):
+        """ Test if invalid form input """
+        form = ReportForm({
+            'report_type': 'invalidinput',
+            'description': 'test report form'
+        })
+        self.assertFalse(form.is_valid())

@@ -1,8 +1,8 @@
 """ Report Models test cases """
 from django.test import TestCase
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from home.models import Category
-from theme.models import Theme
 
 
 class TestReportViews(TestCase):
@@ -19,55 +19,49 @@ class TestReportViews(TestCase):
             introduction='testonly'
         )
         self.category.save()
-        self.theme = Theme.objects.create(
-            title='Test1',
-            author=self.user,
-            category=self.category)
-        self.theme.save()
 
-    def test_get_report_form(self):
+    def test_get_promote_request_form(self):
         """ Test get method to render report.html """
         self.client.login(username='test', password='password')
-        response = self.client.get('/theme/test1/report/')
+        response = self.client.get('/promote_request/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'report/report.html')
+        self.assertTemplateUsed(response, 'promote_request/request.html')
 
-    def test_get_report_form_redir(self):
+    def test_get_promote_request_form_redir(self):
         """ Test get method redirect to login page """
-        response = self.client.get('/theme/test1/report/')
+        response = self.client.get('/promote_request/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
-                             '/accounts/login/?next=/theme/test1/report/')
+                             '/accounts/login/?next=/promote_request/')
 
-    def test_post_report_form(self):
+    def test_post_promote_request_form(self):
         """ Test post method to send form data """
         self.client.login(username='test', password='password')
-        response = self.client.post('/theme/test1/report/', {
-            'report_type': 0,
-            'email': 'test@test.com',
-            'description': 'test report form'
+        category = get_object_or_404(Category, slug='fiction')
+        response = self.client.post('/promote_request/', {
+            'category': category.pk,
+            'reason': 'test promote request form'
         })
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'theme/theme_overview.html')
+        self.assertTemplateUsed(response, 'profiles/profile.html')
 
-    def test_post_report_form_redir(self):
+    def test_post_promote_request_form_redir(self):
         """ Test post method without login """
-        response = self.client.post('/theme/test1/report/', {
-            'report_type': 0,
-            'email': 'test@test.com',
-            'description': 'test report form'
+        category = get_object_or_404(Category, slug='fiction')
+        response = self.client.post('/promote_request/', {
+            'category': category.pk,
+            'reason': 'test promote request form'
         })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
-                             '/accounts/login/?next=/theme/test1/report/')
+                             '/accounts/login/?next=/promote_request/')
 
-    def test_post_form_invalid(self):
+    def test_post_promote_request_form_invalid(self):
         """ Test post method with invalid input """
         self.client.login(username='test', password='password')
-        response = self.client.post('/theme/test1/report/', {
-            'report_type': 'invalid input',
-            'email': 'test@test.com',
-            'description': 'test report form'
+        response = self.client.post('/promote_request/', {
+            'category': 'invalidinput',
+            'reason': 'test promote request form'
         })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/theme/test1/')
+        self.assertRedirects(response, '/profiles/')

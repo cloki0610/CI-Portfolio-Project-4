@@ -76,10 +76,20 @@ class TestThemeView(TestCase):
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/theme/edit_theme/test1/', {
             'title': 'Testedited',
-            'category': category
+            'category': category.pk
         })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/theme/testedited/')
+
+    def test_post_edit_theme_invalid(self):
+        """ test edit_theme post method with invalid input """
+        self.client.login(username='test', password='password')
+        response = self.client.post('/theme/edit_theme/test1/', {
+            'title': 'Testedited',
+            'category': 'invalid input'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/theme/test1/')
 
     def test_get_new_theme(self):
         """ test to get new_theme.html """
@@ -101,10 +111,20 @@ class TestThemeView(TestCase):
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/theme/new_theme/', {
             'title': 'Test2',
-            'category': category
+            'category': category.pk
         })
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
+
+    def test_post_new_theme_invalid(self):
+        """ test post data by new_theme.html with invalid input """
+        self.client.login(username='test', password='password')
+        response = self.client.post('/theme/new_theme/', {
+            'title': 'Test2',
+            'category': 'invalid input'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response,'/')
 
     def test_upvote_view(self):
         """ test upvote view """

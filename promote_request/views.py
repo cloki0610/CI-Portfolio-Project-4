@@ -1,7 +1,8 @@
 """
 PROMOTE REQUEST APPLICATION VIEWS
 """
-from django.shortcuts import render
+from django.shortcuts import render, reverse
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -33,6 +34,7 @@ class PromoteRequestView(LoginRequiredMixin, View):
         else:
             messages.error(request,
                            'Submit failed, Please check and Try Again!')
+            return HttpResponseRedirect(reverse('profile'))
         return render(
             request,
             "profiles/profile.html",
