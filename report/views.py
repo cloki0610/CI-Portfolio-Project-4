@@ -1,14 +1,14 @@
 """
 REPORT APPLICATION VIEWS
 """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import ReportForm
-from .models import Report
 from theme.forms import CommentForm
 from theme.models import Theme
+from .forms import ReportForm
 
 
 class ReportView(LoginRequiredMixin, View):
@@ -40,7 +40,9 @@ class ReportView(LoginRequiredMixin, View):
                              'Form submited, Thank you your report.')
         else:
             messages.error(request,
-                             'Submit failed, Please check and Try Again!')
+                           'Submit failed, Please check and Try Again!')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[theme.slug]))
         return render(
             request,
             "theme/theme_overview.html",

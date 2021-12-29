@@ -1,4 +1,4 @@
-""" Theme app views testsuit """
+""" Theme app views test cases """
 from django.test import TestCase
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -41,12 +41,8 @@ class TestThemeView(TestCase):
 
     def test_post_theme_overview_comment(self):
         """ test to post a comment """
-        user = get_object_or_404(User, username='test')
-        theme = get_object_or_404(Theme, slug="test1")
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/', {
-            'theme': theme,
-            'user': user,
             'comment_body': '<i>Test comments</i>'
         })
         self.assertEqual(response.status_code, 200)
@@ -54,11 +50,7 @@ class TestThemeView(TestCase):
 
     def test_post_theme_overview_comment_no_login(self):
         """ test to post a comment without login """
-        user = get_object_or_404(User, username='test')
-        theme = get_object_or_404(Theme, slug="test1")
         response = self.client.post('/theme/test1/', {
-            'theme': theme,
-            'user': user,
             'comment_body': '<i>Test comments</i>'
         })
         self.assertEqual(response.status_code, 302)
@@ -75,8 +67,19 @@ class TestThemeView(TestCase):
         """ test edit_theme view redirect when user not login"""
         response = self.client.get('/theme/edit_theme/test1/')
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 
+        self.assertRedirects(response,
                              '/accounts/login/?next=/theme/edit_theme/test1/')
+
+    def test_post_edit_theme(self):
+        """ test edit_theme post method """
+        self.client.login(username='test', password='password')
+        category = get_object_or_404(Category, slug='fiction')
+        response = self.client.post('/theme/edit_theme/test1/', {
+            'title': 'Testedited',
+            'category': category
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/theme/testedited/')
 
     def test_get_new_theme(self):
         """ test to get new_theme.html """
@@ -89,7 +92,7 @@ class TestThemeView(TestCase):
         """ test new_theme view redirect when user not login"""
         response = self.client.get('/theme/new_theme/')
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 
+        self.assertRedirects(response,
                              '/accounts/login/?next=/theme/new_theme/')
 
     def test_post_new_theme(self):

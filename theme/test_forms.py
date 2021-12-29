@@ -1,4 +1,4 @@
-""" Theme Form and Comment Form testsuit """
+""" Theme Form and Comment Form test cases """
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -22,14 +22,20 @@ class TestThemeForm(TestCase):
         """ Test if form is valid """
         category = get_object_or_404(Category, slug='fiction')
         form = ThemeForm({'title': 'Test',
-                          'category': category})
+                          'category': category,
+                          'excerpt': 'test optional field',
+                          'feature_image': 'testimg'
+                          })
         self.assertTrue(form.is_valid())
 
     def test_title_is_required(self):
         """ Test if theme title is required """
         category = get_object_or_404(Category, slug='fiction')
         form = ThemeForm({'title': '',
-                          'category': category})
+                          'category': category,
+                          'excerpt': 'test optional field',
+                          'feature_image': 'testimg'
+                          })
         self.assertFalse(form.is_valid())
         self.assertIn('title', form.errors.keys())
         self.assertEqual(form.errors[
@@ -38,11 +44,32 @@ class TestThemeForm(TestCase):
     def test_category_is_required(self):
         """ Test if category title is required """
         form = ThemeForm({'title': 'Test',
-                          'category': ''})
+                          'category': '',
+                          'excerpt': 'test optional field',
+                          'feature_image': 'testimg'
+                          })
         self.assertFalse(form.is_valid())
         self.assertIn('category', form.errors.keys())
         self.assertEqual(form.errors[
             'category'][0], 'This field is required.')
+
+    def test_excerpt_is_optional(self):
+        """ Test if excerpt is optional """
+        category = get_object_or_404(Category, slug='fiction')
+        form = ThemeForm({'title': 'Test',
+                          'category': category,
+                          'feature_image': 'testimg'
+                          })
+        self.assertTrue(form.is_valid())
+
+    def test_feature_image_is_optional(self):
+        """ Test if feature image is optional """
+        category = get_object_or_404(Category, slug='fiction')
+        form = ThemeForm({'title': 'Test',
+                          'category': category,
+                          'excerpt': 'test optional field'
+                          })
+        self.assertTrue(form.is_valid())
 
 
 class TestCommentForm(TestCase):
@@ -67,10 +94,22 @@ class TestCommentForm(TestCase):
         self.comment_theme.save()
 
     def test_form_is_valid(self):
-        """ Test if form is valid """
+        """ Test if comment form is valid """
         user = get_object_or_404(User, username='test')
         theme = get_object_or_404(Theme, slug="test2")
         form = CommentForm({'theme': theme,
                             'user': user,
                             'comment_body': '<i>Test comments</i>'})
         self.assertTrue(form.is_valid())
+
+    def test_form_is_invalid(self):
+        """ Test if comment form is invalid """
+        user = get_object_or_404(User, username='test')
+        theme = get_object_or_404(Theme, slug="test2")
+        form = CommentForm({'theme': theme,
+                            'user': user,
+                            'comment_body': ''})
+        self.assertFalse(form.is_valid())
+        self.assertIn('comment_body', form.errors.keys())
+        self.assertEqual(form.errors[
+            'comment_body'][0], 'This field is required.')
