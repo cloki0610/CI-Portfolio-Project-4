@@ -47,8 +47,8 @@ class TestThemeModels(TestCase):
             comment_body='Test Comment')
         self.assertEqual(str(comment_obj), 'Comment on Test2')
 
-    def test_default_slug(self):
-        """ Test default slug """
+    def test_theme_presave_slug(self):
+        """ Test pre-save function in data model """
         category = get_object_or_404(Category, slug='fiction')
         user = User.objects.get(username="test")
         theme_obj = Theme.objects.create(

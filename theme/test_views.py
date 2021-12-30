@@ -28,13 +28,13 @@ class TestThemeView(TestCase):
         self.theme.save()
 
     def test_get_theme_overview(self):
-        """ test get theme_overview.html without login """
+        """ test get method to render theme_overview.html without login """
         response = self.client.get('/theme/test1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
 
-    def test_get_theme_overview_no_login(self):
-        """ test get theme_overview.html with login """
+    def test_get_theme_overview_with_login(self):
+        """ test get method to render theme_overview.html with login """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/')
         self.assertEqual(response.status_code, 200)
@@ -58,7 +58,7 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/accounts/login/?next=/theme/test1/')
 
     def test_get_edit_theme(self):
-        """ test to get edit_theme.html """
+        """ test to get method to render edit_theme.html """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/edit_theme/test1/')
         self.assertEqual(response.status_code, 200)
@@ -93,7 +93,7 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/theme/test1/')
 
     def test_get_new_theme(self):
-        """ test to get new_theme.html """
+        """ test to get method to render new_theme.html """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/new_theme/')
         self.assertEqual(response.status_code, 200)
@@ -125,7 +125,7 @@ class TestThemeView(TestCase):
             'category': 'invalid input'
         })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response,'/')
+        self.assertRedirects(response, '/')
 
     def test_upvote_view(self):
         """ test upvote view """

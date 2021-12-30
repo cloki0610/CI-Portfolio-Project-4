@@ -72,4 +72,5 @@ Django allauth was used to set up user registration and built in decorators allo
  - https://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
  - https://github.com/Daisy-McG/ChatToTheMat
  - https://github.com/Michelle3334/coaching-warriors
+ - https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages
 ### **Acknowledgment**
