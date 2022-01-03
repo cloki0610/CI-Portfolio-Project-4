@@ -119,15 +119,24 @@ User Story:
 > As a user, I can click on a theme so that I can view the overview page with all comments.
 
 Acceptance Criteria:\
-When user click on a theme, they should browse a page with some information about the theme and see all the comments underneath the information section.
+When user click on a theme, they should browse a page with some information about the theme and see all the comments underneath the button section.
 
 Implementation:\
-theme_overview template have two section:
+theme_overview template have four section:
  - First section display the information about the selected theme
    - Those information included title, author, category, excerpt, created date and last updated date.
    - A feature image will show in the same section.
    - The page's border color will change depends on which category it belongs to.
- - Second section is about all the comments of the theme
+ - Second section display the excerpt of the theme
+   - The excerpt will display in this section.
+   - If user do not write any excerpt a message will be shown.
+ - Third section display all the button user can use
+   - Unauthorized user only can see a read button to table of contents page.
+   - User login as member can see read and report button in this section
+   - User login as creator and admin also can see read and report button, \
+     but if they are the author of the theme they can see 3 more button to create post, \
+     edit theme information and remove the theme.
+ - Fourth section is about all the comments of the theme
    - The comment will be all list underneath the first section.
    - Each comment will display the user name or display name of who comment the theme.
    - Each comment will display the comment date and last update date on the cards.
@@ -274,7 +283,7 @@ The website should allowed authorize user to leave comment of the contents, \
 and the comment form should in the same page with all comments from all members.
 
 Implementation:
- - In theme_overview template, under the information section, \
+ - In theme_overview template, under the button section, \
    authorize user can see a form with textfield generate by crispy form library, \
    they can leave comment on the textview and leave comment on the theme.
  - If user are unauthorized, they can only see all the comments on the page, \
@@ -385,11 +394,9 @@ Implementation:
 #### **Database Design**
 
 #### **Security**
-With heroku's config var feature, all sensitive keys are stored in their server to prevent unwanted connections to the database.
+With heroku's config var feature, all sensitive keys was store in env.py are now store in heroku server to prevent unwanted connections to the database or cloud service.
 
-Django allauth was used to set up user registration and built in decorators allowed restricted access to certain features on the website that are not intended for regular users.
-
-
+This project also use Django allauth to set up user authorization system to provide restricted access to certain features on the website that are not intended for unauthorize users.
 
 ### **Surface Plane**
 <hr>
@@ -448,13 +455,29 @@ with a exist user account.
  - Bootstrap
  - hover.css
  - Google Fonts
+ - Font Awsome
  - GitHub
  - Git
  - Heroku
- and those python libraries install with ![requirements.txt](requirements.txt)
+ - Cloudinary
+
+
+
+ and those python libraries install with [requirements.txt](requirements.txt):
+ - django-cloudinary-storage
+ - PostgreSQL
+ - asgiref
+ - dj-database-url
+ - django-allauth
+ - django-crispyforms
+ - django-summernote
+ - gunicorn
+ - psycopg2
 
 ## **Credits**
 ### **Code**
+<hr>
+
  - https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
  - https://stackoverflow.com/questions/36317816/relatedobjectdoesnotexist-user-has-no-userprofile
  - https://stackoverflow.com/questions/28165243/cannot-upload-image-in-django-modelform
@@ -467,6 +490,8 @@ with a exist user account.
  - https://github.com/Michelle3334/coaching-warriors
  - https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages
 ### **Acknowledgment**
+<hr>
+
  - Thanks to my mentor Daisy McGirr for all support and guidance in the process,\
  without her help my process will be far longer and complex.
  - Thanks stackoverflow's community already have the answers I need to help me solve most of my problems.
