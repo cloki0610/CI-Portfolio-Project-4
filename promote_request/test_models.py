@@ -22,7 +22,7 @@ class TestPromoteRequestModels(TestCase):
         self.category.save()
 
     def test_promote_request_string_method(self):
-        """ Test promote request model's string method """
+        """ Test string method in data model """
         user = User.objects.get(username="test")
         category = get_object_or_404(Category, slug='fiction')
         promote_request_obj = PromoteRequest.objects.create(

@@ -7,7 +7,7 @@ class TestPostForm(TestCase):
     """ Test Post app's form model """
 
     def test_form_is_valid(self):
-        """ Test if form is valid """
+        """ Test form model with a valid input """
         form = PostForm({
             'title': 'Test Title',
             'excerpt': 'Test Excerpt',
@@ -16,7 +16,7 @@ class TestPostForm(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_form_is_invalid(self):
-        """ Test if form input is invalid """
+        """ Test form model with an invalid input """
         form = PostForm({
             'title': '*' * 201,
             'excerpt': 'Test Excerpt',

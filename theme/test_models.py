@@ -28,7 +28,7 @@ class TestThemeModels(TestCase):
         self.theme.save()
 
     def test_theme_string_method(self):
-        """ Test string method """
+        """ Test string method in Theme model """
         category = get_object_or_404(Category, slug='fiction')
         user = User.objects.get(username="test")
         theme_obj = Theme.objects.create(
@@ -38,7 +38,7 @@ class TestThemeModels(TestCase):
         self.assertEqual(str(theme_obj), 'Test1')
 
     def test_comment_string_method(self):
-        """ Test string method """
+        """ Test string method in Comment model """
         user = User.objects.get(username="test")
         theme = get_object_or_404(Theme, slug='test2')
         comment_obj = Comment.objects.create(
@@ -48,7 +48,7 @@ class TestThemeModels(TestCase):
         self.assertEqual(str(comment_obj), 'Comment on Test2')
 
     def test_theme_presave_slug(self):
-        """ Test pre-save function in data model """
+        """ Test pre-save function in theme model """
         category = get_object_or_404(Category, slug='fiction')
         user = User.objects.get(username="test")
         theme_obj = Theme.objects.create(

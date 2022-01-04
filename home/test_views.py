@@ -26,26 +26,26 @@ class TestHomeView(TestCase):
         self.theme.save()
 
     def test_get_index(self):
-        """ Test get method to render index.html """
+        """ Test get method to render index.html template """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/index.html')
 
     def test_get_index_with_login(self):
-        """ Test get method to render index.html with login """
+        """ Test get method to render index.html template with login """
         self.client.login(username='test', password='password')
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/index.html')
 
     def test_get_category(self):
-        """ Test get method to render category.html """
+        """ Test get method to render category.html template """
         response = self.client.get('/fiction')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/category.html')
 
     def test_get_category_with_login(self):
-        """ Test get method to render category.html with login """
+        """ Test get method to render category.html template with login """
         response = self.client.get('/fiction')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/category.html')

@@ -7,7 +7,7 @@ class TestCategoryModel(TestCase):
     """ Test Category data model """
 
     def test_category_string_method(self):
-        """ Test string method output """
+        """ Test string method in data model """
         category_obj = Category.objects.create(
             name='Test Category',
             introduction='Test category introduction'

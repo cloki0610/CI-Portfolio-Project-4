@@ -17,7 +17,7 @@ class TestThemeForm(TestCase):
         self.category.save()
 
     def test_form_is_valid(self):
-        """ Test if form is valid """
+        """ Test theme form model with a valid input """
         category = get_object_or_404(Category, slug='fiction')
         form = ThemeForm({'title': 'Test',
                           'category': category,
@@ -27,7 +27,7 @@ class TestThemeForm(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_form_is_invalid(self):
-        """ Test if form is invalid """
+        """ Test theme form model with an invalid input """
         form = ThemeForm({'title': 'Test',
                           'category': 'invalid input',
                           'excerpt': 'test optional field',
@@ -83,12 +83,12 @@ class TestCommentForm(TestCase):
     """ Test Comment Form """
 
     def test_form_is_valid(self):
-        """ Test if comment form is valid """
+        """ Test comment form model with a valid input """
         form = CommentForm({'comment_body': '<i>Test comments</i>'})
         self.assertTrue(form.is_valid())
 
     def test_form_is_invalid(self):
-        """ Test if comment form is invalid """
+        """ Test comment form model with an invalid input  """
         form = CommentForm({'comment_body': ''})
         self.assertFalse(form.is_valid())
         self.assertIn('comment_body', form.errors.keys())

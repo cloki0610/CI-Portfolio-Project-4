@@ -7,13 +7,21 @@ class TestReportForms(TestCase):
     """ Test report form model """
 
     def test_form_is_valid(self):
-        """ Test if form is valid """
+        """ Test form model with a valid input """
         form = ReportForm({
             'report_type': 0,
             'email': 'test@test.com',
             'description': 'test report form'
         })
         self.assertTrue(form.is_valid())
+
+    def test_invalid_input(self):
+        """ Test form model with an invalid input """
+        form = ReportForm({
+            'report_type': 'invalidinput',
+            'description': 'test report form'
+        })
+        self.assertFalse(form.is_valid())
 
     def test_report_type_is_reuqired(self):
         """ Test if report_type is required """
@@ -46,11 +54,3 @@ class TestReportForms(TestCase):
             'description': 'test report form'
         })
         self.assertTrue(form.is_valid())
-
-    def test_invalid_input(self):
-        """ Test if invalid form input """
-        form = ReportForm({
-            'report_type': 'invalidinput',
-            'description': 'test report form'
-        })
-        self.assertFalse(form.is_valid())

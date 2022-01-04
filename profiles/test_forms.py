@@ -7,7 +7,7 @@ class TestUserProfileForm(TestCase):
     """ Test Theme app's form model """
 
     def test_form_is_valid(self):
-        """ Test if the form input is valid"""
+        """ Test form model with a valid input """
         form = UserProfilesForm({
             'user_icon': 'iconimg',
             'name': 'Test Display Name',
@@ -17,7 +17,7 @@ class TestUserProfileForm(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_form_is_invalid(self):
-        """ Test if the form input is invalid """
+        """ Test form model with an invalid input """
         form = UserProfilesForm({
             'user_icon': 'iconimg',
             'name': 'teststringmorethan20characterandinputisinvalid',

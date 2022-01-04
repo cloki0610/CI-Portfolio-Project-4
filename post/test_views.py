@@ -35,40 +35,44 @@ class TestPostView(TestCase):
         )
 
     def test_get_contents(self):
-        """ Test get method to render contents.html """
+        """ Test get method to render contents.html template """
         response = self.client.get('/theme/test1/post/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/contents.html')
 
     def test_get_contents_with_login(self):
-        """ Test get method to render contents.html with user login """
+        """
+        Test get method to render contents.html template with user login
+        """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/post/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/contents.html')
 
     def test_get_post_detail(self):
-        """ Test get method to render post_detail.html """
+        """ Test get method to render post_detail.html template """
         response = self.client.get('/theme/test1/post/1')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/post_detail.html')
 
     def test_get_post_detail_with_login(self):
-        """ Test get method to render post_detail.html with user login """
+        """
+        Test get method to render post_detail.html template with user login
+        """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/post/1')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/post_detail.html')
 
     def test_get_new_post(self):
-        """ Test get method to render new_post.html """
+        """ Test get method to render new_post.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/post/new_post/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/new_post.html')
 
     def test_get_new_post_redir(self):
-        """ Test get method to render new_post.html without login """
+        """ Test get method to render new_post.html template without login """
         response = self.client.get('/theme/test1/post/new_post/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
@@ -76,7 +80,7 @@ class TestPostView(TestCase):
                              '/test1/post/new_post/')
 
     def test_post_new_post(self):
-        """ Test post method by new_post.html """
+        """ Test post method by NewPostView """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/post/new_post/', {
             'title': 'Test Title',
@@ -90,7 +94,7 @@ class TestPostView(TestCase):
         self.assertEqual(str(messages[0]), 'New post has been created.')
 
     def test_post_new_post_redir(self):
-        """ Test post method by new_post.html without login """
+        """ Test post method by NewPostView without login """
         response = self.client.post('/theme/test1/post/new_post/', {
             'title': 'Test Title',
             'excerpt': 'Test Excerpt',
@@ -102,7 +106,7 @@ class TestPostView(TestCase):
                              '/test1/post/new_post/')
 
     def test_post_new_post_invalid(self):
-        """ Test post method by new_post.html with invalid input """
+        """ Test post method by NewPostView with invalid input """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/post/new_post/', {
             'title': '*' * 201,
@@ -117,14 +121,14 @@ class TestPostView(TestCase):
                          'Submit failed, Please check and Try Again!')
 
     def test_get_edit_post(self):
-        """ Test get method to render edit_post.html """
+        """ Test get method to render edit_post.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/post/edit_post/1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post/edit_post.html')
 
     def test_get_edit_post_redir(self):
-        """ Test get method to render edit_post.html without login """
+        """ Test get method to render edit_post.html template without login """
         response = self.client.get('/theme/test1/post/edit_post/1/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
@@ -132,7 +136,7 @@ class TestPostView(TestCase):
                              '/test1/post/edit_post/1/')
 
     def test_post_edit_post(self):
-        """ Test post method by edit_post.html """
+        """ Test post method by EditPostView """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/post/edit_post/1/', {
             'title': 'Test Edit post',
@@ -147,7 +151,7 @@ class TestPostView(TestCase):
                          'Your post have been successfully updated.')
 
     def test_post_edit_post_redir(self):
-        """ Test post method by edit_post.html without login """
+        """ Test post method by EditPostView without login """
         response = self.client.post('/theme/test1/post/edit_post/1/', {
             'title': 'Test Edit post',
             'excerpt': 'Test Edit Excerpt',
@@ -159,7 +163,7 @@ class TestPostView(TestCase):
                              '/test1/post/edit_post/1/')
 
     def test_post_edit_post_invalid(self):
-        """ Test post method by edit_post.html with invalid input """
+        """ Test post method by EditPostView with invalid input """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/post/edit_post/1/', {
             'title': '*' * 201,
@@ -174,7 +178,7 @@ class TestPostView(TestCase):
                          'Updated failed, Please check and Try Again!')
 
     def test_get_confirm_delete(self):
-        """ Test get method to render confirm_delete_post.html """
+        """ Test get method to render confirm_delete_post.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/post/confirm_delete_post/1/')
         self.assertEqual(response.status_code, 200)
@@ -182,7 +186,8 @@ class TestPostView(TestCase):
 
     def test_get_confirm_delete_redir(self):
         """
-        Test get method to render confirm_delete_post.html without login
+        Test get method to render confirm_delete_post.html template
+        without login
         """
         response = self.client.get('/theme/test1/post/confirm_delete_post/1/')
         self.assertEqual(response.status_code, 302)
@@ -191,7 +196,7 @@ class TestPostView(TestCase):
                              '/test1/post/confirm_delete_post/1/')
 
     def test_post_delete_post(self):
-        """ Test post method to delete a post """
+        """ Test post method in DeletePost to delete a post """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/post/delete_post/1/')
         self.assertEqual(response.status_code, 302)
@@ -202,7 +207,7 @@ class TestPostView(TestCase):
                          'Selected post is successfully deleted.')
 
     def test_post_delete_post_redir(self):
-        """ Test post method to delete a post without login """
+        """ Test post method in DeletePost to delete a post without login """
         response = self.client.post('/theme/test1/post/delete_post/1/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,

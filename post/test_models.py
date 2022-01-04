@@ -29,7 +29,7 @@ class TestPostModels(TestCase):
         self.theme.save()
 
     def test_post_string_method(self):
-        """ Test string method """
+        """ Test string method in data model """
         theme = get_object_or_404(Theme, slug='testpost')
         post_obj = Post.objects.create(
             title='Test1',

@@ -22,21 +22,21 @@ class TestReportViews(TestCase):
         self.category.save()
 
     def test_get_promote_request_form(self):
-        """ Test get method to render report.html """
+        """ Test get method to render report.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/promote_request/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'promote_request/request.html')
 
     def test_get_promote_request_form_redir(self):
-        """ Test get method redirect to login page """
+        """ Test get method to render report.html template without login """
         response = self.client.get('/promote_request/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
                              '/accounts/login/?next=/promote_request/')
 
     def test_post_promote_request_form(self):
-        """ Test post method to send form data """
+        """ Test post method by PromoteRequestView to send form data """
         self.client.login(username='test', password='password')
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/promote_request/', {
@@ -47,7 +47,7 @@ class TestReportViews(TestCase):
         self.assertTemplateUsed(response, 'profiles/profile.html')
 
     def test_post_promote_request_form_redir(self):
-        """ Test post method without login """
+        """ Test post method by PromoteRequestView without login """
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/promote_request/', {
             'category': category.pk,

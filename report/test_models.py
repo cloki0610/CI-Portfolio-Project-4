@@ -28,7 +28,7 @@ class TestReportModels(TestCase):
         self.theme.save()
 
     def test_report_string_method(self):
-        """ Test report model's string method """
+        """ Test string method in data model """
         user = User.objects.get(username="test")
         theme = get_object_or_404(Theme, slug='test3')
         report_obj = Report.objects.create(

@@ -28,20 +28,22 @@ class TestThemeView(TestCase):
         self.theme.save()
 
     def test_get_theme_overview(self):
-        """ test get method to render theme_overview.html without login """
+        """
+        Test get method to render theme_overview.html template without login
+        """
         response = self.client.get('/theme/test1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
 
     def test_get_theme_overview_with_login(self):
-        """ test get method to render theme_overview.html with login """
+        """ Test get method to render theme_overview.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/test1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
 
     def test_post_theme_overview_comment(self):
-        """ test to post a comment """
+        """ Test post method by ThemeOverView to post a comment """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/test1/', {
             'comment_body': '<i>Test comments</i>'
@@ -50,7 +52,9 @@ class TestThemeView(TestCase):
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
 
     def test_post_theme_overview_comment_no_login(self):
-        """ test to post a comment without login """
+        """
+        Test post method by ThemeOverView to post a comment without login
+        """
         response = self.client.post('/theme/test1/', {
             'comment_body': '<i>Test comments</i>'
         })
@@ -58,21 +62,23 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/accounts/login/?next=/theme/test1/')
 
     def test_get_edit_theme(self):
-        """ test to get method to render edit_theme.html """
+        """ Test get method to render edit_theme.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/edit_theme/test1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/edit_theme.html')
 
-    def test_edit_theme_redir(self):
-        """ test edit_theme view redirect when user not login"""
+    def test_get_edit_theme_redir(self):
+        """
+        Test get method to render edit_theme.html template without login
+        """
         response = self.client.get('/theme/edit_theme/test1/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
                              '/accounts/login/?next=/theme/edit_theme/test1/')
 
     def test_post_edit_theme(self):
-        """ test edit_theme post method """
+        """ Test post method by EditThemeView to send form data """
         self.client.login(username='test', password='password')
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/theme/edit_theme/test1/', {
@@ -83,7 +89,9 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/theme/testedited/')
 
     def test_post_edit_theme_invalid(self):
-        """ test edit_theme post method with invalid input """
+        """
+        Test post method by EditThemeView to send form data with invalid input
+        """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/edit_theme/test1/', {
             'title': 'Testedited',
@@ -92,22 +100,35 @@ class TestThemeView(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/theme/test1/')
 
+    def test_post_edit_theme_redir(self):
+        """
+        Test post method by EditThemeView to send form data without login
+        """
+        category = get_object_or_404(Category, slug='fiction')
+        response = self.client.post('/theme/edit_theme/test1/', {
+            'title': 'Testedited',
+            'category': category.pk
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response,
+                             '/accounts/login/?next=/theme/edit_theme/test1/')
+
     def test_get_new_theme(self):
-        """ test to get method to render new_theme.html """
+        """ Test get method to render new_theme.html template """
         self.client.login(username='test', password='password')
         response = self.client.get('/theme/new_theme/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'theme/new_theme.html')
 
-    def test_new_theme_redir(self):
-        """ test new_theme view redirect when user not login"""
+    def test_get_new_theme_redir(self):
+        """ Test get method to render new_theme.html template without login """
         response = self.client.get('/theme/new_theme/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
                              '/accounts/login/?next=/theme/new_theme/')
 
     def test_post_new_theme(self):
-        """ test post data by new_theme.html """
+        """  Test post method by NewThemeView to send form data """
         self.client.login(username='test', password='password')
         category = get_object_or_404(Category, slug='fiction')
         response = self.client.post('/theme/new_theme/', {
@@ -118,7 +139,9 @@ class TestThemeView(TestCase):
         self.assertTemplateUsed(response, 'theme/theme_overview.html')
 
     def test_post_new_theme_invalid(self):
-        """ test post data by new_theme.html with invalid input """
+        """
+        Test post method by NewThemeView to send form data with invalid input
+        """
         self.client.login(username='test', password='password')
         response = self.client.post('/theme/new_theme/', {
             'title': 'Test2',
@@ -127,8 +150,21 @@ class TestThemeView(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/')
 
+    def test_post_new_theme_redir(self):
+        """
+        Test post method by NewThemeView to send form data without login
+        """
+        category = get_object_or_404(Category, slug='fiction')
+        response = self.client.post('/theme/new_theme/', {
+            'title': 'Test2',
+            'category': category.pk
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response,
+                             '/accounts/login/?next=/theme/new_theme/')
+
     def test_upvote_view(self):
-        """ test upvote view """
+        """ Test ThemeUpvote view """
         theme = get_object_or_404(Theme, slug="test1")
         self.client.login(username='test', password='password')
         url = '/theme/theme_upvote/' + str(theme.pk) + '/'
@@ -139,7 +175,7 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/theme/test1/')
 
     def test_downvote_view(self):
-        """ test downvote view """
+        """ Test Themedownvote view """
         theme = get_object_or_404(Theme, slug="test1")
         self.client.login(username='test', password='password')
         url = '/theme/theme_downvote/' + str(theme.pk) + '/'
@@ -150,7 +186,7 @@ class TestThemeView(TestCase):
         self.assertRedirects(response, '/theme/test1/')
 
     def test_delete_view(self):
-        """ test delete_theme view """
+        """ Test DeleteTheme view """
         theme = get_object_or_404(Theme, slug="test1")
         self.client.login(username='test', password='password')
         url = '/theme/delete_theme/' + str(theme.slug) + '/'

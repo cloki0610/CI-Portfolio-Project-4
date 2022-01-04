@@ -483,28 +483,64 @@ Color for represent Lifestyle category: #8321A6
 The Brand text on the navigation bar use 'Pushster' font, and the rest are all using 'Rubik' as the main font.
 
 #### **Differences to Design**
-All the margin and padding maybe not as expected at last because my lack of sense in it.\
+All the margin and padding maybe not as expected at last because my lack of sense in it and most of the time I simply using bootstrap for styling.\
 The footer are also far different than original design because I finally use some code from my previous project.
 
 ## **Feature**
 ### **Existing Features**
 <hr>
 
+ - Aauthentication system provided by allauth library.
+ - Admin panel provided by django framework with customize search and filter function.
+ - Customer user profile.
+ - User can upload image to display as their icons.
+ - User can upload image to display as theme's feature image.
+ - Three different user group: admin, creator and member.
+ - Full list of themes for all themes and for three categories: Fiction, Non-fiction, Lifestyle.
+ - Complete information page about every theme.
+ - Upvote and downvote button for each theme.
+ - Comment function on the theme overview page.
+ - Most upvoted theme display as carousel on the landing page.
+ - Form to contact the website admin to chage their user group as creator.
+ - Form to contact the website admin to report the sensitive/offensive content or comment.
+
 ### **Features Left to Implement**
 <hr>
 
- - Security is still can be improve
- - Platform will allowed the user who authorized by the author of the theme to create related contents, pictures and videos related to the same theme
- - Creator will allow to upload their videos to the database
- - Layout still have space to improve
- - Backend still have space to improve
+ - Platform will allowed the user who authorized by the author of the theme to create related contents, pictures and videos related to the same theme.
+ - Creator will allow to upload their videos to theire themes.
+ - User should be allowed to manage their comments.
+ - Author of the theme will have right manage all the comments in their theme.
+ - Layout still have space to improve.
+ - Security is still can be improve.
+ - There are many feature can add to improve user experience to benefit the community.
 
 ## **Testing**
+ ### Code Validation
+ <hr>
+
  - HTML Code basically pass through the W3C HTML Validator, I try to validate html by url to validate my code and all template should be fine. 
- - CSS Code basically pass through the W3C CSS Validator.
+ - CSS Code in static folder pass through the W3C CSS Validator.
  - Python Code basically pass through PEP8 Validator.
  - Lighthouse in Chrome Dev Tools have been used for test the performance of the website.
  ![light-house-result](readme-img/lighthouse-result.png)
+ ### Manual test
+ <hr>
+
+ - Google Chrome developer tools and WAVE Web Accessibility Evaluation Tool used for layout testing and solve style and display issues.
+ - Github Project have been used to track tasks. I used to check the task completion through the process.
+ - All links were tested with or without login during the development process and test again after deployment.
+ - Every fields in the forms were tested to ensure that they work as they should.
+ ### Automated test
+ <hr>
+
+  There are total 98 test case used test library provide by django framework to test the view, form models and data models in all of the applications. Details of test cases are list below.
+   - Home application
+   - post application
+   - profiles application
+   - promote_request application
+   - report application
+   - theme application
 
 ### Issue found and solved
 <hr>
