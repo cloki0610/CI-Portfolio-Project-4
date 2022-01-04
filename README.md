@@ -390,6 +390,73 @@ Implementation:
 <hr>
 
 #### **Wireframes**
+ - index
+
+ <img src="readme-img/wireframes/index.png" alt="index" style="width:600px;"/>
+
+ - category
+
+  <img src="readme-img/wireframes/category.png" alt="index" style="width:600px;"/>
+
+ - theme_overview
+
+  <img src="readme-img/wireframes/theme_overview.png" alt="index" style="width:600px;"/>
+
+ - new_theme/edit_theme
+
+  <img src="readme-img/wireframes/new_theme_edit_theme.png" alt="index" style="width:600px;"/>
+
+ - contents
+
+  <img src="readme-img/wireframes/contents.png" alt="index" style="width:600px;"/>
+
+ - new_post/edit_post
+
+  <img src="readme-img/wireframes/new_post_edit_post.png" alt="index" style="width:600px;"/>
+
+ - confirm_delete_post
+
+  <img src="readme-img/wireframes/confirm_delete_post.png" alt="index" style="width:600px;"/> 
+
+ - post_detail
+
+  <img src="readme-img/wireframes/post_detail.png" alt="index" style="width:600px;"/>
+
+ - profile
+
+  <img src="readme-img/wireframes/profile.png" alt="index" style="width:600px;"/>
+
+ - edit_profile
+
+  <img src="readme-img/wireframes/edit_profile.png" alt="index" style="width:600px;"/>
+
+ - delete_acc
+
+  <img src="readme-img/wireframes/delete_acc.png" alt="index" style="width:600px;"/>
+
+ - request
+
+  <img src="readme-img/wireframes/request.png" alt="index" style="width:600px;"/>
+
+ - report
+
+  <img src="readme-img/wireframes/report.png" alt="index" style="width:600px;"/>
+
+ - login
+
+  <img src="readme-img/wireframes/login.png" alt="index" style="width:600px;"/>
+
+ - logout
+
+  <img src="readme-img/wireframes/logout.png" alt="index" style="width:600px;"/>
+
+ - singup
+
+  <img src="readme-img/wireframes/singup.png" alt="index" style="width:600px;"/>
+
+ - passoword_change
+
+  <img src="readme-img/wireframes/passoword_change.png" alt="index" style="width:600px;"/>
 
 #### **Database Design**
 
@@ -441,8 +508,8 @@ This project also use Django allauth to set up user authorization system to prov
 <hr>
 
  - Even the template do not allowed, user still can sent a direct request to change the record in database\
-with a exist user account.
- - And there still some potential security problem can be solved and improved.
+with a exist user account no maater their user group.
+ - And there maybe more potential security problem I don't know can be solved and improved.
 
 ## **Deployment**
 
@@ -479,16 +546,31 @@ with a exist user account.
 <hr>
 
  - https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+
+    I get the idea about how to expand the user table throught this post.
  - https://stackoverflow.com/questions/36317816/relatedobjectdoesnotexist-user-has-no-userprofile
+
+    In this post I learn how to use signals to auto generate a new user profile record.
  - https://stackoverflow.com/questions/28165243/cannot-upload-image-in-django-modelform
- - https://stackoverflow.com/questions/33715879/how-to-delete-user-in-django
- - https://www.itread01.com/content/1558923602.html\
-   Full instruction about Paginator
- - https://michealscode.medium.com/django-ajax-like-and-upvote-button-on-listview-solved-in-5-simple-steps-96dbdc39daca
+
+    I find out that my image do not correctly upload, and this post help me to solve the problem.
+ - https://www.itread01.com/content/1558923602.html
+
+    Full instruction about Paginator in Chinese, I gain more understanding about paginator from this blog post.
  - https://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
+
+    Document of django crispy forms, I read this document to know how to style my forms.
  - https://github.com/Daisy-McG/ChatToTheMat
+
+    My mentor provide a example to let me know what this portfolio project should have.\
+    Even I find another way to write my class-based view and automated test,\
+    This project help me so much in the process.
  - https://github.com/Michelle3334/coaching-warriors
+
+    I learn something about testing through others project and get some idea how to write my test cases.
  - https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages
+
+    I get the answer I need to check the messages display by using test case.
 ### **Acknowledgment**
 <hr>
 
