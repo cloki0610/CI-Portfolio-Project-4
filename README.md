@@ -450,15 +450,16 @@ Implementation:
 
   <img src="readme-img/wireframes/logout.png" alt="index" style="width:600px;"/>
 
- - singup
+ - signup
 
-  <img src="readme-img/wireframes/singup.png" alt="index" style="width:600px;"/>
+  <img src="readme-img/wireframes/signup.png" alt="index" style="width:600px;"/>
 
  - passoword_change
 
-  <img src="readme-img/wireframes/passoword_change.png" alt="index" style="width:600px;"/>
+  <img src="readme-img/wireframes/password_change.png" alt="index" style="width:600px;"/>
 
 #### **Database Design**
+<img src="readme-img/pp4_erd.jpg" alt="index" style="width:600px;"/>
 
 #### **Security**
 With heroku's config var feature, all sensitive keys was store in env.py are now store in heroku server to prevent unwanted connections to the database or cloud service.
@@ -527,7 +528,8 @@ with a exist user account no maater their user group.
  - Git
  - Heroku
  - Cloudinary
-
+ - Balsamiq Wireframes
+ - DbVisualizer
 
 
  and those python libraries install with [requirements.txt](requirements.txt):
