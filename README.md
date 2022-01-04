@@ -351,7 +351,7 @@ User Story:
 Acceptance Criteria:\
 If the user is the author of the theme, they should be allowed to create, update and delete their own creation. These two user group also should have right to create a new theme and modify their contents information.
 
-Implementation:\
+Implementation:
  - Theme
    - After user login, if user's user group is creator or admin, a link to create a new theme will appear on the nav bar.
    - User can submit a form to create a new theme with the form in new_theme template.
@@ -470,9 +470,21 @@ This project also use Django allauth to set up user authorization system to prov
 <hr>
 
 #### **Color Sheme**
+Background color: #e3e3e3\
+font color: #212529\
+Nav bar background color: #212529\
+Nav bar font color: #FFFFFF\
+standard border color: #676767\
+Color for represent fiction category: #9C1A1A\
+Color for represent non-Fiction category: #1753A1\
+Color for represent Lifestyle category: #8321A6
 
 #### **Typography**
+The Brand text on the navigation bar use 'Pushster' font, and the rest are all using 'Rubik' as the main font.
+
 #### **Differences to Design**
+All the margin and padding maybe not as expected at last because my lack of sense in it.\
+The footer are also far different than original design because I finally use some code from my previous project.
 
 ## **Feature**
 ### **Existing Features**
@@ -488,11 +500,12 @@ This project also use Django allauth to set up user authorization system to prov
  - Backend still have space to improve
 
 ## **Testing**
- - HTML Code all pass through the W3C HTML Validator
- - CSS Code all pass through the W3C CSS Validator
- - Python Code all pass through PEP8 Validator
+ - HTML Code basically pass through the W3C HTML Validator, I try to validate html by url to validate my code and all template should be fine. 
+ - CSS Code basically pass through the W3C CSS Validator.
+ - Python Code basically pass through PEP8 Validator.
  - Lighthouse in Chrome Dev Tools have been used for test the performance of the website.
  ![light-house-result](readme-img/lighthouse-result.png)
+
 ### Issue found and solved
 <hr>
 
