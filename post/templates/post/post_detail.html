@@ -5,17 +5,19 @@
 <div class="container-fluid">
     {% for post in post_page %}
     <!--Post title-->
-    <h1 class="text-center fw-bold mt-5">{{ post.title }}</h1>
-    <h2 class="text-center fw-bolder">{{ theme.title }}</h2>
-    <!--Dates-->
-    <div class="row">
-        <p class="text-center dates m-0">Publish on: {{ post.publish_on | date:"j M Y f A"  }}</p>
-        <p class="text-center dates m-0">Last Update: {{ post.updated_on | date:"j M Y f A"  }}</p>
-    </div>
+    <header>
+        <h1 class="text-center fw-bold mt-5">{{ post.title }}</h1>
+        <h2 class="text-center fw-bolder">{{ theme.title }}</h2>
+        <!--Dates-->
+        <div class="row">
+            <p class="text-center dates m-0">Publish on: {{ post.publish_on | date:"j M Y f A"  }}</p>
+            <p class="text-center dates m-0">Last Update: {{ post.updated_on | date:"j M Y f A"  }}</p>
+        </div>
+    </header>
     <!--post content-->
-    <div class="my-2 p-3 bg-light border-lightblack rounded mx-auto mx-md-5">
+    <section class="my-2 p-3 bg-light border-lightblack rounded mx-auto mx-md-5">
         <div class="text-break m-5">{{ post.post_body | safe }}</div>
-    </div>
+    </section>
     {% endfor %}
     <!--previous/next button provide by paginator-->
     <p class="current text-center mt-3">

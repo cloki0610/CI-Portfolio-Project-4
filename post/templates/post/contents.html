@@ -4,10 +4,12 @@
 {% block content %}
 <div class="container mx-auto px-auto">
     <!--Header-->
-    <h1 class="text-center fw-bold mt-5">{{ view.get_theme.title }}</h1>
-    <h2 class="text-center fw-bolder text-muted">{{ view.get_theme.author }}</h2>
+    <header>
+        <h1 class="text-center fw-bold mt-5">{{ view.get_theme.title }}</h1>
+        <h2 class="text-center fw-bolder text-muted">{{ view.get_theme.author }}</h2>
+    </header>
     <!--list of posts-->
-    <div class="mx-auto my-3 p-5 border-lightblack bg-light rounded">
+    <section class="mx-auto my-3 p-5 border-lightblack bg-light rounded">
         <div class="row gx-0">
         {% for post in post_list %}
             <div class="card h-100 col-md-5 bg-light border-lightblack p-0 mx-auto my-3 hvr-grow-shadow post-card">
@@ -59,6 +61,6 @@
         <div class="row p-4">
             <a href="{% url 'theme_overview' view.get_theme.slug %}" class="btn btn-outline-dark btn-block btn-lg">RETURN</a>
         </div>
-    </div>
+    </section>
 </div>
 {% endblock %}

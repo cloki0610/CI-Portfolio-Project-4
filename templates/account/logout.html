@@ -6,22 +6,24 @@
 
 {% block content %}
 <div class="container">
-  <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
+  <section class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
     <!--Title-->
-    <h1 class="text-center fw-bold">{% trans "Sign Out" %}</h1>
-    <p class="text-center fw-bolder">{% trans 'Are you sure you want to sign out?' %}</p>
+    <header>
+      <h1 class="text-center fw-bold">{% trans "Sign Out" %}</h1>
+      <p class="text-center fw-bolder">{% trans 'Are you sure you want to sign out?' %}</p>
+    </header>
     <!--Logout button and return link-->
     <form method="post" action="{% url 'account_logout' %}">
       {% csrf_token %}
       {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
       <div class="text-center my-3">
-          <button type="submit" class="btn btn-outline-dark btn-block btn-lg mx-2">{% trans 'SIGN OUT' %}</button>
-          <a href="{% url 'home' %}" class="btn btn-outline-dark btn-block btn-lg mx-2">RETURN</a>
+        <button type="submit" class="btn btn-outline-dark btn-block btn-lg mx-2">{% trans 'SIGN OUT' %}</button>
+        <a href="{% url 'home' %}" class="btn btn-outline-dark btn-block btn-lg mx-2">RETURN</a>
       </div>
     </form>
-  </div>
+  </section>
 </div>
 
 {% endblock %}

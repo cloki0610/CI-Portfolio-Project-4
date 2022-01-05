@@ -3,8 +3,10 @@
 {% load cloudinary %}
 {% block content %}
 {% load crispy_forms_tags %}
-<h1 class="text-center fw-bold mt-5">BECOME CREATOR</h1>
-<div class="px-md-5 mx-md-5">
+<header>
+    <h1 class="text-center fw-bold mt-5">BECOME CREATOR</h1>
+</header>
+<section class="px-md-5 mx-md-5">
     {% if request.user.userprofile.membership == 0 %}
     <!--Request form-->
     <form action="{% url 'promote_request' %}" method="POST" enctype="multipart/form-data" class="mb-3">
@@ -19,5 +21,5 @@
     <p class="text-center mt-3">Sorry, this form only provide to members.</p>
     {% endif %}
     <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-block btn-lg w-100">RETURN</a>
-</div>
+</section>
 {% endblock %}

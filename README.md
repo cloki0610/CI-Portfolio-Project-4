@@ -597,14 +597,14 @@ with a exist user account no maater their user group.
 5. To resources tag, Add-ons, search and add 'Heroku Postgres', I choose the free version for this project.
 6. To deploy tag, Deployment method and connect the github project to heroku.
 7. Then go to Setting tag, Config Vars, I copy the database link of the new heroku postgres to the setting.py file in my project.
-8. Copy the link to env.py in workspace, a file will not be tracked for development use.
-9. Then login my cloudinary account, copy the storage link to env.py in workspace and add the url as 'CLOUDINARY_URL' to the config vars in my heroku project.
-10. I also put my secerect key to env.py file and config vars in heroky project.
+8. Copy the link to env.py in workspace, a file will not be tracked for development use for run the webpage locally.
+9. Then login my cloudinary account, copy the storage link to env.py in workspace and add the url as 'CLOUDINARY_URL' to the Config Vars in my heroku project.
+10. I also put my secerect key to env.py file and Config Vars in heroky project.
 11. Then add 'DISABLE_COLLECTSTATIC' and set value as 1 to convig vars, when development is complete, this variable will be remove.
 12. Then add all the settings to the setting.py in my workspace follow by the cheatsheet.
 13. After complete the initial settings, I create the Procfile, commit and push to the main branch.
 14. Then to deploy tag, Manual Deploy, click the deploy branch to deploy my main branch.
-15. When my website is complete, I remove the 'DISABLE_COLLECTSTATIC' variable in Heroku's config vars
+15. When my website is complete, I remove the 'DISABLE_COLLECTSTATIC' variable in Heroku's Config Vars
 16. Then I change 'DEBUG' variable in setting.py to 'False' and deploy my webpage again.
 ## **Technologies**
 ### **Language**

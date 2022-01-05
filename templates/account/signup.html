@@ -7,9 +7,12 @@
 {% block content %}
 <div class="container">
   <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
-    <h1 class="text-center fw-bold">{% trans "SIGN UP" %}</h1>
-    <p class="text-center fw-bolder">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-    <div class="w-75 px-auto mx-auto text-center">
+    <header>
+      <h1 class="text-center fw-bold">{% trans "SIGN UP" %}</h1>
+      <p class="text-center fw-bolder">{% blocktrans %}Already have an account? Then please <a
+          href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+    </header>
+    <section class="w-75 px-auto mx-auto text-center">
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% if form.errors %}
         <p class="text-center fw-bolder" style="color:red;">Invalid input. Please edit and try again.</p>
@@ -21,7 +24,7 @@
         {% endif %}
         <button type="submit" class="btn btn-outline-dark btn-block btn-lg my-2">SIGN UP</button>
       </form>
-    </div>
+    </section>
   </div>
 </div>
 {% endblock %}

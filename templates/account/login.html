@@ -9,11 +9,14 @@
 <!-- Block Content -->
 <div class="container">
   <div class="my-5 p-3 bg-light border-lightblack rounded mx-auto">
-    <h1 class="text-center fw-bold">SIGN IN</h1>
+    <header>
+      <h1 class="text-center fw-bold">SIGN IN</h1>
+    </header>
     {% get_providers as socialaccount_providers %}
     {% if socialaccount_providers %}
-    <p class="text-center">{% blocktrans with site.name as site_name %}Please sign in with Social Media Account. Or, <a href="{{ signup_url }}">sign up</a>
-    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+    <p class="text-center">{% blocktrans with site.name as site_name %}Please sign in with Social Media Account. Or, <a
+        href="{{ signup_url }}">sign up</a>
+      for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
     <div class="socialaccount_ballot">
 
@@ -41,5 +44,6 @@
         <button class="primaryAction btn btn-outline-dark btn-block btn-lg my-2" type="submit">SIGN IN</button>
       </form>
     </div>
-
+  </div>
+</div>
 {% endblock %}

@@ -2,14 +2,18 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-<h1 class="text-center fw-bold mt-5">PROFILE</h1>
+<!--Header-->
+<header>
+    <h1 class="text-center fw-bold mt-5">PROFILE</h1>
+</header>
 <!--Display user's personal information-->
 <div class="container mx-auto">
-    <div class="card mx-5 my-3 p-md-5 mx-auto border-lightblack bg-light" id="profile-card">
+    <section class="card mx-5 my-3 p-md-5 mx-auto border-lightblack bg-light" id="profile-card">
         <div class="row g-0">
             <div class="col-6 mx-auto text-center" id="user-icon">
                 {% if "placeholder" in user.userprofile.user_icon.url %}
-                <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638377322/lx9f54ugcciywep0ifke.jpg" alt="{{ user.userprofile.name }}" class="img-fluid">
+                <img src="https://res.cloudinary.com/cloki-store/image/upload/v1638377322/lx9f54ugcciywep0ifke.jpg"
+                    alt="{{ user.userprofile.name }}" class="img-fluid">
                 {% else %}
                 <img src="{{ user.userprofile.user_icon.url }}" alt="{{ user.userprofile.name }}" class="img-fluid">
                 {% endif %}
@@ -65,9 +69,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!--Buttons-->
-    <div class="mx-auto my-3 p-md-5 mx-auto border-lightblack bg-light rounded">
+    <section class="mx-auto my-3 p-md-5 mx-auto border-lightblack bg-light rounded">
         <div class="row mx-auto">
             <!--Edit probile-->
             <div class="col-md-6 p-2">
@@ -75,25 +79,33 @@
             </div>
             <!--Change password-->
             <div class="col-md-6 p-2">
-                <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">CHANGE PASSWORD</a>
+                <a href="{% url 'account_change_password' %}" class="btn btn-outline-dark btn-block btn-lg w-100">
+                    CHANGE PASSWORD
+                </a>
             </div>
             <!--if user membership is member display a button to request form-->
             {% if user.userprofile.membership == 0 %}
             <div class="col-md-6 p-2">
-                <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">BECOME CREATOR</a>
+                <a href="{% url 'promote_request' %}" class="btn btn-outline-dark btn-block btn-lg w-100">
+                    BECOME CREATOR
+                </a>
             </div>
             {% endif %}
             <!--Delete account-->
             {% if user.userprofile.membership == 1 or user.userprofile.membership == 2 %}
             <div class="col-md-12 p-2">
-                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">
+                    DELETE ACCOUNT
+                </a>
             </div>
             {% else %}
             <div class="col-md-6 p-2">
-                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">DELETE ACCOUNT</a>
+                <a href="{% url 'delete_account' %}" class="btn btn-outline-danger btn-block btn-lg w-100">
+                    DELETE ACCOUNT
+                </a>
             </div>
             {% endif %}
         </div>
-    </div>
+    </section>
 </div>
 {% endblock %}

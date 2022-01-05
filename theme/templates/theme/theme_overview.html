@@ -4,17 +4,19 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!--Header-->
-<h1 class="text-center fw-bold mt-5">{{ theme.title }}</h1>
+<header>
+    <h1 class="text-center fw-bold mt-5">{{ theme.title }}</h1>
+</header>
 <!--theme details-->
 <div class="container mx-auto">
     {% if theme.category.name == 'Fiction' %}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-fiction">
+    <section class="card my-3 p-md-5 mx-auto bg-light border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-nonfiction">
+    <section class="card my-3 p-md-5 mx-auto bg-light border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-lifestyle">
+    <section class="card my-3 p-md-5 mx-auto bg-light border-lifestyle">
     {% else %}
-    <div class="card my-3 p-md-5 mx-auto bg-light border-lightblack">
+    <section class="card my-3 p-md-5 mx-auto bg-light border-lightblack">
     {% endif %}
         <div class="row g-0">
             <div class="col-md-6">
@@ -94,7 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!--Excerpt section-->
     {% if theme.category.name == 'Fiction' %}
     <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-fiction">
@@ -120,13 +122,13 @@
     <!--button to post list-->
     <!--if user is author also display edit theme and delete theme-->
     {% if theme.category.name == 'Fiction' %}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-fiction">
+    <section class="row mx-auto p-5 my-3 bg-light rounded border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-nonfiction">
+    <section class="row mx-auto p-5 my-3 bg-light rounded border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-lifestyle">
+    <section class="row mx-auto p-5 my-3 bg-light rounded border-lifestyle">
     {% else %}
-    <div class="row mx-auto p-5 my-3 bg-light rounded border-lightblack">
+    <section class="row mx-auto p-5 my-3 bg-light rounded border-lightblack">
     {% endif %}
         <div class="col-md-12 mb-3 px-md-5">
             <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100" aria-label="read">Read</a>
@@ -158,17 +160,17 @@
         </div>
         {% endif %}
         {% endif %}
-    </div>
+    </section>
     <!--comment form-->
     {% if user.is_authenticated %}
     {% if theme.category.name == 'Fiction' %}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-fiction">
+    <section class="p-1 my-3 bg-light rounded mx-auto border-fiction">
     {% elif theme.category.name == 'Non-fiction' %}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-nonfiction">
+    <section class="p-1 my-3 bg-light rounded mx-auto border-nonfiction">
     {% elif theme.category.name == 'Lifestyle'%}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-lifestyle">
+    <section class="p-1 my-3 bg-light rounded mx-auto border-lifestyle">
     {% else %}
-    <div class="p-1 my-3 bg-light rounded mx-auto border-lightblack">
+    <section class="p-1 my-3 bg-light rounded mx-auto border-lightblack">
     {% endif %}
         <div class="row text-center px-md-5 mx-md-5 mb-3">
             <form method="POST" aria-label="comment">
@@ -182,45 +184,45 @@
                 </div>
             </form>
         </div>
-    </div>
+    </section>
     {% endif %}
 </div>
 <!--display all comment-->
-<div class="container mx-auto">
-{% for comment in comments %}
-{% if theme.category.name == 'Fiction' %}
-<div class="card rounded mx-auto mb-3 border-fiction">
-{% elif theme.category.name == 'Non-fiction' %}
-<div class="card rounded mx-auto mb-3 border-nonfiction">
-{% elif theme.category.name == 'Lifestyle'%}
-<div class="card rounded mx-auto mb-3 border-lifestyle">
-{% else %}
-<div class="card rounded mx-auto mb-3 border-lightblack">
-{% endif %}
-    <div class="card-body">
-        {% if not comment.user.userprofile.name %}
-            <h4>
-                {{ comment.user.username }}
-            </h4>
-        {% else %}
-            <h4>
-                {{ comment.user.userprofile.name }}
-            </h4>
-        {% endif %}
-        <p class="text-muted" style="font-size:8px;">{{ comment.created_on }}</p>
-        <hr>
-        {{ comment.comment_body | safe }}
+<section class="container mx-auto">
+    {% for comment in comments %}
+    {% if theme.category.name == 'Fiction' %}
+    <div class="card rounded mx-auto mb-3 border-fiction">
+    {% elif theme.category.name == 'Non-fiction' %}
+    <div class="card rounded mx-auto mb-3 border-nonfiction">
+    {% elif theme.category.name == 'Lifestyle'%}
+    <div class="card rounded mx-auto mb-3 border-lifestyle">
+    {% else %}
+    <div class="card rounded mx-auto mb-3 border-lightblack">
+    {% endif %}
+        <div class="card-body">
+            {% if not comment.user.userprofile.name %}
+                <h4>
+                    {{ comment.user.username }}
+                </h4>
+            {% else %}
+                <h4>
+                    {{ comment.user.userprofile.name }}
+                </h4>
+            {% endif %}
+            <p class="text-muted" style="font-size:8px;">{{ comment.created_on }}</p>
+            <hr>
+            {{ comment.comment_body | safe }}
+        </div>
+        <div class="card-footer text-muted">
+            <p class="text-end" style="font-size:8px;">
+                Last updated on {{ comment.updated_on }}
+            </p>
+        </div>
     </div>
-    <div class="card-footer text-muted">
-        <p class="text-end" style="font-size:8px;">
-            Last updated on {{ comment.updated_on }}
-        </p>
-    </div>
-</div>
-{% empty %}
-<p class="text-center">Here is no any comment yet.</p>
-{% endfor %}
-</div>
+    {% empty %}
+    <p class="text-center">Here is no any comment yet.</p>
+    {% endfor %}
+</section>
 <!-- Modal -->
 <div class="modal fade" id="confirm-delete-theme" tabindex="-1" aria-labelledby="confirm-delete-theme" aria-hidden="true">
     <div class="modal-dialog">
