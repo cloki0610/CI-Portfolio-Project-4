@@ -48,7 +48,7 @@
                     </div>
                     <div class="card-text row gap-md-1 pt-md-5 justify-content-center">
                         <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3">
-                            <span id="upvote-btn" aria-labelledby="upvote-button">
+                            <div id="upvote-btn" aria-labelledby="upvote-btn">
                                 {% if user.is_authenticated %}
                                 <form action="{% url 'theme_upvote' theme.id %}" method="POST" class="d-inline me-3">
                                     {% csrf_token %}
@@ -63,11 +63,11 @@
                                 {% else %}
                                 <i class="fas fa-arrow-alt-circle-up me-2"></i>
                                 {% endif %}
-                            </span>
-                            <span id="count-upvote" aria-labelledby="upvote-count">{{ theme.upvote.count }}</span>
+                            </div>
+                            <span id="count-upvote" aria-labelledby="count-upvote">{{ theme.upvote.count }}</span>
                         </div>
                         <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3">
-                            <span id="downvote-btn"  aria-labelledby="downvote-button">
+                            <div id="downvote-btn"  aria-labelledby="downvote-btn">
                                 {% if user.is_authenticated %}
                                 <form action="{% url 'theme_downvote' theme.id %}" method="POST" class="d-inline">
                                     {% csrf_token %}
@@ -82,10 +82,12 @@
                                 {% else %}
                                 <i class="fas fa-arrow-alt-circle-down me-2"></i>
                                 {% endif %}
-                            </span>
-                            <span id="count-downvote" aria-labelledby="downvote-count">{{ theme.downvote.count }}</span>
+                            </div>
+                            <span id="count-downvote" aria-labelledby="count-downvote">{{ theme.downvote.count }}</span>
                         </div>
-                        <div class="col col-md-3 d-flex justify-content-center align-items-center fs-3" aria-labelledby="comments">
+                        <div id="comments-count"
+                             class="col col-md-3 d-flex justify-content-center align-items-center fs-3" 
+                             aria-labelledby="comments-count">
                             <i class="far fa-comment me-2"></i> {{ comments.count }}
                         </div>
                     </div>
@@ -103,11 +105,11 @@
     {% else %}
     <section class="row mx-auto p-4 my-3 text-center bg-light rounded border-lightblack">
     {% endif %}
-        <div class="col-12" aria-labelledby="excerpt-title">
+        <div id="excerpt-title" class="col-12" aria-labelledby="excerpt-title">
             <h2 class="h3 fw-bold">Excerpt</h2>
             <hr>
         </div>
-        <div class="col-12" aria-labelledby="excerpt">
+        <div id="excerpt-body" class="col-12" aria-labelledby="excerpt-body">
             {% if theme.excerpt %}
             <p>{{ theme.excerpt }}</p>
             {% else %}
