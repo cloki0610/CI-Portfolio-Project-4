@@ -536,11 +536,30 @@ The footer are also far different than original design because I finally use som
 
   There are total 98 test case used test library provide by django framework to test the view, form models and data models in all of the applications. Details of test cases are list below.
    - Home application
+
+   <img src="readme-img/test/test_home_app.png" alt="index" style="width:600px;"/>
+
    - post application
+
+   <img src="readme-img/test/test_post_app.png" alt="index" style="width:600px;"/>
+
    - profiles application
+
+   <img src="readme-img/test/test_profiles_app.png" alt="index" style="width:600px;"/>
+
    - promote_request application
+
+   <img src="readme-img/test/test_promote_request_app.png" alt="index" style="width:600px;"/>
+
    - report application
+
+   <img src="readme-img/test/test_report_app.png" alt="index" style="width:600px;"/>
+
    - theme application
+
+   <img src="readme-img/test/test_theme_app_1.png" alt="index" style="width:600px;"/>
+
+   <img src="readme-img/test/test_theme_app_2.png" alt="index" style="width:600px;"/>
 
 ### Issue found and solved
 <hr>
@@ -562,26 +581,49 @@ with a exist user account no maater their user group.
  - And there maybe more potential security problem I don't know can be solved and improved.
 
 ## **Deployment**
+### **Create a new project**
+<hr>
 
+1. First, I use [Code Institute gitpod full template](https://github.com/Code-Institute-Org/gitpod-full-template) to generate my new project.
+2. Then I open the new project by gitpod
+3. After a new workspace is opened, I follow the cheat sheet to install django and all requirement libraries.
+4. Use 'pip3 freeze --local > requirements.txt' to generate requirements.txt file.
+5. Then I use the source control feature to complete initial commit.
+### **Deploy to Heroku**
+1. Login to heroku account
+2. Click the 'New' button on the dashboard and click 'create a new app'
+3. Enter project name and select region
+4. Click 'create app' button
+5. To resources tag, Add-ons, search and add 'Heroku Postgres', I choose the free version for this project.
+6. To deploy tag, Deployment method and connect the github project to heroku.
+7. Then go to Setting tag, Config Vars, I copy the database link of the new heroku postgres to the setting.py file in my project.
+8. Copy the link to env.py in workspace, a file will not be tracked for development use.
+9. Then login my cloudinary account, copy the storage link to env.py in workspace and add the url as 'CLOUDINARY_URL' to the config vars in my heroku project.
+10. I also put my secerect key to env.py file and config vars in heroky project.
+11. Then add 'DISABLE_COLLECTSTATIC' and set value as 1 to convig vars, when development is complete, this variable will be remove.
+12. Then add all the settings to the setting.py in my workspace follow by the cheatsheet.
+13. After complete the initial settings, I create the Procfile, commit and push to the main branch.
+14. Then to deploy tag, Manual Deploy, click the deploy branch to deploy my main branch.
+15. When my website is complete, I remove the 'DISABLE_COLLECTSTATIC' variable in Heroku's config vars
+16. Then I change 'DEBUG' variable in setting.py to 'False' and deploy my webpage again.
 ## **Technologies**
+### **Language**
+<hr>
+
  - HTML
  - CSS
  - JavaScript
  - Python
+
+### **Libraries**
  - PostgreSQL
- - Bootstrap
+ - Bootstrap 5
+ - JQuery
  - hover.css
  - Google Fonts
  - Font Awsome
- - GitHub
- - Git
- - Heroku
- - Cloudinary
- - Balsamiq Wireframes
- - DbVisualizer
 
-
- and those python libraries install with [requirements.txt](requirements.txt):
+  and those python libraries install with [requirements.txt](requirements.txt):
  - django-cloudinary-storage
  - PostgreSQL
  - asgiref
@@ -592,13 +634,28 @@ with a exist user account no maater their user group.
  - gunicorn
  - psycopg2
 
+### **Project manage and deployment**
+ - GitHub
+ - Git
+ - Heroku
+ - Cloudinary
+### **Testing**
+ - Google DevTool
+ - WAVE Web Accessibility Evaluation Tool
+ - [W3C Markup Validation Service](https://validator.w3.org/)
+ - [W3C CSS](https://jigsaw.w3.org/css-validator/)
+ - [PEP8 online](http://pep8online.com/)
+### **Documentation**
+ - Balsamiq Wireframes
+ - DbVisualizer
+
 ## **Credits**
 ### **Code**
 <hr>
 
  - https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
 
-    I get the idea about how to expand the user table throught this post.
+    I learn how to expand the user table through this post.
  - https://stackoverflow.com/questions/36317816/relatedobjectdoesnotexist-user-has-no-userprofile
 
     In this post I learn how to use signals to auto generate a new user profile record.
@@ -611,11 +668,15 @@ with a exist user account no maater their user group.
  - https://django-crispy-forms.readthedocs.io/en/latest/form_helper.html
 
     Document of django crispy forms, I read this document to know how to style my forms.
+ - https://getbootstrap.com/docs/5.1/getting-started/introduction/
+
+    I use some code from bootstrap document to add bootstrap components, the website mainly use bootstrap for styling and the document help me a lots and I do save many time for styling because of bootstrap.
  - https://github.com/Daisy-McG/ChatToTheMat
 
     My mentor provide a example to let me know what this portfolio project should have.\
-    Even I find another way to write my class-based view and automated test,\
-    This project help me so much in the process.
+    Even I find another way to write my class-based view, \
+    and learn more about automated test from other resource,\
+    This project help me so much in my process.
  - https://github.com/Michelle3334/coaching-warriors
 
     I learn something about testing through others project and get some idea how to write my test cases.
@@ -626,5 +687,5 @@ with a exist user account no maater their user group.
 <hr>
 
  - Thanks to my mentor Daisy McGirr for all support and guidance in the process,\
- without her help my process will be far longer and complex.
- - Thanks stackoverflow's community already have the answers I need to help me solve most of my problems.
+ without her help my process will be more complex and I will need more time to complete all the tasks.
+ - Thanks stackoverflow's community already have the answers I need, that's help me solve most of my problems before I ask for the community.
