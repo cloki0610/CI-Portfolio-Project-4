@@ -27,7 +27,7 @@ Tales is a request come from a anonymous group who want to create and share thei
 
 Because of that, their first priority is not about payment method or security. They just need a platform simple enough to save their work and manage their creations. And build a small community to discuss their process.
 
-And my aim is to build a responsive application that can share contents and allow to build an internal community. User should seperate into two user group: member and creator to clarify their role in their community. The creator should have right to manage their own creations and member should only have right to leave comments for the contents. And it should be as simple as possible because they also have their own chat group within their community, and also have their offical fanpage for their subscribers.
+And my aim is to build a responsive application that can share contents and allow to build an internal community. User should seperate into three user group: admin, creator and member to clarify their role in their community. The creator should have right to manage their own creations and member should only have right to leave comments for the contents. The admin should have right same as creator and have right to use django's admin panel. The member should only have right to report and comment contents. One of the important thing is the website should be as simple as possible because it is jsut a website for internal use, they still working on their own chat group and their offical fanpage on social media for their business.
 
 <br>
 
@@ -466,6 +466,8 @@ With heroku's config var feature, all sensitive keys was store in env.py are now
 
 This project also use Django allauth to set up user authorization system to provide restricted access to certain features on the website that are not intended for unauthorize users.
 
+All image file upload from user should store and be protected in Cloudinary storage.
+
 ### **Surface Plane**
 <hr>
 
@@ -564,7 +566,7 @@ The footer are also far different than original design because I finally use som
 ### Issue found and solved
 <hr>
 
- - Slug update by website
+ - Slug auto update by website
  In the course material, the slug only auto update when change the title in admin platform, I found a way to user signal feature to pre-save a new slug when record create or update.
  - Theme date update when post add or edited
  When I begin my testing, I find that the update date do not change when I create or update a post, at last I change the view to make sure the last updated date should be change when post create and update.
@@ -597,7 +599,7 @@ with a exist user account no maater their user group.
 5. To resources tag, Add-ons, search and add 'Heroku Postgres', I choose the free version for this project.
 6. To deploy tag, Deployment method and connect the github project to heroku.
 7. Then go to Setting tag, Config Vars, I copy the database link of the new heroku postgres to the setting.py file in my project.
-8. Copy the link to env.py in workspace, a file will not be tracked for development use for run the webpage locally.
+8. Copy the link to env.py in workspace, a file will not be tracked for development use to run the webpage locally.
 9. Then login my cloudinary account, copy the storage link to env.py in workspace and add the url as 'CLOUDINARY_URL' to the Config Vars in my heroku project.
 10. I also put my secerect key to env.py file and Config Vars in heroky project.
 11. Then add 'DISABLE_COLLECTSTATIC' and set value as 1 to convig vars, when development is complete, this variable will be remove.
