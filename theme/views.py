@@ -88,6 +88,11 @@ class NewThemeView(LoginRequiredMixin, View):
 
     def post(self, request):
         """ post method """
+        # if user's user group is member then redirect to landing page
+        if request.user.userprofile.membership == 0:
+            messages.error(request,
+                           'Member cannot create new theme.')
+            return redirect(reverse('home'))
         # get the form model
         theme_form = ThemeForm(request.POST)
         # form validation
@@ -138,6 +143,12 @@ class EditThemeView(LoginRequiredMixin, View):
         edit_theme = get_object_or_404(Theme, slug=slug)
         theme_form = ThemeForm(request.POST, request.FILES,
                                instance=edit_theme)
+        # if user is not the author then redirect to overview page
+        if not request.user == edit_theme.author:
+            messages.error(request,
+                           'Only author can edit this theme.')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[edit_theme.slug]))
         # form validation
         if theme_form.is_valid():
             edited_theme = theme_form.save(commit=False)
@@ -165,6 +176,12 @@ class DeleteTheme(LoginRequiredMixin, View):
         # try to delete the target data
         try:
             delete_theme = get_object_or_404(Theme, slug=slug)
+            # if user is not the author then redirect to overview page
+            if not request.user == delete_theme.author:
+                messages.error(request,
+                               'Only author can delete this theme.')
+                return HttpResponseRedirect(reverse('theme_overview',
+                                            args=[delete_theme.slug]))
             delete_theme.delete()
             messages.success(request,
                              'Your theme is successfully deleted.')

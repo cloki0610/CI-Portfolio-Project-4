@@ -8,7 +8,7 @@
     <h1 class="text-center fw-bold mt-5">EDIT POST</h1>
 </header>
 <!--A form to allowed user to edit their post-->
-<section class="px-md-5 mx-md-5">
+<div class="px-md-5 mx-md-5">
     <form action="{% url 'edit_post' theme.slug post.id %}" method="POST" enctype="multipart/form-data"  class="mb-3">
         {% csrf_token %}
         <div class="p-3 bg-light border-lightblack rounded">
@@ -17,5 +17,5 @@
         </div>
     </form>
     <a href="{% url 'contents' theme.slug %}" class="btn btn-outline-dark btn-block btn-lg w-100">Back to Menu</a>
-</section>
+</div>
 {% endblock %}

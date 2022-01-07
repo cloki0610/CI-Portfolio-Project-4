@@ -19,19 +19,19 @@
                         <hr>
                         <p class="card-text">{{ post.excerpt }}</p>
                     </div>
-                    {% if user.is_authenticated %}
-                    {% if request.user == post.theme.author %}
-                    <div class="card-footer">
-                        <div class="col-12 mb-2">
-                            <a href="{% url 'edit_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Edit post</a>
-                        </div>
-                        <div class="col-12 mb-2">
-                            <a href="{% url 'confirm_delete_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Delete post</a>
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% endif %}
                 </a>
+                {% if user.is_authenticated %}
+                {% if request.user == post.theme.author %}
+                <div class="card-footer">
+                    <div class="col-12 mb-2">
+                        <a href="{% url 'edit_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Edit post</a>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <a href="{% url 'confirm_delete_post' post.theme.slug post.id %}" class="btn btn-outline-dark btn-block btn-sm w-100">Delete post</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
             </div>
         {% if forloop.counter|divisibleby:2 %}
         </div>

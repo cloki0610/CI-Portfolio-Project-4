@@ -60,6 +60,13 @@ class NewPostView(LoginRequiredMixin, View):
         """ get method """
         # get required data and form model
         theme = get_object_or_404(Theme, slug=slug)
+        # if user is not the author then redirect to overview page
+        if not request.user == theme.author:
+            messages.error(request,
+                           'Only author can add new post.')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[theme.slug]))
+        # get form model
         post_form = PostForm()
         # return data with template
         return render(
@@ -74,6 +81,13 @@ class NewPostView(LoginRequiredMixin, View):
         """ POST method """
         # get required data and place to input to form model
         theme = get_object_or_404(Theme, slug=slug)
+        # if user is not the author then redirect to overview page
+        if not request.user == theme.author:
+            messages.error(request,
+                           'Only author can add new post.')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[theme.slug]))
+        # get form model
         post_form = PostForm(request.POST)
         # form validation and display result by messages
         if post_form.is_valid():
@@ -95,8 +109,15 @@ class EditPostView(LoginRequiredMixin, View):
     """ View to add a new post to the theme last visit """
     def get(self, request, slug, post_pk):
         """ GET method """
-        # get required data and model form
+        # get target theme
         theme = get_object_or_404(Theme, slug=slug)
+        # if user is not the author then redirect to overview page
+        if not request.user == theme.author:
+            messages.error(request,
+                           'Only author can edit their post.')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[theme.slug]))
+        # get required data and model form
         edit_post = get_object_or_404(Post, pk=post_pk)
         post_form = PostForm(instance=edit_post)
         # return data with template
@@ -112,8 +133,15 @@ class EditPostView(LoginRequiredMixin, View):
 
     def post(self, request, slug, post_pk):
         """ POST method """
-        # get required data and place input into form model
+        # get target theme
         theme = get_object_or_404(Theme, slug=slug)
+        # if user is not the author then redirect to overview page
+        if not request.user == theme.author:
+            messages.error(request,
+                           'Only author can edit their post.')
+            return HttpResponseRedirect(reverse('theme_overview',
+                                        args=[theme.slug]))
+        # get required data and place input into form model
         edit_post = get_object_or_404(Post, pk=post_pk)
         post_form = PostForm(request.POST, instance=edit_post)
         # form validation and display result by messages
@@ -140,6 +168,12 @@ class ConfirmDeletePost(LoginRequiredMixin, View):
         # use try/except to find the required data
         try:
             theme = get_object_or_404(Theme, slug=slug)
+            # if user is not the author then redirect to overview page
+            if not request.user == theme.author:
+                messages.error(request,
+                               'Only author can delete their post.')
+                return HttpResponseRedirect(reverse('theme_overview',
+                                            args=[theme.slug]))
             delete_post = get_object_or_404(Post, pk=post_pk)
         except ObjectDoesNotExist:
             messages.error(request, "Record does not exist.")
@@ -162,6 +196,12 @@ class DeletePost(LoginRequiredMixin, View):
         # use try/except to remove data and display the result by messages
         try:
             theme = get_object_or_404(Theme, slug=slug)
+            # if user is not the author then redirect to overview page
+            if not request.user == theme.author:
+                messages.error(request,
+                               'Only author can delete their post.')
+                return HttpResponseRedirect(reverse('theme_overview',
+                                            args=[theme.slug]))
             delete_post = Post.objects.get(pk=post_pk)
             delete_post.delete()
             messages.success(request,

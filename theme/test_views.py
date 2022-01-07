@@ -16,6 +16,8 @@ class TestThemeView(TestCase):
                     password='password',
                     email='test@example.com')
         self.user.save()
+        self.user.userprofile.membership = 1
+        self.user.save()
         self.category = Category.objects.create(
             name='Fiction',
             introduction='testonly'

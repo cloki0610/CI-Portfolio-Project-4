@@ -32,9 +32,10 @@ class ReportForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Field('report_type', css_class="mb-3"),
-            Field('description', css_class="mb-3"),
+            Field('description'),
             Field('email', css_class="mb-3",
                   placeholder="Your contact email(Optional)")
         )

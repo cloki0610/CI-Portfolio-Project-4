@@ -109,7 +109,7 @@ Acceptance Criteria:\
 Website should have at least a section to display a list of theme order by the update time.
 
 Implementation:
- - The full list of data store in a paginator object and display on the landing page.\
+ - The full list of data store in a paginator object and display on the landing page.
  - The paginator stored 10 of list items for each page.
  - The list item order by the last update time that make them can easily find the latest updated contents.
 
@@ -133,8 +133,8 @@ theme_overview template have four section:
  - Third section display all the button user can use
    - Unauthorized user only can see a read button to table of contents page.
    - User login as member can see read and report button in this section
-   - User login as creator and admin also can see read and report button, \
-     but if they are the author of the theme they can see 3 more button to create post, \
+   - User login as creator and admin also can see read and report button, 
+     but if they are the author of the theme they can see 3 more button to create post, 
      edit theme information and remove the theme.
  - Fourth section is about all the comments of the theme
    - The comment will be all list underneath the first section.
@@ -167,8 +167,8 @@ When user click on the link in table of contents,\
 they should be allowed to view the full content with correct template.
 
 Implementation:
- - When user click on the post in the post list, the view in post application will render post_detail template,\
- - Template will show the full content and a nav bar than can return to previous page, next page,\
+ - When user click on the post in the post list, the view in post application will render post_detail template,
+ - Template will show the full content and a nav bar than can return to previous page, next page,
 and return to the contents page.
 
 <br>
@@ -357,7 +357,7 @@ Implementation:
    - User can submit a form to create a new theme with the form in new_theme template.
    - Form generate by crispy form, title and category field is required, and excerpt and feature field is an optional input.
    - User can update their own image to cloudinary to become the feature image.
-   - In the overview page, if user is the author of the theme, they can see a button to edit_theme template. \
+   - In the overview page, if user is the author of the theme, they can see a button to edit_theme template.
    - User can update the information of the theme by submit the form in edit_theme template.
    - If user click the delete theme button, a model will pop up to the front, \
      user can close the model or press the delete button on the model to remove the theme.
@@ -495,7 +495,6 @@ The footer are also far different than original design because I finally use som
  - Aauthentication system provided by allauth library.
  - Admin panel provided by django framework with customize search and filter function.
  - Customer user profile.
- - User can upload image to display as their icons.
  - User can upload image to display as theme's feature image.
  - Three different user group: admin, creator and member.
  - Full list of themes for all themes and for three categories: Fiction, Non-fiction, Lifestyle.
@@ -505,6 +504,8 @@ The footer are also far different than original design because I finally use som
  - Most upvoted theme display as carousel on the landing page.
  - Form to contact the website admin to chage their user group as creator.
  - Form to contact the website admin to report the sensitive/offensive content or comment.
+ - Page for Error 404.
+ - Page for Error 500.
 
 ### **Features Left to Implement**
 <hr>
@@ -521,7 +522,7 @@ The footer are also far different than original design because I finally use som
  ### Code Validation
  <hr>
 
- - HTML Code basically pass through the W3C HTML Validator, I try to validate html by url to validate my code and all template should be fine. 
+ - HTML Code basically pass through the W3C HTML Validator, I try to validate html by copy the source code from living website, but some error and warning code generate by summernote cannot be fixed.  
  - CSS Code in static folder pass through the W3C CSS Validator.
  - Python Code basically pass through PEP8 Validator.
  - Lighthouse in Chrome Dev Tools have been used for test the performance of the website.
@@ -533,10 +534,12 @@ The footer are also far different than original design because I finally use som
  - Github Project have been used to track tasks. I used to check the task completion through the process.
  - All links were tested with or without login during the development process and test again after deployment.
  - Every fields in the forms were tested to ensure that they work as they should.
+ - I also test the website in different size of screen by Google Chome developer tools and all the layouts are fine.
+ - Error 500 page work as expected.
  ### Automated test
  <hr>
 
-  There are total 98 test case used test library provide by django framework to test the view, form models and data models in all of the applications. Details of test cases are list below.
+  There are total 99 test case used test library provide by django framework to test the view, form models and data models in all of the applications. Details of test cases are list below.
    - Home application
 
    <img src="readme-img/test/test_home_app.png" alt="index" style="width:600px;"/>
@@ -566,20 +569,21 @@ The footer are also far different than original design because I finally use som
 ### Issue found and solved
 <hr>
 
- - Slug auto update by website
+ - Slug auto update by website \
  In the course material, the slug only auto update when change the title in admin platform, I found a way to user signal feature to pre-save a new slug when record create or update.
- - Theme date update when post add or edited
+ - Theme date update when post add or edited \
  When I begin my testing, I find that the update date do not change when I create or update a post, at last I change the view to make sure the last updated date should be change when post create and update.
- - Searching result redirect to 404 instead of redirect to target page
+ - Searching result redirect to 404 instead of redirect to target page \
  When I testing to remove a post when post record do not exist, I find that the page will redirect to error 404 page instead of the overview page, it is fine but not as my expected, so at last I make a little change to make sure the view will redirect user to my target page when post record is not exist.
+ - Nested form tag \
+ When using W3C Markup Validation Service I found that there are another form tag generate by crispy form, and the problem solved by using crispy form's form helper feature.
 
  <br>
 
 ### Unsolved Issue
 <hr>
 
- - Even the template do not allowed, user still can sent a direct request to change the record in database\
-with a exist user account no maater their user group.
+ - The html code generate by summernote cannot pass the HTML validator, I try my best to solve the problem but the layout will not as expected.
  - And there maybe more potential security problem I don't know can be solved and improved.
 
 ## **Deployment**

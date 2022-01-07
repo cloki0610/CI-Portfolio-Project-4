@@ -33,6 +33,7 @@ class UserProfilesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Field('user_icon', css_class="mb-3"),
             Field('name', css_class="mb-3"),

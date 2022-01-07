@@ -27,6 +27,7 @@ class PromoteRequestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Field('category', css_class="mb-3"),
             Field('reason', css_class="mb-3")

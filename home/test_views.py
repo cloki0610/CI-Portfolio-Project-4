@@ -49,3 +49,9 @@ class TestHomeView(TestCase):
         response = self.client.get('/fiction')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/category.html')
+
+    def test_get_error_404(self):
+        """ Test a invalid link to error 404 page """
+        response = self.client.get('/invalidurl')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
